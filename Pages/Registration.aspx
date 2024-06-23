@@ -18,23 +18,29 @@
     <header class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
-                <a class="navbar-brand text-white header main-title" href="Ads.aspx">Lose and Find</a>
+                <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
+                    <img style="margin-top: 2px; height: 47px; width: 26px; margin-right: 15px;" src="/Resources/lapaThin.svg" />
+                    <img style="margin-bottom: 7px;" src="/Resources/logoDefault.svg" />
+                </a>
                 <div class="navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="Settings.aspx?section=divMyAds" style="margin-right: 8px;" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>
+                            <a href="Settings.aspx?section=divAdsInLikes">
+                                <img class="header-img header" src="/Resources/heartFull.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divBells" class="nav-link text-white header">Уведомления</a>
+                            <a href="Settings.aspx?section=divBells">
+                                <img class="header-img header" src="/Resources/bell.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMessages" class="nav-link text-white header">Сообщения</a>
+                            <a href="Settings.aspx?section=divMessages">
+                                <img class="header-img header" src="/Resources/message.png" /></a>
                         </li>
                     </ul>
                 </div>
@@ -60,92 +66,93 @@
 
 
 
-
-    <form id="regForm" runat="server" class="registration_form" autocomplete="off">
-        <h1 id="titleReg" class="registration_header">Регистрация</h1>
-        <div id="divCheckRegFirst" class="reg-div-left visible" runat="server">
-            <div class="form-group">
-                <div class="horizontal_label">
-                    <label class="reg_label_left">Имя</label>
-                    <label id="lblNameReg" runat="server" class="attention_red"></label>
-                </div>
-                <asp:TextBox ID="tbNameReg" MaxLength="100" runat="server" CssClass="form-control" placeholder="Введите ваше имя" />
-            </div>
-
-            <div class="form-group">
-                <div class="horizontal_label">
-                    <label class="reg_label_left">Телефон</label>
-                    <label id="lblNumberPhone" runat="server" class="attention_red"></label>
-                </div>
-                <asp:TextBox ID="tbNumberPhone" runat="server" class="form-control" placeholder="Введите номер телефона" />
-            </div>
-
-            <div class="form-group">
-                <div class="horizontal_label">
-                    <label class="reg_label_left">Тип аккаунта</label>
-                    <label id="lblTypeUser" runat="server" class="attention_red"></label>
-                </div>
-                <asp:DropDownList ID="cbTypeUser" runat="server" CssClass="main-cb" AutoPostBack="True">
-                </asp:DropDownList>
-            </div>
-
-            <div class="form-group">
-                <asp:Button ID="btnReg" runat="server" Text="Зарегистрироваться" CssClass="register-button" />
-                <asp:Button ID="btnRegHide" runat="server" Text="Register" OnClick="Reg" style="display: none;" />
-            </div>
-            <div class="form-group">
-                <span>Уже есть аккаунт?</span>
-                <asp:Button ID="btnAuth" runat="server" Text="Авторизоваться" OnClick="Auth" CssClass="authorization-button" />
-            </div>
-        </div>
-
-
-        <div id="divCheckReg" class="reg-div-right hidden" runat="server">
-            <div class="form-group">
-                <div class="horizontal_label">
-                    <label class="reg_label_left">Почта</label>
-                    <label id="lblLoginReg" runat="server" class="attention_red"></label>
-                </div>
-                <asp:TextBox ID="loginReg" runat="server" class="form-control" placeholder="Введите почтовый адрес" MaxLength="100" />
-            </div>
-            <div class="form-group">
-                <div class="horizontal_label">
-                    <label class="reg_label_left">Пароль</label>
-                    <label id="lblPasswordReg" runat="server" class="attention_red"></label>
-                </div>
-                <asp:TextBox type="password" ID="passwordReg" runat="server" class="form-control" placeholder="Введите пароль" MaxLength="100" />
-            </div>
-            <div class="form-group">
-                <div class="horizontal_label">
-                    <label class="reg_label_left">Повторите пароль</label>
-                    <label id="lblPasswordConfirmReg" runat="server" class="attention_red"></label>
-                </div>
-                <asp:TextBox type="password" ID="passwordConfirmReg" runat="server" CssClass="form-control" placeholder="Повторите пароль" MaxLength="100" />
-            </div>
-            <div class="form-group">
-                <asp:Button ID="btnR" runat="server" Text="Зарегистрироваться" CssClass="register-button" />
-            </div>
-            <div class="form-group">
-                <span>Уже есть аккаунт?</span>
-                <asp:Button ID="btnA" runat="server" Text="Авторизоваться" OnClick="Auth" CssClass="authorization-button" />
-            </div>
-        </div>
-        <asp:Panel ID="divCheckRegSecond" runat="server" CssClass="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closePopup()">&times;</span>
+    <div class="cont">
+        <form id="regForm" runat="server" class="registration_form" autocomplete="off">
+            <asp:Button Style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
+            <h1 id="titleReg" class="registration_header">Регистрация</h1>
+            <div id="divCheckRegFirst" class="reg-div-left visible" runat="server">
                 <div class="form-group">
                     <div class="horizontal_label">
-                        <label class="reg_label_left">Код</label>
-                        <label id="lblCorrectCode" runat="server" class="attention_red"></label>
+                        <label class="reg_label_left">Имя</label>
+                        <label id="lblNameReg" runat="server" class="attention_red"></label>
                     </div>
-                    <asp:TextBox ID="tbCode" runat="server" CssClass="form-control" placeholder="Введите проверочный код" />
+                    <asp:TextBox ID="tbNameReg" MaxLength="100" runat="server" CssClass="form-control" placeholder="Введите ваше имя" />
                 </div>
                 <div class="form-group">
-                    <asp:Button ID="btnCheckMailGood" runat="server" Text="Подтвердить" OnClick="Reg" OnClientClick="btnCheckMail_Click(); return false;" CssClass="authorization-button" />
+                    <div class="horizontal_label">
+                        <label class="reg_label_left">Телефон</label>
+                        <label id="lblNumberPhone" runat="server" class="attention_red"></label>
+                    </div>
+                    <asp:TextBox ID="tbNumberPhone" runat="server" class="form-control" placeholder="Введите номер телефона" />
+                </div>
+                <div class="form-group">
+                    <div class="horizontal_label">
+                        <label class="reg_label_left">Тип аккаунта</label>
+                        <label id="lblTypeUser" runat="server" class="attention_red"></label>
+                    </div>
+                    <asp:DropDownList ID="cbTypeUser" runat="server" CssClass="main-cb" AutoPostBack="True">
+                    </asp:DropDownList>
+                </div>
+                <div class="form-group">
+                    <asp:Button ID="btnReg" runat="server" Text="Зарегистрироваться" CssClass="register-button" />
+                    <asp:Button ID="btnRegHide" runat="server" OnClick="Reg" Style="display: none;" />
+                </div>
+                <div class="form-group">
+                    <span>Уже есть аккаунт?</span>
+                    <asp:Button ID="btnAuth" runat="server" Text="Авторизоваться" OnClick="Auth" CssClass="authorization-button" />
                 </div>
             </div>
-        </asp:Panel>
-    </form>
+
+
+            <div id="divCheckReg" class="reg-div-right hidden" runat="server">
+                <div class="form-group">
+                    <div class="horizontal_label">
+                        <label class="reg_label_left">Почта</label>
+                        <label id="lblLoginReg" runat="server" class="attention_red"></label>
+                    </div>
+                    <asp:TextBox ID="loginReg" runat="server" class="form-control" placeholder="Введите почтовый адрес" MaxLength="100" />
+                </div>
+                <div class="form-group">
+                    <div class="horizontal_label">
+                        <label class="reg_label_left">Пароль</label>
+                        <label id="lblPasswordReg" runat="server" class="attention_red"></label>
+                    </div>
+                    <asp:TextBox type="password" ID="passwordReg" runat="server" class="form-control" placeholder="Введите пароль" MaxLength="100" />
+                </div>
+                <div class="form-group">
+                    <div class="horizontal_label">
+                        <label class="reg_label_left">Повторите пароль</label>
+                        <label id="lblPasswordConfirmReg" runat="server" class="attention_red"></label>
+                    </div>
+                    <asp:TextBox type="password" ID="passwordConfirmReg" runat="server" CssClass="form-control" placeholder="Повторите пароль" MaxLength="100" />
+                </div>
+                <div class="form-group">
+                    <asp:Button ID="btnR" runat="server" Text="Зарегистрироваться" CssClass="register-button" />
+                </div>
+                <div class="form-group">
+                    <span>Уже есть аккаунт?</span>
+                    <asp:Button ID="btnA" runat="server" Text="Авторизоваться" OnClick="Auth" CssClass="authorization-button" />
+                </div>
+            </div>
+
+
+            <asp:Panel ID="divCheckRegSecond" runat="server" CssClass="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <div class="form-group">
+                        <div class="horizontal_label">
+                            <label class="reg_label_left">Код</label>
+                            <label id="lblCorrectCode" runat="server" class="attention_red"></label>
+                        </div>
+                        <asp:TextBox ID="tbCode" runat="server" CssClass="form-control" placeholder="Введите проверочный код" />
+                    </div>
+                    <div class="form-group">
+                        <asp:Button ID="btnCheckMailGood" runat="server" Text="Подтвердить" OnClick="Reg" OnClientClick="btnCheckMail_Click(); return false;" CssClass="authorization-button" />
+                    </div>
+                </div>
+            </asp:Panel>
+        </form>
+    </div>
 
 
     <script type="text/javascript">
@@ -378,7 +385,7 @@
                 dropdownCssClass: 'my-dropdown'
             });
         });
-</script>
+</script>    <%-- Стили для комбобокса --%>
 
 
 
@@ -400,7 +407,7 @@
                             <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>

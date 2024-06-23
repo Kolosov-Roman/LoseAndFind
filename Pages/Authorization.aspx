@@ -15,23 +15,29 @@
     <header class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
-                <a class="navbar-brand text-white header main-title" href="Ads.aspx">Lose and Find</a>
+                <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
+                    <img style="margin-top: 2px; height: 47px; width: 26px; margin-right: 15px;" src="/Resources/lapaThin.svg" />
+                    <img style="margin-bottom: 7px;" src="/Resources/logoDefault.svg" />
+                </a>
                 <div class="navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="Settings.aspx?section=divMyAds" style="margin-right: 8px;" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>
+                            <a href="Settings.aspx?section=divAdsInLikes">
+                                <img class="header-img header" src="/Resources/heartFull.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divBells" class="nav-link text-white header">Уведомления</a>
+                            <a href="Settings.aspx?section=divBells">
+                                <img class="header-img header" src="/Resources/bell.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMessages" class="nav-link text-white header">Сообщения</a>
+                            <a href="Settings.aspx?section=divMessages">
+                                <img class="header-img header" src="/Resources/message.png" /></a>
                         </li>
                     </ul>
                 </div>
@@ -58,10 +64,10 @@
 
 
 
-
-    <div class="registration_form">
-        <h1 id="h1" class="registration_header">Авторизация</h1>
-        <form id="authForm" runat="server">
+    <div class="cont">
+        <form id="authForm" class="registration_form" runat="server">
+            <h1 id="h1" class="registration_header">Авторизация</h1>
+            <asp:Button Style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
             <div id="divAuth" runat="server" class="visible">
                 <div class="form-group">
                     <div class="horizontal_label">
@@ -78,7 +84,8 @@
                     <asp:TextBox type="password" ID="passwordAuth" runat="server" class="form-control" placeholder="Введите пароль" />
                 </div>
                 <div class="form-group">
-                    <asp:Button ID="btnEnter" runat="server" Text="Войти" OnClick="Enter" CssClass="register-button" />
+                    <asp:Button ID="btnEnter" runat="server" Text="Войти" CssClass="register-button" />
+                    <asp:Button ID="btnEnterHide" runat="server" OnClick="Enter" Style="display: none;" />
                 </div>
                 <div class="form-group">
                     <asp:Button ID="btnReg" runat="server" Text="Зарегистрироваться" OnClick="Reg" CssClass="register-button" />
@@ -123,6 +130,8 @@
                     <asp:Button ID="btnSavePassword" runat="server" Text="Сохранить изменения" CssClass="register-button" />
                 </div>
             </div>
+
+
             <asp:Panel ID="divCheckRegSecond" runat="server" CssClass="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closePopup()">&times;</span>
@@ -299,9 +308,6 @@
                         divEnter.classList.add('visible');
                         h1.innerText = "Изменение пароля";
 
-                        // Сделать здесь отображение окна, в котором будет 2 поля пароля, которые если заполнить неправильно, показывало ошибку, иначе отправляло
-                        // в метод c#, где новый пароль меняется на старый и пользователя перебрасывает на главную страницу
-
                         closePopup();
                     }
                 },
@@ -311,7 +317,7 @@
                 }
             });
         }
-    </script>
+    </script>    <%-- Проверка кода почты --%>
 
 
     <script type="text/javascript">
@@ -342,7 +348,6 @@
             if (passwordReg.value != passwordConfirmReg.value && passwordConfirmReg.value != "" && passwordReg.value != "") {
                 lblPasswordConfirmReg.innerText = "Пароли не совпадают";
                 passwordConfirmRepeat = true;
-                return password || passwordConfirm || passwordConfirmRepeat;
             }
             else lblPasswordConfirmReg.innerText = "";
 
@@ -375,6 +380,61 @@
                 }
             });
         };
+    </script>    <%-- Проверка изменения нового пароля --%>
+
+
+    <script>
+        document.getElementById('btnEnter').onclick = function (event) {
+            event.preventDefault(); // предотвращение обновления страницы
+
+            var password = false;
+            var login = false;
+
+            var loginAuth = document.getElementById('loginAuth');
+            var passwordAuth = document.getElementById('passwordAuth');
+
+            var lblLoginAuth = document.getElementById('lblLoginAuth');
+            var lblPasswordAuth = document.getElementById('lblPasswordAuth');
+
+            lblLoginAuth.innerText = "";
+            lblPasswordAuth.innerText = "";
+
+            if (loginAuth.value == "") {
+                lblLoginAuth.innerText = "Введите почту";
+                login = true;
+            }
+            else lblLoginAuth.innerText = "";
+
+            if (passwordAuth.value == "") {
+                lblPasswordAuth.innerText = "Введите пароль";
+                password = true;
+            }
+            else lblPasswordAuth.innerText = "";
+
+            if (login || password) return;
+
+            $.ajax({
+                type: "POST",
+                url: "Authorization.aspx/CheckAuth",
+                data: JSON.stringify({ loginAuth: loginAuth.value, passwordAuth: passwordAuth.value }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var result = response.d;
+                    if (result == "") {
+                        document.getElementById('<%= btnEnterHide.ClientID %>').click();
+                    } else if (result == "Данный пользователь не найден") {
+                        lblLoginAuth.innerText = "Данный пользователь не найден";
+                    } else {
+                        lblPasswordAuth.innerText = "Пароль не верный";
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert("Error processing request: " + error);
+                }
+            });
+        };
     </script>
 
 
@@ -397,7 +457,7 @@
                             <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>

@@ -19,23 +19,29 @@
     <header class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
-                <a class="navbar-brand text-white header main-title" href="Ads.aspx">Lose and Find</a>
+                <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
+                    <img style="margin-top: 2px; height: 47px; width: 26px; margin-right: 15px;" src="/Resources/lapaThin.svg" />
+                    <img style="margin-bottom: 7px;" src="/Resources/logoDefault.svg" />
+                </a>
                 <div class="navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="Settings.aspx?section=divMyAds" style="margin-right: 8px;" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>
+                            <a href="Settings.aspx?section=divAdsInLikes">
+                                <img class="header-img header" src="/Resources/heartFull.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divBells" class="nav-link text-white header">Уведомления</a>
+                            <a href="Settings.aspx?section=divBells">
+                                <img class="header-img header" src="/Resources/bell.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMessages" class="nav-link text-white header">Сообщения</a>
+                            <a href="Settings.aspx?section=divMessages">
+                                <img class="header-img header" src="/Resources/message.png" /></a>
                         </li>
                     </ul>
                 </div>
@@ -63,81 +69,206 @@
 
 
     <form id="AdsForm" runat="server" class="ads" autocomplete="off">
+        <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
         <div class="ads-search">
-            <asp:TextBox ID="tbSearchTitle" placeholder="Введите название" CssClass="ads-title" runat="server" AutoPostBack="true" OnTextChanged="ShowAllFilters"></asp:TextBox>
+            <asp:TextBox ID="tbSearch" placeholder="Введите название" CssClass="ads-title" runat="server"></asp:TextBox>
+            <asp:Button ID="btnGoSearch" CssClass="ads-search-button" runat="server" Text="Найти" OnClientClick="filterAds(); return false;" />
         </div>
         <div class="ads-filters-container">
-            <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb" AutoPostBack="True" OnSelectedIndexChanged="ShowAllFilters">
+            <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb">
                 <asp:ListItem Text="По умолчанию"></asp:ListItem>
                 <asp:ListItem Text="По возрастанию"></asp:ListItem>
                 <asp:ListItem Text="По убыванию"></asp:ListItem>
             </asp:DropDownList>
-            <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb" AutoPostBack="True" OnSelectedIndexChanged="ShowAllFilters">
+            <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb">
             </asp:DropDownList>
-            <asp:DropDownList ID="filterType" runat="server" CssClass="main-cb" AutoPostBack="True" OnSelectedIndexChanged="ChangeDDLType">
+            <asp:DropDownList ID="filterType" runat="server" CssClass="main-cb">
             </asp:DropDownList>
-            <asp:DropDownList ID="filterBreed" runat="server" CssClass="main-cb" AutoPostBack="True" OnSelectedIndexChanged="ShowAllFilters">
-            </asp:DropDownList>
-            <asp:DropDownList ID="filterMale" runat="server" CssClass="main-cb" AutoPostBack="True" OnSelectedIndexChanged="ShowAllFilters">
-            </asp:DropDownList>
-            <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb" AutoPostBack="True" OnSelectedIndexChanged="ShowAllFilters">
+            <div id="ddlBreed">
+                <asp:DropDownList ID="filterBreed" runat="server" CssClass="main-cb">
+                </asp:DropDownList>
+            </div>
+            <div id="ddlMale">
+                <asp:DropDownList ID="filterMale" runat="server" CssClass="main-cb">
+                </asp:DropDownList>
+            </div>
+            <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb">
             </asp:DropDownList>
             <div class="ads-checkbox">
                 <span>
-                    <asp:CheckBox ID="cbIsChipping" CssClass="main-chb" Text="Чипированный" runat="server" AutoPostBack="True" OnCheckedChanged="ShowAllFilters" />
+                    <asp:CheckBox ID="cbIsChipping" CssClass="main-chb" Text="Чипированный" runat="server" />
                 </span>
                 <span>
-                    <asp:CheckBox ID="cbIsCollar" CssClass="main-chb" Text="С ошейником" runat="server" AutoPostBack="True" OnCheckedChanged="ShowAllFilters" />
+                    <asp:CheckBox ID="cbIsCollar" CssClass="main-chb" Text="С ошейником" runat="server" />
                 </span>
                 <span>
-                    <asp:CheckBox ID="cbIsCastrated" CssClass="main-chb" Text="Кастрированный" runat="server" AutoPostBack="True" OnCheckedChanged="ShowAllFilters" />
+                    <asp:CheckBox ID="cbIsCastrated" CssClass="main-chb" Text="Кастрированный" runat="server" />
                 </span>
+                <asp:Button style="margin-top: 10px;" ID="FilterButton" runat="server" Text="Найти" CssClass="register-button" />
+                <asp:Button style="margin-top: 10px;" ID="clearFilterButton" runat="server" Text="Сбросить фильтры" CssClass="authorization-button" />
             </div>
         </div>
 
-            <div runat="server" class="ads-card-container">
-                <div runat="server" class="main-container" visible="false" id="divShow">
-                    <asp:Label ID="lblAttentionMain" CssClass="ads-text-attention-main" runat="server">Объявления не найдены(</asp:Label>
-                    <asp:Label ID="lblAttention" CssClass="ads-text-attention" runat="server">Попробуйте изменить фильтры или запрос.</asp:Label>
-                </div>
-                <asp:Repeater ID="AdsRepeater" runat="server" OnItemDataBound="Repeater_ItemDataBound">
-                    <ItemTemplate>
-                        <div class="ads-card">
-                            <a id="urlImage" class="card-link" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
-                                <div class="ads-card-img">
-                                    <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
-                                </div>
-                            </a>
-                            <div class="ads-card-charact">
-                                <div class="ads-card-title-heart">
-                                    <a id="urlTitle" class="ads-text-title" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
-                                        <asp:Label ID="lblTitleAd" Text='<%# Eval("title") %>' runat="server"></asp:Label>
-                                    </a>
-                                    <asp:Button runat="server" ID="btnAddInLikes" CssClass="ads-card-heart" OnClientClick='<%# "btnAddInLikes(this); return false;" %>' />
-                                </div>
-                                <asp:Label ID="lblTownAd" Text='<%# Eval("town") %>' CssClass="ads-text-town" runat="server"></asp:Label>
-                                <asp:Label ID="lblDataPublicationAd" Text='<%# FormatPublishDateToMinute((DateTime)Eval("dataPublication")) %>' CssClass="ads-text-time" runat="server"></asp:Label>
-                                <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription" runat="server"></asp:Label>
-                            </div>
-                        </div>
-                    </ItemTemplate>
-                </asp:Repeater>
+
+        <div runat="server" class="ads-card-container">
+            <div runat="server" class="main-container" visible="false" id="divShow">
+                <asp:Label ID="lblAttentionMain" CssClass="ads-text-attention-main" runat="server">Объявления не найдены(</asp:Label>
+                <asp:Label ID="lblAttention" CssClass="ads-text-attention" runat="server">Попробуйте изменить фильтры или запрос.</asp:Label>
             </div>
+            <div id="ads-card-container" class="myads-card-container">
+                
+            </div>
+        </div>
     </form>
 
 
-    <script type="text/javascript">    // Возвращение в верх страницы при перезагрузке
-        document.addEventListener('DOMContentLoaded', function () {
-            // Прокрутка страницы к началу
-            window.scrollTo(0, 0);
+    <script type="text/javascript">
+        var filterType = document.getElementById('filterType');
+        var filterMale = document.getElementById('filterMale');
+        var filterBreed = document.getElementById('filterBreed');
+        var filterColor = document.getElementById('filterColor');
+        var filterLoseOrFind = document.getElementById('filterLoseOrFind');
+        var sortDate = document.getElementById('sortDate');
+        var cbIsChipping = document.getElementById('cbIsChipping');
+        var cbIsCollar = document.getElementById('cbIsCollar');
+        var cbIsCastrated = document.getElementById('cbIsCastrated');
+        var selectedType = filterType.selectedIndex;
+        var btnSearch = document.getElementById('FilterButton');
+        var btnClear = document.getElementById('clearFilterButton');
+        var tbSearch = document.getElementById('tbSearch');
+
+        document.addEventListener("DOMContentLoaded", function () {
+            filterAds();
+            btnClear.style.display = 'none';
+            btnSearch.style.display = 'none';
+            if (selectedType === 0) {
+                $('#ddlBreed, #ddlMale').hide();
+            } else {
+                $('#ddlBreed, #ddlMale').show();
+            }
         });
-    </script>
+
+        $('.main-cb').change(function () {
+            btnClear.style.display = 'inline';
+            btnSearch.style.display = 'inline';
+        });
+
+        // Отслеживание изменений для всех чекбоксов с классом .main-chb
+        $('.main-chb').change(function () {
+            btnClear.style.display = 'inline';
+            btnSearch.style.display = 'inline';
+        });
+
+        $(document).ready(function () {
+            $('#<%= filterType.ClientID %>').change(function () {
+                selectedType = filterType.selectedIndex;
+
+                if (selectedType === 0) {
+                    $('#ddlBreed, #ddlMale').hide();
+                }
+                else {
+                    $('#ddlBreed, #ddlMale').show();
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'Ads.aspx/ChangeDDLType',
+                    data: JSON.stringify({ selectedType: filterType.selectedIndex }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (response) {
+
+                        var ddlBreed = $('#<%= filterBreed.ClientID %>');
+                        var ddlMale = $('#<%= filterMale.ClientID %>');
+
+                        ddlBreed.empty();
+                        ddlMale.empty();
+
+                        ddlBreed.append($('<option></option>').val('').html('Порода'));
+                        ddlMale.append($('<option></option>').val('').html('Пол'));
+
+                        if (response.d) {
+                            $.each(response.d.breeds, function (index, breed) {
+                                ddlBreed.append($('<option></option>').val(breed.value).html(breed.text));
+                            });
+
+                            $.each(response.d.males, function (index, male) {
+                                ddlMale.append($('<option></option>').val(male.value).html(male.text));
+                            });
+
+                            if (selectedType !== 0) {
+                                $('#ddlBreed, #ddlMale').show();
+                            }
+                        } else {
+                            console.log('No data returned.');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error: ' + error);
+                    }
+                });
+            });
+        });
+
+        function filterAds() {
+            var selectedType = filterType.selectedIndex;
+            var selectedMale = filterMale.selectedIndex;
+            var selectedBreed = filterBreed.selectedIndex;
+            var selectedColor = filterColor.selectedIndex;
+            var selectedLoseOrFind = filterLoseOrFind.selectedIndex;
+            var selectedDate = sortDate.selectedIndex;
+            var selectedChipping = cbIsChipping.checked;
+            var selectedCollar = cbIsCollar.checked;
+            var selectedCastrated = cbIsCastrated.checked;
+            var selectedSearch = tbSearch.value;
+
+
+            $.ajax({
+                type: "POST",
+                url: "Ads.aspx/ShowAllFilters",
+                data: JSON.stringify({
+                    selectedType: selectedType,
+                    selectedMale: selectedMale,
+                    selectedBreed: selectedBreed,
+                    selectedColor: selectedColor,
+                    selectedLoseOrFind: selectedLoseOrFind,
+                    selectedDate: selectedDate,
+                    selectedChipping: selectedChipping,
+                    selectedCollar: selectedCollar,
+                    selectedCastrated: selectedCastrated,
+                    selectedSearch: selectedSearch
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var adsContainer = $('#ads-card-container');
+                    adsContainer.html(response.d);
+                    btnSearch.style.display = 'none';
+                },
+                error: function (xhr, status, error) {
+                    console.log("AJAX Error: " + status + " - " + error);
+                }
+            });
+        };
+
+        $(document).ready(function () {
+            $('#FilterButton').click(function () {
+                filterAds();
+                return false;
+            });
+        });
+        $(document).ready(function () {
+            $('#clearFilterButton').click(function () {
+                location.reload();
+                return false;
+            });
+        });
+    </script>    <%-- Вытаскивание элементов из комбобоксов --%>
 
 
     <script type="text/javascript">
         function btnAddInLikes(button) {
-            var adId = button.getAttribute('data-adid');
-            console.log("adId:", adId);  // Проверяем значение adId
+            var adId = button.closest('.ads-card').querySelector('.card-link').getAttribute('data-adid');
+            console.log(adId);
             $.ajax({
                 type: "POST",
                 url: "Ads.aspx/btnAddInLikes_Click",
@@ -165,7 +296,7 @@
                 }
             });
         }
-    </script>
+    </script>    <%-- Добавление объявления в избранное --%>
 
 
     <script>
@@ -175,25 +306,33 @@
             });
             $('#filterMale').select2({
                 dropdownCssClass: 'my-dropdown',
-                minimumResultsForSearch: -1, // отключает поисковую строку
+                minimumResultsForSearch: -1,
             });
             $('#filterLoseOrFind').select2({
                 dropdownCssClass: 'my-dropdown',
-                minimumResultsForSearch: -1, // отключает поисковую строку
+                minimumResultsForSearch: -1,
             });
             $('#filterType').select2({
                 dropdownCssClass: 'my-dropdown',
-                minimumResultsForSearch: -1, // отключает поисковую строку
+                minimumResultsForSearch: -1,
             });
             $('#filterColor').select2({
                 dropdownCssClass: 'my-dropdown'
             });
             $('#sortDate').select2({
                 dropdownCssClass: 'my-dropdown',
-                minimumResultsForSearch: -1, // отключает поисковую строку
+                minimumResultsForSearch: -1,
             });
         });
-    </script>
+    </script>    <%-- Применение стилей к комбобоксам --%>
+
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Прокрутка страницы к началу
+                window.scrollTo(0, 0);
+            });
+        </script>    <%-- Возвращение в верх страницы при перезагрузке--%>
 
 
 
@@ -215,7 +354,7 @@
                             <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>

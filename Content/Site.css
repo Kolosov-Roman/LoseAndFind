@@ -103,7 +103,6 @@ header {
     font-size: 14px;
     font-family: 'Inter', sans-serif;
     font-weight: 300;
-    font-size: clamp(14px, 0vw, 20px);
 }
 
 .main-title {
@@ -125,6 +124,27 @@ header {
     width: 40px;
     height: 40px;
     border-radius: 30px;
+}
+
+.header-img {
+    width: 20px;
+    height: 20px;
+}
+
+.mx-2 {
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    justify-self: center;
+    align-items: center;
+    align-self: center;
+}
+
+.header-text-shadow {
+    font-weight: 500;
 }
 
 
@@ -165,9 +185,6 @@ header {
 .placeholder-red::placeholder {
     color: red;
 }
-
-
-
 
 .my-dropdown {
     overflow-y: auto !important;
@@ -217,6 +234,7 @@ header {
 
 .select2.select2-container.select2-container--default {
     height: 41px;
+    width: 200px !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -230,10 +248,113 @@ header {
     max-height: 300px !important;
 }
 
+.hidden {
+    display: none;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.active-tab,
+.archive-tab {
+    font-family: Onest-Bold;
+    font-size: 18px;
+    text-decoration: none;
+    color: #808080;
+}
+
+.active {
+    cursor: default;
+    color: black;
+}
+
+.passive {
+    cursor: pointer;
+}
+
+.active:hover {
+    color: black;
+}
+
+    .passive:hover {
+        color: #ff6163;
+    }
+
+.divActivePassiveAdv {
+    display: flex;
+    margin-bottom: 10px;
+    gap: 50px;
+    width: fit-content;
+}
+
+.separator-container {
+    position: relative;
+    height: 16px;
+    margin-bottom: 40px;
+    width: 227px;
+}
+
+.indicator {
+    position: absolute;
+    height: 16px;
+    border-radius: 30px;
+    background-color: #555555;
+    transition: width 0.2s ease, transform 0.2s ease;
+    z-index: 1;
+}
+
+.separator {
+    height: 2px;
+    background-color: #e3e2e1;
+    position: absolute;
+    top: 7px;
+    left: 0;
+    right: 0;
+}
+
+.separator-1 {
+    height: 10px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 9px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.ads-title,
+.makead-title-input-form-control,
+.set-form-control,
+.form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid rgb(70, 70, 70);
+    border-radius: 7px;
+    outline: none;
+    height: 41px;
+}
+
+.makead-title-input-form-control {
+    width: 500px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.set-form-control {
+    width: 300px;
+}
+
+.ads-title {
+    border: 2px solid #28a745;
+    border-radius: 7px 0 0 7px;
+}
 
 
 
-    /*                                                     Стили окна регистрации и авторизации                                                */
+
+/*                                                     Стили окна регистрации и авторизации                                                */
 
 
 
@@ -241,29 +362,30 @@ header {
 .registration_form {
     flex-direction: column;
     padding: 20px;
-    width: 420px; /* Ширина формы */
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1); /* Тень формы */
-    border-radius: 10px; /* Закругленные углы */
+    width: 420px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     background-color: white;
-    margin-top: 45px;
+    display: flex;
+}
+
+.cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .reg-div-left {
-    display: flex;
     flex-direction: column;
 }
 
 .reg-div-right {
-    display: flex;
     flex-direction: column;
-}
-
-.hidden {
-    display: none;
-}
-
-.visible {
-    visibility: visible;
 }
 
 .registration_header {
@@ -297,14 +419,6 @@ header {
     justify-content: space-between;
 }
 
-.form-control {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border: 2px solid rgb(60, 60, 60);
-    border-radius: 7px;
-}
-
 .fetch-code-button,
 .register-button,
 .authorization-button,
@@ -327,8 +441,8 @@ header {
     font-size: 12px;
     padding: 0px;
     align-self: center;
+    margin-top: 20px;
 }
-
     .adv-btnCloseAd:hover,
     .fetch-code-button:hover,
     .set-save-photo:hover,
@@ -349,6 +463,7 @@ header {
     cursor: pointer;
 }
 
+    .ads-search-button:hover,
     .adv-btnEditAd:hover,
     .adv-btnShowPhone:hover,
     .register-button:hover,
@@ -389,6 +504,7 @@ header {
     flex-direction: column;
     border-radius: 10px;
     align-items: center;
+/*    max-height: 570px;*/
 }
 
 .set-right-container {
@@ -442,7 +558,6 @@ header {
     width: 100%;
     justify-content: space-between;
     flex-direction: column;
-    margin-bottom: 30px;
 }
 
 .set-sidebar-photo {
@@ -459,6 +574,7 @@ header {
 
 .set-all {
     display: flex;
+    margin-bottom: 65px;
 }
 
 .set-account-1 {
@@ -492,14 +608,6 @@ header {
     width: 550px;
     margin-bottom: 20px;
     justify-content: space-between;
-}
-
-.set-form-control {
-    width: 300px;
-    padding: 8px;
-    font-size: 16px;
-    border: 2px solid rgb(60, 60, 60);
-    border-radius: 7px;
 }
 
 .set-title-margin {
@@ -594,6 +702,34 @@ header {
     margin: 20px 0px 20px 0px;
 }
 
+.set-separator-center {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 30px 0px 30px 0px;
+}
+
+.set-exitAccount {
+    border: none;
+    background: none;
+    font-size: 14px;
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+}
+
+.set-deleteAccount {
+    border: none;
+    background: none;
+    color: darkred;
+    font-size: 14px;
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+    align-content: center;
+    margin-top: 20px;
+}
+
 .set-attention_red {
     color: red;
     width: 200px;
@@ -617,7 +753,6 @@ header {
     width: 150px;
     height: 150px;
     border-radius: 10px;
-    margin-bottom: 40px;
 }
 
     .file-upload-wrapper input[type="file"] {
@@ -656,15 +791,6 @@ header {
     margin-left: 350px;
     margin-bottom: 60px;
     max-width: 1300px;
-}
-
-.ads-title {
-    width: 100%;
-    padding: 0px 0px 0px 10px;
-    border: none;
-    border-radius: 7px;
-    background-color: white;
-    height: 41px;
 }
 
 .ads-filters-container {
@@ -773,6 +899,11 @@ header {
 
 .ads-img {
     border-radius: 10px 0px 0px 10px;
+    max-width: 200px;
+    max-height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    object-fit: cover;
 }
 
 .ads-card-charact {
@@ -781,10 +912,11 @@ header {
     padding: 10px 10px 0px 20px;
     background-color: white;
     border-radius: 0px 10px 10px 0px;
-    min-width: 197px;
+    min-width: 198px;
 }
 
 .ads-text-title {
+    font-family: Onest-SemiBold;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -800,6 +932,7 @@ header {
     margin-bottom: 5px;
     max-height: 35px;
     width: 130px;
+    font-family: Onest-Regular;
 }
 
 .ads-text-town {
@@ -813,7 +946,7 @@ header {
 }
 
 .ads-text-discription {
-    font-size: 14px;
+    font-size: 13px;
     color: #555555;
     width: 160px;
     overflow: hidden;
@@ -821,14 +954,7 @@ header {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
-}
-
-.ads-card img {
-    max-width: 200px;
-    max-height: 200px;
-    min-width: 200px;
-    min-height: 200px;
-    object-fit: cover;
+    white-space: pre-wrap;
 }
 
 .ads-card-title-heart {
@@ -845,10 +971,10 @@ header {
     height: 18px;
     margin: 0px 5px 0 0;
     align-self: center;
-    background-image: url('/Resources/heartEmpty.png');
     background-size: contain;
     background-color: white;
     border: none;
+    cursor: pointer;
 }
 
 a.ads-text-title {
@@ -891,6 +1017,7 @@ a.ads-text-title {
     width: 250px;
     display: flex;
     justify-content: space-between;
+    outline: none;
 }
 
 .makead-charact {
@@ -942,17 +1069,6 @@ a.ads-text-title {
     margin-bottom: 40px;
 }
 
-.makead-title-input-form-control {
-    width: 500px;
-    display: flex;
-    margin-bottom: 20px;
-    height: 41px;
-    padding: 8px;
-    font-size: 16px;
-    border: 2px solid rgb(60, 60, 60);
-    border-radius: 7px;
-}
-
 .makead-description-input {
     width: 500px;
     height: 150px;
@@ -971,20 +1087,20 @@ a.ads-text-title {
     background-color: #007bff;
     color: #fff;
     border: none;
-    width: 200px;
+    width: 220px;
     border-radius: 7px;
     cursor: pointer;
     align-content: center;
     transition: background-color 0.25s;
 }
 
+    .makead-btnMakeAd:hover {
+        background-color: #0056b3;
+    }
+
 .makead-submit-button {
     justify-content: center;
     display: flex;
-}
-
-.makead-btnMakeAd:hover {
-    background-color: #0056b3;
 }
 
 .makead-attention-red {
@@ -1112,6 +1228,12 @@ a.ads-text-title {
     opacity: 0.5;
 }
 
+.red-title {
+    color: #864129;
+    background: #fff0bb;
+    font-family: Onest-Medium;
+}
+
 
 
 /*                                                             Стили окна одного объявления                                                */
@@ -1142,7 +1264,7 @@ a.ads-text-title {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #f3f3f3;
+    background-color: #fff;
     border-radius: 10px;
     min-width: 500px;
     max-width: 500px;
@@ -1158,7 +1280,7 @@ a.ads-text-title {
     min-width: 600px;
     min-height: 500px;
     object-fit: cover;
-    border: 1px solid rgb(60, 60, 60);
+    border: 1px solid rgb(70, 70, 70);
 }
 
 .adv-image-client {
@@ -1232,6 +1354,7 @@ a.ads-text-title {
     margin: 10px 0px 10px 0px;
 }
 
+.ads-search-button,
 .adv-btnShowPhone {
     width: 50%;
     padding: 10px;
@@ -1241,6 +1364,12 @@ a.ads-text-title {
     border-radius: 7px;
     cursor: pointer;
     transition: background-color 0.25s;
+}
+
+.ads-search-button {
+    width: 100px;
+    height: 41px;
+    border-radius: 0 7px 7px 0;
 }
 
 .adv-btnCloseAd,
@@ -1311,6 +1440,7 @@ a.ads-text-title {
 }
 
 .description-last-text {
+    white-space: pre-wrap;
 }
 
 .modal {

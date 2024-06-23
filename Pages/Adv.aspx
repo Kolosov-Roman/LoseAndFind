@@ -16,23 +16,29 @@
     <header class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
-                <a class="navbar-brand text-white header main-title" href="Ads.aspx">Lose and Find</a>
+                <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
+                    <img style="margin-top: 2px; height: 47px; width: 26px; margin-right: 15px;" src="/Resources/lapaThin.svg" />
+                    <img style="margin-bottom: 7px;" src="/Resources/logoDefault.svg" />
+                </a>
                 <div class="navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="Settings.aspx?section=divMyAds" style="margin-right: 8px;" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>
+                            <a href="Settings.aspx?section=divAdsInLikes">
+                                <img class="header-img header" src="/Resources/heartFull.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divBells" class="nav-link text-white header">Уведомления</a>
+                            <a href="Settings.aspx?section=divBells">
+                                <img class="header-img header" src="/Resources/bell.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMessages" class="nav-link text-white header">Сообщения</a>
+                            <a href="Settings.aspx?section=divMessages">
+                                <img class="header-img header" src="/Resources/message.png" /></a>
                         </li>
                     </ul>
                 </div>
@@ -60,12 +66,16 @@
 
 
     <form id="adv" class="adv" runat="server" autocomplete="off">
+        <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
         <div class="adv-container-left">
             <div id="divCloseAndEditAd" runat="server" class="adv-container-right-showing">
                 <asp:Button ID="btnEditAdv" CssClass="adv-btnEditAd" Text="Редактировать объявление" runat="server" OnClick="EditAdv" />
                 <asp:Button ID="btnCloseAdv" CssClass="adv-btnCloseAd" Text="Снять с публикации" runat="server" OnClick="CloseAdv" />
             </div>
-            <asp:Label ID="lblLoseOrFind" class="adv-loseOrFind" runat="server"></asp:Label>
+            <div style="display: flex; justify-content: space-between">
+                <asp:Label ID="lblLoseOrFind" class="adv-loseOrFind" runat="server"></asp:Label>
+                <asp:Label ID="lblCloseAdv" class="adv-loseOrFind red-title" runat="server">Объявление снято с публикации</asp:Label>
+            </div>
             <div>
                 <asp:Label ID="lblTitleAnimal" class="adv-title" runat="server"></asp:Label>
                 <asp:Image ID="imgAnimal" runat="server" CssClass="adv-image-animal" />
@@ -152,16 +162,26 @@
         document.addEventListener('DOMContentLoaded', function () {
             var modal = document.getElementById('<%= pnlPopup.ClientID %>');
 
-        function openPopup() {
-            if (modal && !modal.classList.contains('show')) {
-                modal.style.display = 'block';
-                // Добавляем класс через setTimeout, чтобы анимация началась с задержкой
-                setTimeout(function () {
-                    modal.classList.add('show');
-                    // Добавляем обработчик события transitionend для завершения анимации
-                    modal.addEventListener('transitionend', onTransitionEnd);
-                }, 10);
-            }
+            function openPopup() {
+                var isUserAuthenticated = <%= currentUser == null ? "false" : "true" %>;
+
+                if (!isUserAuthenticated) {
+                '<%= LoseAndFind.Pages.Helper.valueOfPage = "~/Pages/Adv?advertisementId=" + LoseAndFind.Pages.Helper.advertisementId %>';
+                    window.location.href = '<%= ResolveUrl("~/Pages/Authorization") %>';
+                    return false;
+                }
+                else {
+                    if (modal && !modal.classList.contains('show')) {
+                        modal.style.display = 'block';
+                        // Добавляем класс через setTimeout, чтобы анимация началась с задержкой
+                        setTimeout(function () {
+                            modal.classList.add('show');
+                            // Добавляем обработчик события transitionend для завершения анимации
+                            modal.addEventListener('transitionend', onTransitionEnd);
+                        }, 10);
+                    }
+                    return false;
+                }
         }
 
         function closePopup() {
@@ -216,7 +236,7 @@
                             <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>

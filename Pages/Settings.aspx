@@ -10,28 +10,35 @@
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/Site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
-                <a class="navbar-brand text-white header main-title" href="Ads.aspx">Lose and Find</a>
+                <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
+                    <img style="margin-top: 2px; height: 47px; width: 26px; margin-right: 15px;" src="/Resources/lapaThin.svg" />
+                    <img style="margin-bottom: 7px;" src="/Resources/logoDefault.svg" />
+                </a>
                 <div class="navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="Settings.aspx?section=divMyAds" style="margin-right: 8px;" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>
+                            <a href="Settings.aspx?section=divAdsInLikes">
+                                <img class="header-img header" src="/Resources/heartFull.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divBells" class="nav-link text-white header">Уведомления</a>
+                            <a href="Settings.aspx?section=divBells">
+                                <img class="header-img header" src="/Resources/bell.png" /></a>
                         </li>
                         <li class="mx-2">
-                            <a href="Settings.aspx?section=divMessages" class="nav-link text-white header">Сообщения</a>
+                            <a href="Settings.aspx?section=divMessages">
+                                <img class="header-img header" src="/Resources/message.png" /></a>
                         </li>
                     </ul>
                 </div>
@@ -59,6 +66,7 @@
 
 
     <form id="settings" class="set-formm" runat="server" autocomplete="off">
+        <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
         <div class="set-form">
             <div class="set-left-container">
                 <div class="set-account">
@@ -75,13 +83,13 @@
                         <asp:Label runat="server">Безопасность</asp:Label>
                     </div>
                     <div class="set-separator"></div>
-                    <div data-section-id="divMyAds" class="set-sidebar-item">
+                    <div data-section-id="divMyAds" onclick="setOpacityMyAds();" class="set-sidebar-item">
                         <asp:Label runat="server">Мои объявления</asp:Label>
                     </div>
                     <div data-section-id="divMessages" class="set-sidebar-item">
                         <asp:Label runat="server">Сообщения</asp:Label>
                     </div>
-                    <div data-section-id="divAdsInLikes" onclick="setOpacity();" class="set-sidebar-item">
+                    <div data-section-id="divAdsInLikes" class="set-sidebar-item">
                         <asp:Label runat="server">Избранное</asp:Label>
                     </div>
                     <div data-section-id="divBells" class="set-sidebar-item">
@@ -131,6 +139,11 @@
                             <asp:Button ID="btnSavePhotoClient" OnClick="imgClientChange_Click" Text="Сохранить" CssClass="set-save-photo" runat="server" />
                         </div>
                     </div>
+                    <div class="set-separator-center"></div>
+                    <div style="display: flex; flex-direction: column; height: fit-content;">
+                        <asp:Button ID="exitAccount" OnClick="exitAccount_Click" Text="Выйти из аккаунта" CssClass="set-exitAccount" runat="server" />
+                        <asp:Button ID="deleteAccount" OnClick="deleteAccount_Click" Text="Удалить аккаунт" CssClass="set-deleteAccount" runat="server" />
+                    </div>
                 </div>
                 <div class="set-sidebar" id="divSecurity">    <%-- Изменение пароля --%>
                     <div class="set-account-set">
@@ -159,33 +172,74 @@
                         <h3 class="set-title-margin">Мои объявления</h3>
                         <asp:Label runat="server" ID="message" class="message-container-center"></asp:Label>
                     </div>
-                    <div runat="server" class="main-container-message-attention" visible="false" id="divMyAdsAttention">
-                        <asp:Label CssClass="main-text-attention-hight" runat="server">У вас ещё нет объявлений</asp:Label>
-                        <asp:Label CssClass="main-text-attention-low" runat="server">Но это легко исправить - разместите первое</asp:Label>
-                        <asp:Button ID="btnMakeAd" OnClick="MakeAd_Click" runat="server" CssClass="myads-btn-make-ad" Text="Разместить объявление" />
+                    <div class="divActivePassiveAdv">
+                        <a href="javascript:void(0);" id="activeTabLink" class="active active-tab tab" onclick="showTab('active')">Активные</a>
+                        <a href="javascript:void(0);" id="archiveTabLink" class="passive archive-tab tab" onclick="showTab('archived')">Архивные</a>
                     </div>
-                    <div runat="server" class="myads-card-container">
-                        <asp:Repeater ID="MyAdsRepeater" runat="server" OnItemDataBound="MyAdsRepeater_ItemDataBound">
-                            <ItemTemplate>
-                                <div class="ads-card">
-                                    <a id="urlImage" class="card-link" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
-                                        <div class="ads-card-img">
-                                            <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
+                    <div class="separator-container">
+                        <div class="indicator"></div>
+                        <div style="height: 50px;">
+                            <div class="separator"></div>
+                            <div class="separator-1"></div>
+                        </div>
+                    </div>
+                    <div id="divActiveAds">
+                        <div runat="server" class="main-container-message-attention" visible="false" id="divMyAdsAttention">
+                            <asp:Label CssClass="main-text-attention-hight" runat="server">У вас ещё нет объявлений</asp:Label>
+                            <asp:Label CssClass="main-text-attention-low" runat="server">Но это легко исправить - разместите первое</asp:Label>
+                            <asp:Button ID="btnMakeAd" OnClick="MakeAd_Click" runat="server" CssClass="myads-btn-make-ad" Text="Разместить объявление" />
+                        </div>
+                        <div runat="server" class="myads-card-container">
+                            <asp:Repeater ID="MyAdsRepeater" runat="server" OnItemDataBound="MyAdsRepeater_ItemDataBound">
+                                <ItemTemplate>
+                                    <div class="ads-card">
+                                        <a id="urlImage" class="card-link" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                            <div class="ads-card-img">
+                                                <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
+                                            </div>
+                                        </a>
+                                        <div class="ads-card-charact">
+                                            <div class="ads-card-title-heart">
+                                                <a id="urlTitle" class="ads-text-title" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                                    <asp:Label ID="lblTitleAd" Text='<%# Eval("title") %>' runat="server"></asp:Label>
+                                                </a>
+                                            </div>
+                                            <asp:Label ID="lblTownAd" Text='<%# Eval("town") %>' CssClass="ads-text-town" runat="server"></asp:Label>
+                                            <asp:Label ID="lblDataPublicationAd" Text='<%# FormatPublishDateToMinute((DateTime)Eval("dataPublication")) %>' CssClass="ads-text-time" runat="server"></asp:Label>
+                                            <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription" runat="server"></asp:Label>
                                         </div>
-                                    </a>
-                                    <div class="ads-card-charact">
-                                        <div class="ads-card-title-heart">
-                                            <a id="urlTitle" class="ads-text-title" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
-                                                <asp:Label ID="lblTitleAd" Text='<%# Eval("title") %>' runat="server"></asp:Label>
-                                            </a>
-                                        </div>
-                                        <asp:Label ID="lblTownAd" Text='<%# Eval("town") %>' CssClass="ads-text-town" runat="server"></asp:Label>
-                                        <asp:Label ID="lblDataPublicationAd" Text='<%# FormatPublishDateToMinute((DateTime)Eval("dataPublication")) %>' CssClass="ads-text-time" runat="server"></asp:Label>
-                                        <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription" runat="server"></asp:Label>
                                     </div>
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </div>
+                    <div id="divArchivedAds" class="hidden">
+                        <div runat="server" class="main-container-message-attention" visible="false" id="divMyArchivedAdsAttention">
+                            <asp:Label CssClass="main-text-attention-hight" runat="server">У вас нет архивных объявлений</asp:Label>
+                        </div>
+                        <div runat="server" class="myads-card-container">
+                            <asp:Repeater ID="ArchivedAdsRepeater" runat="server" OnItemDataBound="ArchivedAdsRepeater_ItemDataBound">
+                                <ItemTemplate>
+                                    <div class="ads-card">
+                                        <a id="urlImage" class="card-link" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                            <div id="status" class="ads-card-img favourite" data-style="<%# Eval("idStatus").ToString() == "2" ? 1 : 0 %>">
+                                                <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
+                                            </div>
+                                        </a>
+                                        <div class="ads-card-charact">
+                                            <div class="ads-card-title-heart">
+                                                <a id="urlTitle" class="ads-text-title" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                                    <asp:Label ID="lblTitleAd" Text='<%# Eval("title") %>' runat="server"></asp:Label>
+                                                </a>
+                                            </div>
+                                            <asp:Label ID="lblTownAd" Text='<%# Eval("town") %>' CssClass="ads-text-town" runat="server"></asp:Label>
+                                            <asp:Label ID="lblDataPublicationAd" Text='<%# FormatPublishDateToMinute((DateTime)Eval("dataPublication")) %>' CssClass="ads-text-time" runat="server"></asp:Label>
+                                            <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
                     </div>
                 </div>
                 <div class="set-sidebar" id="divMessages">    <%-- Сообщения --%>
@@ -249,7 +303,96 @@
     </form>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            $('#btnCancelName, #btnCancelMail, #btnSaveName, #btnSaveMail, #tbNameSidebar, #tbMailSidebar').hide();
+
+            const tabs = document.querySelectorAll('.tab');
+            const indicator = document.querySelector('.indicator');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    moveIndicator(tab);
+                    setActiveTab(tab);
+                    saveActiveTab(tab.id);
+                });
+            });
+
+            function moveIndicator(tab) {
+                const tabRect = tab.getBoundingClientRect();
+                const tabsRect = tab.parentNode.getBoundingClientRect();
+
+                const leftPosition = tabRect.left - tabsRect.left;
+                const width = tab.offsetWidth;
+
+                indicator.style.width = `${width}px`;
+                indicator.style.transform = `translateX(${leftPosition}px)`;
+            }
+
+            function setActiveTab(activeTab) {
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.classList.add('passive');
+                });
+                activeTab.classList.add('active');
+                activeTab.classList.remove('passive');
+                showTab(activeTab.getAttribute('onclick').split("'")[1]);
+            }
+
+            function saveActiveTab(tabId) {
+                localStorage.setItem('activeTab', tabId);
+            }
+
+            function getActiveTab() {
+                return localStorage.getItem('activeTab');
+            }
+
+            // Установка начальной позиции индикатора после полной загрузки страницы
+            window.addEventListener('load', function () {
+                const activeTabId = getActiveTab();
+                const initialTab = activeTabId ? document.getElementById(activeTabId) : document.querySelector('.tab');
+                moveIndicator(initialTab);
+                setActiveTab(initialTab);
+            });
+        });
+
+        function showTab(tabName) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active-content');
+            });
+            document.getElementById(tabName).classList.add('active-content');
+        }
+    </script>    <%-- Отображение архивных и активных объявлений --%>
+
+
+    <script type="text/javascript">
+        function showTab(tabName) {
+            var activeTab = document.getElementById('divActiveAds');
+            var archiveTab = document.getElementById('divArchivedAds');
+
+            var activeLink = document.getElementById('activeTabLink');
+            var archiveLink = document.getElementById('archiveTabLink');
+
+            if (tabName === 'active') {
+                activeTab.classList.remove('hidden');
+                archiveTab.classList.add('hidden');
+
+                activeLink.classList.add('active');
+                activeLink.classList.remove('passive');
+                archiveLink.classList.add('passive');
+                archiveLink.classList.remove('active');
+            } else {
+                activeTab.classList.add('hidden');
+                archiveTab.classList.remove('hidden');
+
+                activeLink.classList.add('passive');
+                activeLink.classList.remove('active');
+                archiveLink.classList.add('active');
+                archiveLink.classList.remove('passive');
+            }
+        }
+    </script>    <%-- Отображение стилей архивных и активных объявлений --%>
 
 
     <script type="text/javascript">
@@ -268,15 +411,6 @@
         var tbNameSidebar = document.getElementById('<%= tbNameSidebar.ClientID %>');
         var tbMailSidebar = document.getElementById('<%= tbMailSidebar.ClientID %>');
         var tbCode = document.getElementById('<%= tbCode.ClientID %>');
-
-        document.addEventListener("DOMContentLoaded", function () {
-            btnCancelName.style.display = 'none';
-            btnCancelMail.style.display = 'none';
-            btnSaveName.style.display = 'none';
-            btnSaveMail.style.display = 'none';
-            tbNameSidebar.style.display = 'none';
-            tbMailSidebar.style.display = 'none';
-        });
 
         function btnChangeName_Click() {
             $.ajax({
@@ -444,19 +578,30 @@
                 }
             });
         }
-</script>    <%-- Изменение имени и почты --%>
+    </script>    <%-- Изменение имени и почты --%>
 
 
     <script>
-        function setOpacity() {
-            var ads = document.getElementsByClassName("favourite");
-            Array.from(ads).forEach(ad => {
-                if (ad.getAttribute("data-style") == 1) {
-                    ad.classList.add("adinlike-deleted-opacity");
-                }
-            });
-        }
-    </script>    <%-- Сделать фон изображения объявления сероватым, в случае снятии объявления с публикации --%>
+    document.addEventListener("DOMContentLoaded", function () {
+        setOpacityMyAds();
+    });
+
+    function setOpacityMyAds() {
+        var ads = document.getElementsByClassName("favourite");
+        Array.from(ads).forEach(ad => {
+            if (ad.getAttribute("data-style") == 1) {
+                ad.classList.add("adinlike-deleted-opacity");
+            }
+        });
+    }
+
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', function () {
+            setOpacityMyAds();
+        });
+    });
+</script>    <%-- Сделать фон изображения объявления темнее при снятии с публикации --%>
 
 
     <script type="text/javascript">
@@ -467,7 +612,6 @@
         if (message) {
             // Показываем сообщение
             showMessage(message);
-            console.log('Message from URL:', message);
 
             // Удаляем параметр message из URL
             urlParams.delete('message');
@@ -479,7 +623,6 @@
         if (deletionMessage) {
             // Удаляем сообщение из localStorage перед его показом
             localStorage.removeItem('deletionMessage');
-            console.log('Found and removed deletionMessage from localStorage:', deletionMessage);
             showMessage(deletionMessage);
         }
 
@@ -488,14 +631,12 @@
             if (event.key === 'deletionMessage' && event.newValue) {
                 // Удаляем сообщение из localStorage перед его показом
                 localStorage.removeItem('deletionMessage');
-                console.log('Detected deletionMessage change in localStorage:', event.newValue);
                 showMessage(event.newValue);
             }
         });
     });
 
     function showMessage(message) {
-        console.log('Displaying message:', message);
         var messageContainer = document.getElementById('message');
         if (messageContainer) {
             messageContainer.innerText = message;
@@ -509,11 +650,8 @@
                 messageContainer.classList.remove('show'); // Плавно скрываем текст
                 setTimeout(function () {
                     messageContainer.style.display = 'none'; // Скрываем контейнер после завершения анимации
-                    console.log('Message hidden');
-                }, 1000); // Время для завершения анимации скрытия (1 секунда)
-            }, 4000); // Через 4000 миллисекунд (4 секунды)
-        } else {
-            console.log('Message container not found');
+                }, 1000);
+            }, 4000);
         }
     }
 </script>    <%-- Отображение сообщения о снятии объявления --%>
@@ -639,7 +777,6 @@
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         function showSection(sectionId, element) {
-            console.log("Switching to section:", sectionId); // Отладочное сообщение
             var sidebarItems = document.getElementsByClassName('set-sidebar-item');
             var sections = document.getElementsByClassName('set-sidebar');
 
@@ -657,8 +794,6 @@
             var activeSection = document.getElementById(sectionId);
             if (activeSection) {
                 activeSection.style.display = 'block';
-            } else {
-                console.warn("Section not found:", sectionId); // Отладочное сообщение
             }
 
             // Добавить класс 'set-active' к выбранному пункту меню
@@ -669,20 +804,11 @@
             // Обновить URL без перезагрузки страницы
             var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?section=' + sectionId;
             window.history.replaceState({ path: newUrl }, '', newUrl);
-
-            // Выполнить дополнительные действия, если вкладка "Избранное"
-            if (sectionId === 'divAdsInLikes') {
-                setOpacity();
-            }
         }
 
         // Получаем параметры запроса из URL
         const urlParams = new URLSearchParams(window.location.search);
         const section = urlParams.get('section');
-        console.log("URL section parameter:", section); // Отладочное сообщение
-
-        console.log("Current URL:", window.location.href); // Дополнительное отладочное сообщение
-        console.log("URL Params:", urlParams.toString()); // Дополнительное отладочное сообщение
 
         // Добавляем обработчики событий для элементов с классом 'set-sidebar-item'
         var sidebarItems = document.querySelectorAll('.set-sidebar-item');
@@ -706,11 +832,6 @@
             showSection('divAccount', document.querySelector('.set-sidebar-item'));
         }
 
-        // Выполняем дополнительные действия при загрузке страницы, если выбрана секция "Избранное"
-        if (section === 'divAdsInLikes') {
-            setOpacity();
-        }
-
         // Чтение сообщения из localStorage
         const message = localStorage.getItem('closeAdvMessage');
         if (message) {
@@ -718,18 +839,7 @@
             localStorage.removeItem('closeAdvMessage'); // Удаляем сообщение из localStorage после отображения
         }
     });
-
-    function setOpacity() {
-        // Сделать фон изображения объявления сероватым, в случае снятия объявления с публикации
-        var ads = document.getElementsByClassName("favourite");
-        Array.from(ads).forEach(ad => {
-            if (ad.getAttribute("data-style") == 1) {
-                ad.classList.add("adinlike-deleted-opacity");
-            }
-        });
-        console.log('setOpacity called');
-    }
-</script>    <%-- Загрузка вкладок в Settings --%>
+    </script>    <%-- Загрузка вкладок в Settings --%>
 
 
     <script type="text/javascript">
@@ -795,9 +905,8 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        if (response.d) { // Проверка ответа от сервера
+                        if (response.d) {
                             lblSaveOkSecurity.innerText = "Пароль изменён";
-                            // Очистите поля ввода
                             oldPassword.value = "";
                             newPassword.value = "";
                             newConfirmPassword.value = "";
@@ -819,7 +928,7 @@
     <script type="text/javascript">
         function btnAddInLikes(button) {
             var adId = button.getAttribute('data-adid');
-            console.log("adId:", adId);  // Проверяем значение adId
+
             $.ajax({
                 type: "POST",
                 url: "Settings.aspx/btnAddInLikes_Click",
@@ -865,7 +974,7 @@
                             <a href="Settings.aspx?section=divMyAds" class="nav-link text-white header">Мои объявления</a>
                         </li>
                         <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header">Разместить объявление</a>
+                            <a href="MakeAd.aspx" class="nav-link text-white header" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes" class="nav-link text-white header">Избранное</a>
