@@ -230,15 +230,9 @@
             lblPasswordReg.innerText = "";
             lblPasswordConfirmReg.innerText = "";
 
-            if (loginReg.value.length < 10) {
-                if (loginReg.value == "") {
-                    lblLoginReg.innerText = "Введите почту";
-                    login = true;
-                }
-                else {
-                    lblLoginReg.innerText = "Введите корректную почту";
-                    login = true;
-                }
+            if (!validateEmail(loginReg.value)) {
+                login = true;
+                lblLoginReg.innerText = "Почта указана неверно";
             }
             else lblLoginReg.innerText = "";
 
@@ -270,15 +264,18 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    if (response.d) {
+                    if (!response.d) {
                         lblLoginReg.innerText = "";
                         lblPasswordReg.innerText = "";
                         lblPasswordConfirmReg.innerText = "";
 
                         openPopup();
-                    } else {
+                    } else if (response.d == "") {
                         lblLoginReg.innerText = "Данная почта уже существует";
                         return;
+                    }
+                    else {
+                        alert(response.d);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -288,6 +285,14 @@
             });
         };
     </script>    <%-- Проверки на валидность второго окна регистрации --%>
+
+
+        <script>
+            function validateEmail(email) {
+                var re = /^[a-zA-Z0-9._%+-]+\u0040[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+                return re.test(email);
+            }
+        </script>
 
 
     <script>
