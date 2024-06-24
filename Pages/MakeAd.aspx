@@ -55,7 +55,7 @@
 
             myPlacemark = new ymaps.Placemark(initialCoords, {}, {
                 iconLayout: 'default#image',
-                iconImageHref: 'http://localhost/Resources/imageGeo.png',
+                iconImageHref: '/Resources/imageGeo.png',
                 iconImageSize: [35, 38],
                 iconImageOffset: [-17.5, -38],
                 draggable: true
@@ -114,7 +114,7 @@
             } else {
                 myPlacemark = new ymaps.Placemark(coords, {}, {
                     iconLayout: 'default#image',
-                    iconImageHref: 'http://localhost/Resources/imageGeo.png',
+                    iconImageHref: '/Resources/imageGeo.png',
                     iconImageSize: [35, 38],
                     iconImageOffset: [0, -30],
                     draggable: true

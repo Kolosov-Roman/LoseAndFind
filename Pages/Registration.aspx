@@ -264,17 +264,17 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    if (!response.d) {
+                    if (response.d == "") {
+                        lblLoginReg.innerText = "Данная почта уже существует";
+                        return;
+
+                    } else if (!response.d) {
                         lblLoginReg.innerText = "";
                         lblPasswordReg.innerText = "";
                         lblPasswordConfirmReg.innerText = "";
 
                         openPopup();
-                    } else if (response.d == "") {
-                        lblLoginReg.innerText = "Данная почта уже существует";
-                        return;
-                    }
-                    else {
+                    } else {
                         alert(response.d);
                     }
                 },

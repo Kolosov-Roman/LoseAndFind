@@ -111,7 +111,7 @@
 
 
         <div runat="server" class="ads-card-container">
-            <div runat="server" class="main-container" visible="false" id="divShow">
+            <div runat="server" class="main-container" id="hiddenEmpty">
                 <asp:Label ID="lblAttentionMain" CssClass="ads-text-attention-main" runat="server">Объявления не найдены(</asp:Label>
                 <asp:Label ID="lblAttention" CssClass="ads-text-attention" runat="server">Попробуйте изменить фильтры или запрос.</asp:Label>
             </div>
@@ -139,6 +139,7 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             filterAds();
+            $('#hiddenEmpty').hide();
             btnClear.style.display = 'none';
             btnSearch.style.display = 'none';
             if (selectedType === 0) {
@@ -187,6 +188,7 @@
                         ddlMale.append($('<option></option>').val('').html('Пол'));
 
                         if (response.d) {
+
                             $.each(response.d.breeds, function (index, breed) {
                                 ddlBreed.append($('<option></option>').val(breed.value).html(breed.text));
                             });
@@ -198,8 +200,6 @@
                             if (selectedType !== 0) {
                                 $('#ddlBreed, #ddlMale').show();
                             }
-                        } else {
-                            console.log('No data returned.');
                         }
                     },
                     error: function (xhr, status, error) {
@@ -240,9 +240,15 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
+                    $('#hiddenEmpty').hide();
                     var adsContainer = $('#ads-card-container');
                     adsContainer.html(response.d);
                     btnSearch.style.display = 'none';
+
+                    if (!response.d) {
+                        console.log("sadas");
+                        $('#hiddenEmpty').show();
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.log("AJAX Error: " + status + " - " + error);
