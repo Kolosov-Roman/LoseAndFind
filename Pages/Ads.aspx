@@ -287,6 +287,7 @@
                         window.location.href = '<%= ResolveUrl("~/Pages/Authorization") %>';
                         console.log("Нет пользователя");
                     } else {
+                        console.log("user ", response.d.user);
                         if (response.d.Result) {
                             $(button).css('background-image', 'url("/Resources/heartFull.png")'); // Устанавливаем изображение для true
                             console.log("Сердце полное");
