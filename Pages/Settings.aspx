@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Settings.aspx.cs" Inherits="LoseAndFind.Settings" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="Settings.aspx.cs" Inherits="LoseAndFind.Settings" %>
 
 <!DOCTYPE html>
 

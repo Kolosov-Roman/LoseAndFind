@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MakeAd.aspx.cs" Inherits="LoseAndFind.MakeAd" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="MakeAd.aspx.cs" Inherits="LoseAndFind.MakeAd" %>
 
 <!DOCTYPE html>
 
@@ -280,8 +280,44 @@
                     <asp:Button ID="btnSaveChanges" runat="server" Text="Сохранить изменения" OnClientClick="editAd(); return false;" class="makead-btnMakeAd" />
                 </div>
             </div>
+            <asp:Panel ID="pnlPopup" runat="server" CssClass="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <asp:Label class="adv-title-name" ID="lblPhoneNumber" runat="server"></asp:Label>
+                    <div class="form-group">
+                        <div class="horizontal_label">
+                            <label class="reg_label_left">Ваша порода</label>
+                            <label id="lblCorrectCode" runat="server" class="attention_red"></label>
+                        </div>
+                        <asp:TextBox ID="tbCode" runat="server" CssClass="form-control" placeholder="Введите породу" />
+                    </div>
+                    <div class="form-group">
+                        <asp:Button ID="btnCheckMailGood" runat="server" Text="Добавить" OnClientClick="btnCheckMail_Click(); return false;" CssClass="authorization-button" />
+                    </div>
+                </div>
+            </asp:Panel>
         </div>
     </form>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var dropdown = $('#<%= ddlBreed.ClientID %>');
+
+            // Добавляем обработчик событий на изменение выбора
+            dropdown.change(function () {
+                var selectedItem = $(this).find('option:selected');
+                if (selectedItem.text() === "Добавить свою породу") {
+                    // Сбрасываем выбор, чтобы пользователь мог кликнуть снова
+                    $(this).prop('selectedIndex', 0);
+                    openPopup();
+                }
+            });
+        });
+    </script>    <%-- Обработчик событий на последний элемент --%>
+
+
+
 
 
     <script type="text/javascript">
@@ -696,7 +732,67 @@
                 reader.readAsDataURL(file);
             }
         });
-        </script>    <%-- Загрузка изображения животного и отображение
+        </script>    <%-- Загрузка изображения животного и отображение --%>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('<%= pnlPopup.ClientID %>');
+
+            function openPopup() {
+                if (modal && !modal.classList.contains('show')) {
+                    modal.style.display = 'block';
+                    setTimeout(function () {
+                        modal.classList.add('show');
+                        modal.addEventListener('transitionend', onTransitionEnd);
+                    }, 10);
+                }
+            }
+
+            function closePopup() {
+                if (modal && modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                    modal.addEventListener('transitionend', onTransitionEnd);
+                }
+            }
+
+            function onTransitionEnd() {
+                modal.removeEventListener('transitionend', onTransitionEnd);
+                if (!modal.classList.contains('show')) {
+                    modal.style.display = 'none';
+                }
+            }
+
+            if (modal) {
+                modal.addEventListener('click', function (event) {
+                    if (event.target === modal) {
+                        closePopup();
+                    }
+                });
+            }
+
+            function setOpenModalFlag() {
+                sessionStorage.setItem('openModal', 'true');
+            }
+
+            function checkModalStatus() {
+                if (sessionStorage.getItem('openModal') === 'true') {
+                    showModal();
+                    sessionStorage.removeItem('openModal');
+                }
+            }
+
+            function showModal() {
+                openPopup();
+            }
+
+            checkModalStatus();
+
+            window.openPopup = openPopup;
+            window.closePopup = closePopup;
+            window.setOpenModalFlag = setOpenModalFlag;
+        });
+    </script>    <%-- Открытие модального окна с добавлением породы --%>
 
 
 

@@ -221,6 +221,7 @@
             var selectedCastrated = cbIsCastrated.checked;
             var selectedSearch = tbSearch.value;
 
+            console.log("Начало функции SAF");
 
             $.ajax({
                 type: "POST",
@@ -240,13 +241,13 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
+                    console.log("Начало функции SAF");
                     $('#hiddenEmpty').hide();
                     var adsContainer = $('#ads-card-container');
                     adsContainer.html(response.d);
                     btnSearch.style.display = 'none';
 
                     if (!response.d) {
-                        console.log("sadas");
                         $('#hiddenEmpty').show();
                     }
                 },
