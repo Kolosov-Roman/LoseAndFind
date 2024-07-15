@@ -6,7 +6,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lose and Find - сервис для нахождения потерянных животных</title>
+    <title>Вход - Lose and Find</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/Site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
@@ -64,8 +64,8 @@
 
 
 
-    <div class="cont">
-        <form id="authForm" class="registration_form" runat="server">
+    <form runat="server" id="authForm" class="cont">
+        <div class="registration_form" runat="server">
             <h1 id="h1" class="registration_header">Авторизация</h1>
             <asp:Button Style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
             <div id="divAuth" runat="server" class="visible">
@@ -147,8 +147,8 @@
                     </div>
                 </div>
             </asp:Panel>
-        </form>
-    </div>
+        </div>
+    </form>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

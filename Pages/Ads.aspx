@@ -73,6 +73,10 @@
         <div class="ads-search">
             <asp:TextBox ID="tbSearch" placeholder="Введите название" CssClass="ads-title" runat="server"></asp:TextBox>
             <asp:Button ID="btnGoSearch" CssClass="ads-search-button" runat="server" Text="Найти" OnClientClick="filterAds(); return false;" />
+            <div style="width: 200px;">
+                <asp:DropDownList ID="filterTown" runat="server" CssClass="main-cb">
+            </asp:DropDownList>
+            </div>
         </div>
         <div class="ads-filters-container">
             <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb">
@@ -127,6 +131,7 @@
         var filterMale = document.getElementById('filterMale');
         var filterBreed = document.getElementById('filterBreed');
         var filterColor = document.getElementById('filterColor');
+        var filterTown = document.getElementById('filterTown');
         var filterLoseOrFind = document.getElementById('filterLoseOrFind');
         var sortDate = document.getElementById('sortDate');
         var cbIsChipping = document.getElementById('cbIsChipping');
@@ -214,6 +219,7 @@
             var selectedMale = filterMale.selectedIndex;
             var selectedBreed = filterBreed.selectedIndex;
             var selectedColor = filterColor.selectedIndex;
+            var selectedTown = filterTown.value;
             var selectedLoseOrFind = filterLoseOrFind.selectedIndex;
             var selectedDate = sortDate.selectedIndex;
             var selectedChipping = cbIsChipping.checked;
@@ -231,6 +237,7 @@
                     selectedMale: selectedMale,
                     selectedBreed: selectedBreed,
                     selectedColor: selectedColor,
+                    selectedTown: selectedTown,
                     selectedLoseOrFind: selectedLoseOrFind,
                     selectedDate: selectedDate,
                     selectedChipping: selectedChipping,
@@ -310,6 +317,9 @@
     <script>
         $(document).ready(function () {
             $('#filterBreed').select2({
+                dropdownCssClass: 'my-dropdown'
+            });
+            $('#filterTown').select2({
                 dropdownCssClass: 'my-dropdown'
             });
             $('#filterMale').select2({
