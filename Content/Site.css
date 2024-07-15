@@ -826,7 +826,7 @@ header {
 .ads {
     padding: 20px;
     margin-left: 100px;
-    width: 1920px;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
