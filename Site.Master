@@ -9,11 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Мое приложение ASP.NET</title>
 
-    <link href="<%= ResolveUrl("~/Content/site.css") %>" rel="stylesheet" />
-    <link href="<%= ResolveUrl("~/Content/bootstrap.min.css") %>" rel="stylesheet" />
-    <link href="<%= ResolveUrl("~/favicon.ico") %>" rel="shortcut icon" type="image/x-icon" />
-
-    <script src="<%= ResolveUrl("~/Scripts/modernizr-2.8.3.js") %>"></script>
+    <link rel="stylesheet" href="/Content/Site.css" asp-append-version="true" />
 </head>
 <body>
     <form runat="server">
@@ -61,9 +57,6 @@
             </footer>
         </div>
     </form>
-
-    <script src="<%= ResolveUrl("~/Scripts/jquery-3.3.1.min.js") %>"></script>
-    <script src="<%= ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
 
 </body>
 </html>

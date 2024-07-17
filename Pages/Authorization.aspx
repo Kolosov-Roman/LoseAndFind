@@ -8,7 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Вход - Lose and Find</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Site.css" asp-append-version="true" />
+    
+        <link rel="stylesheet" href="/Content/Site.css" />
+    <% if ((string)Page.Items["DeviceType"] == "mobile") { %>
+        <link rel="stylesheet" href="/Content/Site_m.css" />
+    <% } %>
+
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
 </head>
 <body>

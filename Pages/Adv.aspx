@@ -9,7 +9,12 @@
 
     <title>Lose and Find - сервис для нахождения потерянных животных</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Site.css" asp-append-version="true" />
+    
+        <link rel="stylesheet" href="/Content/Site.css" />
+    <% if ((string)Page.Items["DeviceType"] == "mobile") { %>
+        <link rel="stylesheet" href="/Content/Site_m.css" />
+    <% } %>
+
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
 </head>
 <body>

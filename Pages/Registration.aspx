@@ -8,7 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lose and Find - сервис для нахождения потерянных животных</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Site.css" asp-append-version="true" />
+    
+        <link rel="stylesheet" href="/Content/Site.css" />
+    <% if ((string)Page.Items["DeviceType"] == "mobile") { %>
+        <link rel="stylesheet" href="/Content/Site_m.css" />
+    <% } %>
+
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
