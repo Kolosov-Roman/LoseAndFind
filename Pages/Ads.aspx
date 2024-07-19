@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/Content/Site_m.css" />
     <% } else
        { %>
-        <link rel="stylesheet" href="/Content/Site_m.css" />
+        <link rel="stylesheet" href="/Content/Site.css" />
     <% }%>
 
     <link rel="stylesheet" href="/LoseAndFind.styles.css" asp-append-version="true" />
