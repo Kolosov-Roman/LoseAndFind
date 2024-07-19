@@ -23,11 +23,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
-<%--    <script>
+    <script>
         if (window.location.host === 'http://losenfind.ru' && /Mobi|Android/i.test(navigator.userAgent)) {
             window.location.href = 'http://m.losenfind.ru' + window.location.pathname;
         }
-    </script>--%>
+    </script>
 
 </head>
 
