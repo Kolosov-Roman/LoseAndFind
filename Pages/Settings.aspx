@@ -35,15 +35,15 @@
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes">
-                                <img class="header-img header" src="/Resources/heartFull.png" /></a>
+                                <img class="header-img header" src="/Resources/heartFullFooter.svg" /></a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divBells">
-                                <img class="header-img header" src="/Resources/bell.png" /></a>
+                                <img class="header-img header" src="/Resources/bell.svg" /></a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divMessages">
-                                <img class="header-img header" src="/Resources/message.png" /></a>
+                                <img class="header-img header" src="/Resources/messageFooter.svg" /></a>
                         </li>
                     </ul>
                 </div>
@@ -943,7 +943,7 @@
                 success: function (response) {
                     // Обработка успешного ответа
                     if (response.d) {
-                        $(button).css('background-image', 'url("/Resources/heartFull.png")'); // Устанавливаем изображение для true
+                        $(button).css('background-image', 'url("/Resources/heartFullFooter.svg")'); // Устанавливаем изображение для true
                         console.log("Сердечко полное");
                     } else {
                         $(button).css('background-image', 'url("/Resources/heartEmpty.png")'); // Устанавливаем изображение для false

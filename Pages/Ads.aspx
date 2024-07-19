@@ -10,26 +10,29 @@
     <title>Lose and Find - сервис для нахождения потерянных животных</title>
     <link rel="stylesheet" href="/Content/bootstrap.min.css" />
     
-    <link rel="stylesheet" href="/Content/Site.css" />
-    <% if ((string)Page.Items["DeviceType"] == "mobile") { %>
+    <% if ((string)Page.Items["DeviceType"] == "mobile")
+       { %>
         <link rel="stylesheet" href="/Content/Site_m.css" />
-    <% } %>
+    <% } else
+       { %>
+        <link rel="stylesheet" href="/Content/Site_m.css" />
+    <% }%>
 
     <link rel="stylesheet" href="/LoseAndFind.styles.css" asp-append-version="true" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
-    <script>
+<%--    <script>
         if (window.location.host === 'http://losenfind.ru' && /Mobi|Android/i.test(navigator.userAgent)) {
             window.location.href = 'http://m.losenfind.ru' + window.location.pathname;
         }
-    </script>
+    </script>--%>
 
 </head>
 
 <body>
-    <header class="fixed-top">
+    <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
                 <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
@@ -46,15 +49,15 @@
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes">
-                                <img class="header-img header" src="/Resources/heartFull.png" /></a>
+                                <img class="header-img header" src="/Resources/heartFullFooter.svg" /></a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divBells">
-                                <img class="header-img header" src="/Resources/bell.png" /></a>
+                                <img class="header-img header" src="/Resources/bell.svg" /></a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divMessages">
-                                <img class="header-img header" src="/Resources/message.png" /></a>
+                                <img class="header-img header" src="/Resources/messageFooter.svg" /></a>
                         </li>
                     </ul>
                 </div>
@@ -86,7 +89,7 @@
         <div class="ads-search">
             <asp:TextBox ID="tbSearch" placeholder="Введите название" CssClass="ads-title" runat="server"></asp:TextBox>
             <asp:Button ID="btnGoSearch" CssClass="ads-search-button" runat="server" Text="Найти" OnClientClick="filterAds(); return false;" />
-            <div style="width: 200px;">
+            <div id="ddlTown-hide" style="width: 200px;">
                 <asp:DropDownList ID="filterTown" runat="server" CssClass="main-cb">
             </asp:DropDownList>
             </div>
@@ -133,7 +136,7 @@
                 <asp:Label ID="lblAttention" CssClass="ads-text-attention" runat="server">Попробуйте изменить фильтры или запрос.</asp:Label>
             </div>
             <div id="ads-card-container" class="myads-card-container">
-                
+
             </div>
         </div>
     </form>
@@ -309,7 +312,7 @@
                     } else {
                         console.log("user ", response.d.user);
                         if (response.d.Result) {
-                            $(button).css('background-image', 'url("/Resources/heartFull.png")'); // Устанавливаем изображение для true
+                            $(button).css('background-image', 'url("/Resources/heartFullFooter.svg")'); // Устанавливаем изображение для true
                             console.log("Сердце полное");
                         } else {
                             $(button).css('background-image', 'url("/Resources/heartEmpty.png")'); // Устанавливаем изображение для false
@@ -376,7 +379,7 @@
     <%--                                                         Нижняя часть                                                                 --%>
 
 
-    <header class="fixed-bottom">
+    <header id="footer-hide" class="fixed-bottom">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
                 <div class="navbar-collapse justify-content-center">
@@ -400,6 +403,48 @@
                 </div>
             </div>
         </nav>
+    </header>
+
+
+    <header id="footer-show" style="display: none;" class="fixed-bottom">
+        <ul id="ul-row" class="navbar-nav">
+            <li class="mx-2">
+                <a href="Ads.aspx" class="nav-link header div-li">
+                    <img class="header-img header" src="/Resources/searchFooter-passive.svg" />
+                    <asp:Label runat="server">Поиск</asp:Label>
+                </a>
+            </li>
+            <li class="mx-2">
+                <a href="Settings.aspx?section=divAdsInLikes" class="nav-link header div-li">
+                    <img class="header-img header" src="/Resources/heartFullFooter-passive.svg" />
+                    <asp:Label runat="server">Избранное</asp:Label>
+                </a>
+            </li>
+            <li class="mx-2">
+                <a href="Settings.aspx?section=divMyAds" class="nav-link header div-li">
+                    <img class="header-img header" src="/Resources/ads-passive.svg" />
+                    <asp:Label runat="server">Объявления</asp:Label>
+                </a>
+            </li>
+            <li class="mx-2">
+                <a href="Settings.aspx?section=divMessages" class="nav-link header div-li">
+                    <img class="header-img header" src="/Resources/messageFooter-passive.svg" />
+                    <asp:Label runat="server">Сообщения</asp:Label>
+                </a>
+            </li>
+            <li id="ulAuthorizationFooter" runat="server" class="mx-2">
+                <a href="Authorization.aspx" class="nav-link header div-li">
+                    <img class="header-img header" src="/Resources/pictureClient-passive.svg" />
+                    <asp:Label runat="server">Профиль</asp:Label>
+                </a>
+            </li>
+            <li id="imageAClientFooter" runat="server" class="mx-2">
+                <a href="Settings.aspx" class="nav-link header div-li">
+                    <asp:Image ID="imgClientFooter" runat="server" CssClass="header-img header header-image-link"></asp:Image>
+                    <asp:Label runat="server">Профиль</asp:Label>
+                </a>
+            </li>
+        </ul>
     </header>
 </body>
 </html>
