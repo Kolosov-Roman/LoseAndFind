@@ -338,12 +338,6 @@ header {
     align-items: center;
 }
 
-.full-size {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
 
 
 
@@ -1084,9 +1078,13 @@ header {
     height: 100%;
 }
 
+.full-size {
+    position: relative;
+    padding-top: 100%;
+}
+
 .ads-card-img {
-    width: 100%;
-    height: 100%;
+
 }
 
 .ads-img {
@@ -1095,6 +1093,7 @@ header {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    top: 0;
 }
 
 .ads-card-charact {
