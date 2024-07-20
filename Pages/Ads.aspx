@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Ads.aspx.cs" Inherits="LoseAndFind.Ads" %>
 
-
 <!DOCTYPE html>
 
 <html lang="ru">
@@ -297,7 +296,7 @@
 
     <script type="text/javascript">
         function btnAddInLikes(button) {
-            var adId = button.closest('.ads-card').querySelector('.card-link').getAttribute('data-adid');
+            var adId = button.closest('.ads-card').querySelector('.full-size').getAttribute('data-adid');
             console.log(adId);
             $.ajax({
                 type: "POST",
@@ -408,37 +407,37 @@
 
     <header id="footer-show" style="display: none;" class="fixed-bottom">
         <ul id="ul-row" class="navbar-nav">
-            <li class="mx-2">
+            <li>
                 <a href="Ads.aspx" class="nav-link header div-li">
                     <img class="header-img header" src="/Resources/search-passive.svg" />
                     <asp:Label runat="server">Главная</asp:Label>
                 </a>
             </li>
-            <li class="mx-2">
+            <li>
                 <a href="Settings.aspx?section=divAdsInLikes" class="nav-link header div-li">
                     <img class="header-img header" src="/Resources/heartFull-passive.svg" />
                     <asp:Label runat="server">Избранное</asp:Label>
                 </a>
             </li>
-            <li class="mx-2">
+            <li>
                 <a href="Settings.aspx?section=divMyAds" class="nav-link header div-li">
                     <img class="header-img header" src="/Resources/ads-passive.svg" />
                     <asp:Label runat="server">Объявления</asp:Label>
                 </a>
             </li>
-            <li class="mx-2">
+            <li>
                 <a href="Settings.aspx?section=divMessages" class="nav-link header div-li">
                     <img class="header-img header" src="/Resources/message-passive.svg" />
                     <asp:Label runat="server">Сообщения</asp:Label>
                 </a>
             </li>
-            <li id="ulAuthorizationFooter" runat="server" class="mx-2">
+            <li id="ulAuthorizationFooter" runat="server">
                 <a href="Authorization.aspx" class="nav-link header div-li">
                     <img class="header-img header" src="/Resources/pictureClient-passive.svg" />
                     <asp:Label runat="server">Аккаунт</asp:Label>
                 </a>
             </li>
-            <li id="imageAClientFooter" runat="server" class="mx-2">
+            <li id="imageAClientFooter" runat="server">
                 <a href="Settings.aspx" class="nav-link header div-li">
                     <asp:Image ID="imgClientFooter" runat="server" CssClass="header-img header header-image-link"></asp:Image>
                     <asp:Label runat="server">Аккаунт</asp:Label>

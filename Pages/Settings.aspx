@@ -192,6 +192,7 @@
                         </div>
                     </div>
                     <div id="divActiveAds">
+                        <%-- Активные --%>
                         <div runat="server" class="main-container-message-attention" visible="false" id="divMyAdsAttention">
                             <asp:Label CssClass="main-text-attention-hight" runat="server">У вас ещё нет объявлений</asp:Label>
                             <asp:Label CssClass="main-text-attention-low" runat="server">Но это легко исправить - разместите первое</asp:Label>
@@ -201,7 +202,7 @@
                             <asp:Repeater ID="MyAdsRepeater" runat="server" OnItemDataBound="MyAdsRepeater_ItemDataBound">
                                 <ItemTemplate>
                                     <div class="ads-card">
-                                        <a id="urlImage" class="card-link" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                        <a id="urlImage" class="full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
                                             <div class="ads-card-img">
                                                 <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
                                             </div>
@@ -222,6 +223,7 @@
                         </div>
                     </div>
                     <div id="divArchivedAds" class="hidden">
+                        <%-- Пассивные --%>
                         <div runat="server" class="main-container-message-attention" visible="false" id="divMyArchivedAdsAttention">
                             <asp:Label CssClass="main-text-attention-hight" runat="server">У вас нет архивных объявлений</asp:Label>
                         </div>
@@ -229,7 +231,7 @@
                             <asp:Repeater ID="ArchivedAdsRepeater" runat="server" OnItemDataBound="ArchivedAdsRepeater_ItemDataBound">
                                 <ItemTemplate>
                                     <div class="ads-card">
-                                        <a id="urlImage" class="card-link" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                        <a id="urlImage" class="full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
                                             <div id="status" class="ads-card-img favourite" data-style="<%# Eval("idStatus").ToString() == "2" ? 1 : 0 %>">
                                                 <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
                                             </div>
@@ -264,7 +266,7 @@
                         <asp:Repeater ID="AdsInLikeRepeater" runat="server" OnItemDataBound="AdsInLikeRepeater_ItemDataBound">
                             <ItemTemplate>
                                 <div class="ads-card">
-                                    <a id="urlImage" class="card-link" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                    <a id="urlImage" class="full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
                                         <div id="status" class="ads-card-img favourite" data-style="<%# Eval("idStatus").ToString() == "2" ? 1 : 0 %>">
                                             <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
                                         </div>

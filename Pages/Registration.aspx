@@ -98,7 +98,7 @@
                         <label class="reg_label_left">Тип аккаунта</label>
                         <label id="lblTypeUser" runat="server" class="attention_red"></label>
                     </div>
-                    <asp:DropDownList ID="cbTypeUser" runat="server" CssClass="main-cb" AutoPostBack="True">
+                    <asp:DropDownList ID="cbTypeUser" runat="server" CssClass="main-cb">
                     </asp:DropDownList>
                 </div>
                 <div class="form-group">
