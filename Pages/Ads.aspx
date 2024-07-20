@@ -6,7 +6,7 @@
 <html lang="ru">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
     <title>Lose and Find - сервис для нахождения потерянных животных</title>
     <link rel="stylesheet" href="/Content/bootstrap.min.css" />
     
@@ -23,11 +23,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
-    <script>
+<%--    <script>
         if (window.location.host === 'http://losenfind.ru' && /Mobi|Android/i.test(navigator.userAgent)) {
             window.location.href = 'http://m.losenfind.ru' + window.location.pathname;
         }
-    </script>
+    </script>--%>
 
 </head>
 
@@ -49,7 +49,7 @@
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes">
-                                <img class="header-img header" src="/Resources/heartFullFooter.svg" /></a>
+                                <img class="header-img header" src="/Resources/heartFull-active.svg" /></a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divBells">
@@ -57,7 +57,7 @@
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divMessages">
-                                <img class="header-img header" src="/Resources/messageFooter.svg" /></a>
+                                <img class="header-img header" src="/Resources/message-active.svg" /></a>
                         </li>
                     </ul>
                 </div>
@@ -312,7 +312,7 @@
                     } else {
                         console.log("user ", response.d.user);
                         if (response.d.Result) {
-                            $(button).css('background-image', 'url("/Resources/heartFullFooter.svg")'); // Устанавливаем изображение для true
+                            $(button).css('background-image', 'url("/Resources/heartFull-active.svg")'); // Устанавливаем изображение для true
                             console.log("Сердце полное");
                         } else {
                             $(button).css('background-image', 'url("/Resources/heartEmpty.png")'); // Устанавливаем изображение для false
@@ -410,13 +410,13 @@
         <ul id="ul-row" class="navbar-nav">
             <li class="mx-2">
                 <a href="Ads.aspx" class="nav-link header div-li">
-                    <img class="header-img header" src="/Resources/searchFooter-passive.svg" />
-                    <asp:Label runat="server">Поиск</asp:Label>
+                    <img class="header-img header" src="/Resources/search-passive.svg" />
+                    <asp:Label runat="server">Главная</asp:Label>
                 </a>
             </li>
             <li class="mx-2">
                 <a href="Settings.aspx?section=divAdsInLikes" class="nav-link header div-li">
-                    <img class="header-img header" src="/Resources/heartFullFooter-passive.svg" />
+                    <img class="header-img header" src="/Resources/heartFull-passive.svg" />
                     <asp:Label runat="server">Избранное</asp:Label>
                 </a>
             </li>
@@ -428,20 +428,20 @@
             </li>
             <li class="mx-2">
                 <a href="Settings.aspx?section=divMessages" class="nav-link header div-li">
-                    <img class="header-img header" src="/Resources/messageFooter-passive.svg" />
+                    <img class="header-img header" src="/Resources/message-passive.svg" />
                     <asp:Label runat="server">Сообщения</asp:Label>
                 </a>
             </li>
             <li id="ulAuthorizationFooter" runat="server" class="mx-2">
                 <a href="Authorization.aspx" class="nav-link header div-li">
                     <img class="header-img header" src="/Resources/pictureClient-passive.svg" />
-                    <asp:Label runat="server">Профиль</asp:Label>
+                    <asp:Label runat="server">Аккаунт</asp:Label>
                 </a>
             </li>
             <li id="imageAClientFooter" runat="server" class="mx-2">
                 <a href="Settings.aspx" class="nav-link header div-li">
                     <asp:Image ID="imgClientFooter" runat="server" CssClass="header-img header header-image-link"></asp:Image>
-                    <asp:Label runat="server">Профиль</asp:Label>
+                    <asp:Label runat="server">Аккаунт</asp:Label>
                 </a>
             </li>
         </ul>

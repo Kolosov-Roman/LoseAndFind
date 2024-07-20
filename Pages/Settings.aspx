@@ -5,20 +5,23 @@
 <html lang="ru">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
     <title>Личный кабинет - Lose and Find</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
 
-        <link rel="stylesheet" href="/Content/Site.css" />
-    <% if ((string)Page.Items["DeviceType"] == "mobile") { %>
-        <link rel="stylesheet" href="/Content/Site_m.css" />
-    <% } %>
+        <% if ((string)Page.Items["DeviceType"] == "mobile")
+   { %>
+    <link rel="stylesheet" href="/Content/Site_m.css" />
+<% } else
+   { %>
+    <link rel="stylesheet" href="/Content/Site.css" />
+<% }%>
 
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <header class="fixed-top">
+    <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
                 <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
@@ -35,7 +38,7 @@
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divAdsInLikes">
-                                <img class="header-img header" src="/Resources/heartFullFooter.svg" /></a>
+                                <img class="header-img header" src="/Resources/heartFull-active.svg" /></a>
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divBells">
@@ -43,7 +46,7 @@
                         </li>
                         <li class="mx-2">
                             <a href="Settings.aspx?section=divMessages">
-                                <img class="header-img header" src="/Resources/messageFooter.svg" /></a>
+                                <img class="header-img header" src="/Resources/message-active.svg" /></a>
                         </li>
                     </ul>
                 </div>
@@ -113,15 +116,15 @@
                                 <asp:Label ClientIDMode="Static" ID="lblNameSidebar" runat="server"></asp:Label>
                                 <asp:TextBox ClientIDMode="Static" ID="tbNameSidebar" runat="server" class="set-form-control placeholder-red" placeholder="Имя пользователя" MaxLength="100" />
                                 <asp:ImageButton ClientIDMode="Static" ID="btnChangeName" OnClientClick="btnChangeName_Click(); return false;" ImageUrl="~/Resources/edit.png" runat="server" CssClass="set-save-data" />
-                                <asp:ImageButton ClientIDMode="Static" ID="btnSaveName" OnClientClick="btnSaveName_Click(); return false;" ImageUrl="~/Resources/save.png" runat="server" CssClass="set-save-data" />
-                                <asp:ImageButton ClientIDMode="Static" ID="btnCancelName" OnClientClick="btnCancelName_Click(); return false;" ImageUrl="~/Resources/cancel.png" runat="server" CssClass="set-save-data" />
+                                <asp:ImageButton ClientIDMode="Static" ID="btnSaveName" OnClientClick="btnSaveName_Click(); return false;" ImageUrl="~/Resources/save.svg" runat="server" CssClass="set-save-data" />
+                                <asp:ImageButton ClientIDMode="Static" ID="btnCancelName" OnClientClick="btnCancelName_Click(); return false;" ImageUrl="~/Resources/cancel.svg" runat="server" CssClass="set-save-data" />
                             </div>
                             <div class="set-horizontal-namemail">
                                 <asp:Label ClientIDMode="Static" ID="lblMailSidebar" runat="server"></asp:Label>
                                 <asp:TextBox ClientIDMode="Static" ID="tbMailSidebar" runat="server" class="set-form-control placeholder-red" placeholder="Email" MaxLength="100" />
                                 <asp:ImageButton ClientIDMode="Static" ID="btnChangeMail" OnClientClick="btnChangeMail_Click(); return false;" ImageUrl="~/Resources/edit.png" runat="server" CssClass="set-save-data" />
-                                <asp:ImageButton ClientIDMode="Static" ID="btnSaveMail" OnClientClick="btnSaveMail_Click(); return false;" ImageUrl="~/Resources/save.png" runat="server" CssClass="set-save-data" />
-                                <asp:ImageButton ClientIDMode="Static" ID="btnCancelMail" OnClientClick="btnCancelMail_Click(); return false;" ImageUrl="~/Resources/cancel.png" runat="server" CssClass="set-save-data" />
+                                <asp:ImageButton ClientIDMode="Static" ID="btnSaveMail" OnClientClick="btnSaveMail_Click(); return false;" ImageUrl="~/Resources/save.svg" runat="server" CssClass="set-save-data" />
+                                <asp:ImageButton ClientIDMode="Static" ID="btnCancelMail" OnClientClick="btnCancelMail_Click(); return false;" ImageUrl="~/Resources/cancel.svg" runat="server" CssClass="set-save-data" />
                             </div>
                             <div class="set-horizontal-label-none">
                                 <asp:Label ID="lblNumberPhone" runat="server"></asp:Label>
@@ -943,7 +946,7 @@
                 success: function (response) {
                     // Обработка успешного ответа
                     if (response.d) {
-                        $(button).css('background-image', 'url("/Resources/heartFullFooter.svg")'); // Устанавливаем изображение для true
+                        $(button).css('background-image', 'url("/Resources/heartFull-active.svg")'); // Устанавливаем изображение для true
                         console.log("Сердечко полное");
                     } else {
                         $(button).css('background-image', 'url("/Resources/heartEmpty.png")'); // Устанавливаем изображение для false
@@ -970,7 +973,7 @@
     <%--                                                          Нижняя часть                                                                --%>
 
 
-    <header class="fixed-bottom">
+    <header id="footer-hide" class="fixed-bottom">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
                 <div class="navbar-collapse justify-content-center">
@@ -995,5 +998,47 @@
             </div>
         </nav>
     </header>
+
+
+    <header id="footer-show" style="display: none;" class="fixed-bottom">
+    <ul id="ul-row" class="navbar-nav">
+        <li class="mx-2">
+            <a href="Ads.aspx" class="nav-link header div-li">
+                <img class="header-img header" src="/Resources/search-passive.svg" />
+                <asp:Label runat="server">Главная</asp:Label>
+            </a>
+        </li>
+        <li class="mx-2">
+            <a href="Settings.aspx?section=divAdsInLikes" class="nav-link header div-li">
+                <img class="header-img header" src="/Resources/heartFull-passive.svg" />
+                <asp:Label runat="server">Избранное</asp:Label>
+            </a>
+        </li>
+        <li class="mx-2">
+            <a href="Settings.aspx?section=divMyAds" class="nav-link header div-li">
+                <img class="header-img header" src="/Resources/ads-passive.svg" />
+                <asp:Label runat="server">Объявления</asp:Label>
+            </a>
+        </li>
+        <li class="mx-2">
+            <a href="Settings.aspx?section=divMessages" class="nav-link header div-li">
+                <img class="header-img header" src="/Resources/message-passive.svg" />
+                <asp:Label runat="server">Сообщения</asp:Label>
+            </a>
+        </li>
+        <li id="ulAuthorizationFooter" runat="server" class="mx-2">
+            <a href="Authorization.aspx" class="nav-link header div-li">
+                <img class="header-img header" src="/Resources/pictureClient-passive.svg" />
+                <asp:Label runat="server">Аккаунт</asp:Label>
+            </a>
+        </li>
+        <li id="imageAClientFooter" runat="server" class="mx-2">
+            <a href="Settings.aspx" class="nav-link header div-li">
+                <asp:Image ID="imgClientFooter" runat="server" CssClass="header-img header header-image-link"></asp:Image>
+                <asp:Label runat="server">Аккаунт</asp:Label>
+            </a>
+        </li>
+    </ul>
+</header>
 </body>
 </html>
