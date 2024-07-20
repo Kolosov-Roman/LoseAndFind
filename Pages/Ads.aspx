@@ -21,13 +21,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
-<%--    <script>
-        if (window.location.host === 'http://losenfind.ru' && /Mobi|Android/i.test(navigator.userAgent)) {
-            window.location.href = 'http://m.losenfind.ru' + window.location.pathname;
-        }
-    </script>--%>
-
 </head>
 
 <body>
@@ -139,6 +132,31 @@
             </div>
         </div>
     </form>
+
+
+    <script>
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('btnGoSearch').click();
+                document.getElementById('btnGoSearch').focus();
+                document.getElementById('btnGoSearch').blur();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const tbSearch = document.getElementById('tbSearch');
+            tbSearch.addEventListener('keydown', handleEnterKey);
+            const checkboxes = document.querySelectorAll('.main-chb');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('keydown', handleEnterKey);
+            });
+            const comboBoxes = document.querySelectorAll('.main-cb');
+            comboBoxes.forEach(comboBox => {
+                comboBox.addEventListener('keydown', handleEnterKey);
+            });
+        });
+    </script>
 
 
     <script type="text/javascript">
