@@ -105,7 +105,7 @@
             </div>
 
 
-            <div id="divRecover" class="hidden" runat="server">
+            <div id="divRecover" class="hidden hidden-m" runat="server">
                 <div class="form-group">
                     <div class="horizontal_label">
                         <label class="reg_label_left">Почта</label>
@@ -119,7 +119,7 @@
             </div>
 
 
-            <div id="divEnter" class="hidden" runat="server">
+            <div id="divEnter" class="hidden hidden-m" runat="server">
                 <div class="form-group">
                     <div class="horizontal_label">
                         <label class="reg_label_left">Пароль</label>

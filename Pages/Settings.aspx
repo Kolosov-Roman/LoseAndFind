@@ -202,7 +202,7 @@
                             <asp:Repeater ID="MyAdsRepeater" runat="server" OnItemDataBound="MyAdsRepeater_ItemDataBound">
                                 <ItemTemplate>
                                     <div class="ads-card">
-                                        <a id="urlImage" class="full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                        <a id="urlImage" class="ads-full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
                                             <div class="ads-card-img">
                                                 <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
                                             </div>
@@ -231,7 +231,7 @@
                             <asp:Repeater ID="ArchivedAdsRepeater" runat="server" OnItemDataBound="ArchivedAdsRepeater_ItemDataBound">
                                 <ItemTemplate>
                                     <div class="ads-card">
-                                        <a id="urlImage" class="full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                        <a id="urlImage" class="ads-full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
                                             <div id="status" class="ads-card-img favourite" data-style="<%# Eval("idStatus").ToString() == "2" ? 1 : 0 %>">
                                                 <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
                                             </div>
@@ -266,7 +266,7 @@
                         <asp:Repeater ID="AdsInLikeRepeater" runat="server" OnItemDataBound="AdsInLikeRepeater_ItemDataBound">
                             <ItemTemplate>
                                 <div class="ads-card">
-                                    <a id="urlImage" class="full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
+                                    <a id="urlImage" class="ads-full-size" runat="server" href='<%# ResolveUrl("~/Pages/Adv?advertisementId=" + Eval("id")) %>'>
                                         <div id="status" class="ads-card-img favourite" data-style="<%# Eval("idStatus").ToString() == "2" ? 1 : 0 %>">
                                             <asp:Image ID="imgAnimal" class="ads-img" runat="server" />
                                         </div>

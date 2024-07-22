@@ -785,14 +785,10 @@ header {
     max-width: 1300px;
 }
 
-.ads-filters-container {
-    position: fixed;
+.ads-search-el {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 30px;
-    background-color: white;
-    border-radius: 20px;
+    width: 100%;
+    min-width: 450px;
 }
 
 .ads-checkbox {
@@ -837,6 +833,24 @@ header {
     display: flex;
     flex-wrap: wrap;
     max-width: 1300px;
+}
+
+.ads-filters {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 20px;
+    top: 115px;
+}
+
+.ads-div-fixed-buttons {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    position: relative !important;
 }
 
 .main-container {
@@ -1476,8 +1490,8 @@ a.ads-text-title {
     align-items: center;
     display: flex;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     top: 0;
     right: 0;
 }

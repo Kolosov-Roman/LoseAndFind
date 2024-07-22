@@ -79,47 +79,65 @@
     <form id="AdsForm" runat="server" class="ads" autocomplete="off">
         <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
         <div class="ads-search">
-            <asp:TextBox ID="tbSearch" placeholder="Введите название" CssClass="ads-title" runat="server"></asp:TextBox>
-            <asp:Button ID="btnGoSearch" CssClass="ads-search-button" runat="server" Text="Найти" OnClientClick="filterAds(); return false;" />
+            <div class="ads-search-el">
+                <asp:TextBox ID="tbSearch" placeholder="Введите название" CssClass="ads-title ads-search-ph" runat="server"></asp:TextBox>
+                <asp:Button ID="btnGoSearch" CssClass="ads-search-button" runat="server" Text="Найти" OnClientClick="filterAds(); return false;" />
+            </div>
             <div id="ddlTown-hide" style="width: 200px;">
                 <asp:DropDownList ID="filterTown" runat="server" CssClass="main-cb">
             </asp:DropDownList>
             </div>
-        </div>
-        <div class="ads-filters-container">
-            <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb">
-                <asp:ListItem Text="По умолчанию"></asp:ListItem>
-                <asp:ListItem Text="По возрастанию"></asp:ListItem>
-                <asp:ListItem Text="По убыванию"></asp:ListItem>
-            </asp:DropDownList>
-            <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb">
-            </asp:DropDownList>
-            <asp:DropDownList ID="filterType" runat="server" CssClass="main-cb">
-            </asp:DropDownList>
-            <div id="ddlBreed">
-                <asp:DropDownList ID="filterBreed" runat="server" CssClass="main-cb">
-                </asp:DropDownList>
-            </div>
-            <div id="ddlMale">
-                <asp:DropDownList ID="filterMale" runat="server" CssClass="main-cb">
-                </asp:DropDownList>
-            </div>
-            <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb">
-            </asp:DropDownList>
-            <div class="ads-checkbox">
-                <span>
-                    <asp:CheckBox ID="cbIsChipping" CssClass="main-chb" Text="Чипированный" runat="server" />
-                </span>
-                <span>
-                    <asp:CheckBox ID="cbIsCollar" CssClass="main-chb" Text="С ошейником" runat="server" />
-                </span>
-                <span>
-                    <asp:CheckBox ID="cbIsCastrated" CssClass="main-chb" Text="Кастрированный" runat="server" />
-                </span>
-                <asp:Button style="margin-top: 10px;" ID="FilterButton" runat="server" Text="Найти" CssClass="register-button" />
-                <asp:Button style="margin-top: 10px;" ID="clearFilterButton" runat="server" Text="Сбросить фильтры" CssClass="authorization-button" />
+
+            <div id="divShowFilters" class="ads-img-filters" onclick="openPopup(); return false;">
+                <img class="ads-img-filter" id="openFilters" src="/Resources/filters.svg" runat="server" />
             </div>
         </div>
+
+
+        <asp:Panel ID="pnlPopup" runat="server" CssClass="ads-modal">
+            <div class="ads-modal-content">
+                <div class="ads-filters-top fixed-top hidden">
+                    <label class="total-text">Фильтры</label>
+                    <span class="ads-close" onclick="closePopup()">&times;</span>
+                </div>
+                <div id="adsFiltersContainer" class="hidden-m ads-filters">
+                    <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb">
+                        <asp:ListItem Text="По умолчанию"></asp:ListItem>
+                        <asp:ListItem Text="По возрастанию"></asp:ListItem>
+                        <asp:ListItem Text="По убыванию"></asp:ListItem>
+                    </asp:DropDownList>
+                    <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb">
+                    </asp:DropDownList>
+                    <asp:DropDownList ID="filterType" runat="server" CssClass="main-cb">
+                    </asp:DropDownList>
+                    <div id="ddlBreed">
+                        <asp:DropDownList ID="filterBreed" runat="server" CssClass="main-cb">
+                        </asp:DropDownList>
+                    </div>
+                    <div id="ddlMale">
+                        <asp:DropDownList ID="filterMale" runat="server" CssClass="main-cb">
+                        </asp:DropDownList>
+                    </div>
+                    <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb">
+                    </asp:DropDownList>
+                    <div class="ads-checkbox">
+                        <span>
+                            <asp:CheckBox ID="cbIsChipping" CssClass="main-chb" Text="Чипированный" runat="server" />
+                        </span>
+                        <span>
+                            <asp:CheckBox ID="cbIsCollar" CssClass="main-chb" Text="С ошейником" runat="server" />
+                        </span>
+                        <span>
+                            <asp:CheckBox ID="cbIsCastrated" CssClass="main-chb" Text="Кастрированный" runat="server" />
+                        </span>
+                    </div>
+                    <div class="ads-div-fixed-buttons-m fixed-bottom ads-div-fixed-buttons">
+                        <asp:Button ID="FilterButton" runat="server" Text="Найти" CssClass="register-button" />
+                        <asp:Button ID="clearFilterButton" runat="server" Text="Сбросить фильтры" CssClass="authorization-button" />
+                    </div>
+                </div>
+            </div>
+        </asp:Panel>
 
 
         <div runat="server" class="ads-card-container">
@@ -132,6 +150,78 @@
             </div>
         </div>
     </form>
+
+
+    <script>
+        window.addEventListener('popstate', function (event) {
+            // Событие, которое будет вызвано при нажатии кнопки "Назад"
+            alert("Вы нажали кнопку 'Назад'!");
+        });
+    </script>    <%-- Тестирование кнопки назад --%>
+
+
+    <script>
+        const divShowFilters = document.getElementById('divShowFilters');
+        const adsFiltersContainer = document.getElementById('adsFiltersContainer');
+
+        divShowFilters.addEventListener('click', function () {
+            adsFiltersContainer.classList.toggle('ads-filters-container');
+            document.body.classList.toggle('no-scroll');
+        });
+    </script>    <%-- Смена стилей для боди и дива фильтров --%>
+
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('<%= pnlPopup.ClientID %>');
+
+        function openPopup() {
+            
+                if (modal && !modal.classList.contains('show')) {
+                    modal.style.display = 'block';
+                    // Добавляем класс через setTimeout, чтобы анимация началась с задержкой
+                    setTimeout(function () {
+                        modal.classList.add('show');
+                        // Добавляем обработчик события transitionend для завершения анимации
+                        modal.addEventListener('transitionend', onTransitionEnd);
+                    }, 10);
+                }
+                return false;
+        }
+
+        function closePopup() {
+            if (modal && modal.classList.contains('show')) {
+                modal.classList.remove('show');
+                // Добавляем обработчик события transitionend для завершения анимации
+                modal.addEventListener('transitionend', onTransitionEnd);
+                adsFiltersContainer.classList.toggle('ads-filters-container');
+                document.body.classList.toggle('no-scroll');
+            }
+        }
+
+        function onTransitionEnd() {
+            // Убираем обработчик события transitionend после его выполнения,
+            // чтобы он не вызывался повторно при следующем открытии/закрытии
+            modal.removeEventListener('transitionend', onTransitionEnd);
+            // После завершения анимации скрываем или показываем модальное окно
+            if (!modal.classList.contains('show')) {
+                modal.style.display = 'none';
+            }
+        }
+
+        if (modal) {
+            modal.addEventListener('click', function (event) {
+                if (event.target === modal) {
+                    closePopup();
+                }
+            });
+        }
+
+        // Делаем функции глобальными, чтобы их можно было вызывать из других скриптов
+        window.openPopup = openPopup;
+        window.closePopup = closePopup;
+    });
+    </script>    <%-- Открытие модального окна с фильтрами --%>
 
 
     <script>
@@ -151,12 +241,8 @@
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('keydown', handleEnterKey);
             });
-            const comboBoxes = document.querySelectorAll('.main-cb');
-            comboBoxes.forEach(comboBox => {
-                comboBox.addEventListener('keydown', handleEnterKey);
-            });
         });
-    </script>
+    </script>    <%-- События клика по enter --%>
 
 
     <script type="text/javascript">
@@ -300,6 +386,7 @@
         $(document).ready(function () {
             $('#FilterButton').click(function () {
                 filterAds();
+                window.closePopup();
                 return false;
             });
         });
@@ -314,7 +401,7 @@
 
     <script type="text/javascript">
         function btnAddInLikes(button) {
-            var adId = button.closest('.ads-card').querySelector('.full-size').getAttribute('data-adid');
+            var adId = button.closest('.ads-card').querySelector('.ads-full-size').getAttribute('data-adid');
             console.log(adId);
             $.ajax({
                 type: "POST",
@@ -379,11 +466,12 @@
 
 
     <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Прокрутка страницы к началу
-                window.scrollTo(0, 0);
-            });
-        </script>    <%-- Возвращение в верх страницы при перезагрузке--%>
+        function moveDiv() {
+            var child = document.getElementById('ddlTown-hide');
+            var parent2 = document.querySelector('adsFiltersContainer');
+            parent2.appendChild(child);
+        }
+    </script>
 
 
 

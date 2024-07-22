@@ -112,7 +112,7 @@
             </div>
 
 
-            <div id="divCheckReg" class="reg-div-right hidden" runat="server">
+            <div id="divCheckReg" class="reg-div-right hidden hidden-m" runat="server">
                 <div class="form-group">
                     <div class="horizontal_label">
                         <label class="reg_label_left">Почта</label>
@@ -209,12 +209,14 @@
             if (name || numberPhone) return;
             else {
                 divCheckRegFirst.classList.add('hidden');
+                divCheckRegFirst.classList.add('hidden-m');
                 divCheckRegFirst.classList.remove('visible');
                 divCheckReg.classList.add('visible');
                 divCheckReg.classList.remove('hidden');
+                divCheckReg.classList.remove('hidden-m');
             }
         };
-</script>    <%-- Проверки на валидность первого окна регистрации --%>
+    </script>    <%-- Проверки на валидность первого окна регистрации --%>
 
 
     <script type="text/javascript">
