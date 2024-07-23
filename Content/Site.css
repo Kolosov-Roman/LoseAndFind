@@ -1,4 +1,14 @@
 ﻿
+@media (min-height: 858px) {
+
+    .ads-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        max-width: 1300px;
+    }
+}
+
 /*                                                         Стили общие (body, html, header)                                                */
 
 html {
@@ -439,7 +449,7 @@ header {
     .fetch-code-button:hover,
     .set-save-photo:hover,
     .authorization-button:hover,
-    .myads-btn-make-ad {
+    .myads-btn-make-ad:hover {
         background-color: #0069db; /* Цвет кнопок при наведении */
     }
 
@@ -835,8 +845,14 @@ header {
     max-width: 1300px;
 }
 
+.ads-heart-box {
+    display: flex;
+    align-self: start;
+    margin-top: 3px;
+}
+
 .ads-filters {
-    position: fixed;
+    position: absolute;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -851,6 +867,7 @@ header {
     flex-direction: column !important;
     gap: 10px !important;
     position: relative !important;
+    z-index: 0;
 }
 
 .main-container {
@@ -900,6 +917,18 @@ header {
 
 .ads-card-img {
     z-index: -10;
+}
+
+.ads-label-text-title-1 {
+    display: -webkit-box;
+    cursor: pointer;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    cursor: pointer;
+    overflow: hidden; /* Скрыть текст, который не помещается */
+    text-overflow: ellipsis; /* Добавить многоточие */
+    word-break: break-all; /* Принудительный перенос текста, если он не помещается */
+    overflow-wrap: break-word;
 }
 
 .ads-img {
@@ -985,6 +1014,17 @@ header {
 a.ads-text-title {
     text-decoration: none; /* Убираем подчеркивание */
     color: inherit; /* Наследуем цвет текста */
+}
+
+.ads-filters-text {
+    font-family: Onest-Bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.ads-filters-c {
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -1248,7 +1288,6 @@ a.ads-text-title {
 
 .adv {
     display: flex;
-    top: 10%;
     padding: 20px;
     flex-wrap: wrap;
     max-width: 1280px;
@@ -1307,7 +1346,6 @@ a.ads-text-title {
 }
 
 .adv-charact-label-main {
-    margin: 0px 0px 10px 0px;        /* Сверху, справа, снизу, слева */
     display: flex;
 }
 
@@ -1317,11 +1355,22 @@ a.ads-text-title {
 
 .adv-charact-label {
     color: #555555;
-    width: 130px;
+    min-width: 130px;
 }
 
 .adv-address-info-label {
     color: #555555;
+}
+
+.adv-charact-div {
+    display: grid;
+    gap: 10px;
+}
+
+.adv-div-cb {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .adv-address-value {
@@ -1354,7 +1403,7 @@ a.ads-text-title {
 .adv-title-charact {
     display: flex;
     font-size: 24px;
-    font-weight: bold;
+    font-family: Onest-SemiBold;
     justify-content: center;
     margin: 10px 0px 10px 0px;
 }
@@ -1420,6 +1469,10 @@ a.ads-text-title {
     flex-direction: column;
 }
 
+.adv-div-charact {
+    display: flex;
+}
+
 .adv-container-right-showing {
     display: flex;
     justify-content: space-between;
@@ -1445,7 +1498,7 @@ a.ads-text-title {
     word-wrap: break-word;
 }
 
-.description-last-text {
+.adv-description-last-text {
     white-space: pre-wrap;
 }
 

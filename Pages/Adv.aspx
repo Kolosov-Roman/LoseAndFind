@@ -80,12 +80,12 @@
                 <asp:Button ID="btnEditAdv" CssClass="adv-btnEditAd" Text="Редактировать объявление" runat="server" OnClick="EditAdv" />
                 <asp:Button ID="btnCloseAdv" CssClass="adv-btnCloseAd" Text="Снять с публикации" runat="server" OnClick="CloseAdv" />
             </div>
-            <div style="display: flex; justify-content: space-between">
+            <div class="adv-label-lf" style="display: flex; justify-content: space-between">
                 <asp:Label ID="lblLoseOrFind" class="adv-loseOrFind" runat="server"></asp:Label>
                 <asp:Label ID="lblCloseAdv" class="adv-loseOrFind red-title" runat="server">Объявление снято с публикации</asp:Label>
             </div>
-            <div>
-                <asp:Label ID="lblTitleAnimal" class="adv-title" runat="server"></asp:Label>
+            <asp:Label ID="lblTitleAnimal" class="adv-title" runat="server"></asp:Label>
+            <div class="adv-div-img">
                 <asp:Image ID="imgAnimal" runat="server" CssClass="adv-image-animal" />
             </div>
             <div class="adv-img-margin">
@@ -99,8 +99,8 @@
             <div class="adv-separator-top"></div>
             <asp:Label ID="lblTitleCharact" class="adv-title-charact" Text="Характеристики" runat="server"></asp:Label>
             <div class="adv-separator-bottom"></div>
-            <div style="display: flex;">
-                <div style="margin-right: 100px;">
+            <div class="adv-div-charact">
+                <div class="adv-charact-div" style="margin-right: 100px;">
                     <div class="adv-charact-label-main">
                         <asp:Label ID="lblTypeTitle" class="adv-charact-label" Text="Тип:" runat="server"></asp:Label>
                         <asp:Label ID="lblTypeValue" runat="server"></asp:Label>
@@ -118,7 +118,7 @@
                         <asp:Label ID="lblMaleValue" runat="server"></asp:Label>
                     </div>
                 </div>
-                <div>
+                <div class="adv-div-cb">
                     <div class="adv-charact-label-main">
                         <asp:Label ID="lblIsChippingTitle" class="adv-charact-label" Text="Чипирован:" runat="server"></asp:Label>
                         <asp:Label ID="lblIsChippingValue" runat="server"></asp:Label>
@@ -135,8 +135,9 @@
             </div>
             <div class="adv-separator-top"></div>
             <div class="adv-description-last">
-                <asp:Label ID="lblDescription" class="description-last-text" runat="server"></asp:Label>
+                <asp:Label ID="lblDescription" class="adv-description-last-text" runat="server"></asp:Label>
             </div>
+            <div class="adv-separator-top hidden"></div>
         </div>
         <div id="divInfoAccount" runat="server" class="adv-container-right">
             <div class="adv-div-center">

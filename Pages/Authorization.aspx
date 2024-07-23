@@ -171,10 +171,10 @@
 
                 var h1 = document.getElementById('h1');
 
-                divAuth.classList.add('hidden');
+                divAuth.classList.add('hidden-m');
                 divAuth.classList.remove('visible');
                 divRecover.classList.add('visible');
-                divRecover.classList.remove('hidden');
+                divRecover.classList.remove('hidden-m');
                 h1.innerText = "Восстановление пароля";
             }
     </script>    <%-- Переход на окно восстановления пароля --%>
@@ -311,8 +311,8 @@
                     if (response.d) {
 
                         divRecover.classList.remove('visible');
-                        divRecover.classList.add('hidden');
-                        divEnter.classList.remove('hidden');
+                        divRecover.classList.add('hidden-m');
+                        divEnter.classList.remove('hidden-m');
                         divEnter.classList.add('visible');
                         h1.innerText = "Изменение пароля";
 

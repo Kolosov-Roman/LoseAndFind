@@ -83,7 +83,8 @@
                 <asp:TextBox ID="tbSearch" placeholder="Введите название" CssClass="ads-title ads-search-ph" runat="server"></asp:TextBox>
                 <asp:Button ID="btnGoSearch" CssClass="ads-search-button" runat="server" Text="Найти" OnClientClick="filterAds(); return false;" />
             </div>
-            <div id="ddlTown-hide" style="width: 200px;">
+            <div id="ddlTown" class="hidden-m">
+                <label class="ads-filters-text hidden">Где искать</label>
                 <asp:DropDownList ID="filterTown" runat="server" CssClass="main-cb">
             </asp:DropDownList>
             </div>
@@ -101,25 +102,43 @@
                     <span class="ads-close" onclick="closePopup()">&times;</span>
                 </div>
                 <div id="adsFiltersContainer" class="hidden-m ads-filters">
-                    <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb">
-                        <asp:ListItem Text="По умолчанию"></asp:ListItem>
-                        <asp:ListItem Text="По возрастанию"></asp:ListItem>
-                        <asp:ListItem Text="По убыванию"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb">
-                    </asp:DropDownList>
-                    <asp:DropDownList ID="filterType" runat="server" CssClass="main-cb">
-                    </asp:DropDownList>
-                    <div id="ddlBreed">
-                        <asp:DropDownList ID="filterBreed" runat="server" CssClass="main-cb">
+                    <div class="ads-filters-c">
+                        <label class="ads-filters-text">Сортировка</label>
+                        <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb">
+                            <asp:ListItem Text="По умолчанию"></asp:ListItem>
+                            <asp:ListItem Text="По возрастанию"></asp:ListItem>
+                            <asp:ListItem Text="По убыванию"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
-                    <div id="ddlMale">
-                        <asp:DropDownList ID="filterMale" runat="server" CssClass="main-cb">
+                    <div class="ads-filters-c">
+                        <label class="ads-filters-text">Вид объявления</label>
+                        <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb">
                         </asp:DropDownList>
                     </div>
-                    <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb">
-                    </asp:DropDownList>
+                    <div class="ads-filters-c">
+                        <label class="ads-filters-text">Тип животного</label>
+                        <asp:DropDownList ID="filterType" runat="server" CssClass="main-cb">
+                        </asp:DropDownList>
+                    </div>
+                    <div class="ads-filters-c">
+                        <label class="ads-filters-text">Окрас животного</label>
+                        <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb">
+                        </asp:DropDownList>
+                    </div>
+                    <div id="ddlBreed-div" class="ads-filters-c">
+                        <label class="ads-filters-text">Порода</label>
+                        <div id="ddlBreed">
+                            <asp:DropDownList ID="filterBreed" runat="server" CssClass="main-cb">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div id="ddlMale-div" class="ads-filters-c">
+                        <label class="ads-filters-text">Пол</label>
+                        <div id="ddlMale">
+                            <asp:DropDownList ID="filterMale" runat="server" CssClass="main-cb">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
                     <div class="ads-checkbox">
                         <span>
                             <asp:CheckBox ID="cbIsChipping" CssClass="main-chb" Text="Чипированный" runat="server" />
@@ -267,9 +286,9 @@
             btnClear.style.display = 'none';
             btnSearch.style.display = 'none';
             if (selectedType === 0) {
-                $('#ddlBreed, #ddlMale').hide();
+                $('#ddlBreed-div, #ddlMale-div').hide();
             } else {
-                $('#ddlBreed, #ddlMale').show();
+                $('#ddlBreed-div, #ddlMale-div').show();
             }
         });
 
@@ -289,10 +308,9 @@
                 selectedType = filterType.selectedIndex;
 
                 if (selectedType === 0) {
-                    $('#ddlBreed, #ddlMale').hide();
-                }
-                else {
-                    $('#ddlBreed, #ddlMale').show();
+                    $('#ddlBreed-div, #ddlMale-div').hide();
+                } else {
+                    $('#ddlBreed-div, #ddlMale-div').show();
                 }
 
                 $.ajax({
@@ -322,7 +340,7 @@
                             });
 
                             if (selectedType !== 0) {
-                                $('#ddlBreed, #ddlMale').show();
+                                $('#ddlBreed-div, #ddlMale-div').show();
                             }
                         }
                     },
@@ -466,12 +484,18 @@
 
 
     <script>
-        function moveDiv() {
-            var child = document.getElementById('ddlTown-hide');
-            var parent2 = document.querySelector('adsFiltersContainer');
-            parent2.appendChild(child);
+        function isMobile() {
+            return /Mobi|Android/i.test(navigator.userAgent);
         }
-    </script>
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (isMobile()) {
+                var child = document.getElementById('ddlTown');
+                var parent2 = document.querySelector('.ads-filters');
+                parent2.insertBefore(child, parent2.firstChild);
+            }
+        });
+    </script>    <%-- Перемещение фильтра городов --%>
 
 
 
