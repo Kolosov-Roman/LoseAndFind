@@ -353,6 +353,10 @@ header {
     border-radius: 7px 0 0 7px;
 }
 
+.max-width {
+    width: 100%;
+}
+
 
 
 

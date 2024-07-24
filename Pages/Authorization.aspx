@@ -4,6 +4,7 @@
 
 <html lang="ru">
 <head runat="server">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
     <title>Вход - Lose and Find</title>
@@ -17,9 +18,8 @@
     <link rel="stylesheet" href="/Content/Site.css" />
 <% }%>
 
-    <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
 </head>
-<body style="height: calc(100vh - 50px); background-color: white;">
+<body style="height: calc(100vh - 50px);">
     <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
@@ -159,9 +159,6 @@
     </form>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
     <script type="text/javascript">
             document.getElementById('btnRecoverPassword').onclick = function (event) {
                 event.preventDefault(); // предотвращение обновления страницы
@@ -171,10 +168,10 @@
 
                 var h1 = document.getElementById('h1');
 
-                divAuth.classList.add('hidden-m');
+                divAuth.classList.add('hidden-m', 'hidden');
                 divAuth.classList.remove('visible');
                 divRecover.classList.add('visible');
-                divRecover.classList.remove('hidden-m');
+                divRecover.classList.remove('hidden-m', 'hidden');
                 h1.innerText = "Восстановление пароля";
             }
     </script>    <%-- Переход на окно восстановления пароля --%>
@@ -186,7 +183,8 @@
 
                 function openPopup() {
                     if (modal && !modal.classList.contains('show')) {
-                        modal.style.display = 'block';
+                        modal.style.display = 'flex';
+                        modal.style.justifyContent = 'center';
                         setTimeout(function () {
                             modal.classList.add('show');
                             modal.addEventListener('transitionend', onTransitionEnd);

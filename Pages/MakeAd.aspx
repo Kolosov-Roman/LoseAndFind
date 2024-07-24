@@ -288,7 +288,7 @@
                     <asp:Button ID="btnSaveChanges" runat="server" Text="Сохранить изменения" OnClientClick="editAd(); return false;" class="makead-btnMakeAd" />
                 </div>
             </div>
-            <asp:Panel ID="pnlPopup" runat="server" CssClass="modal">
+            <%--<asp:Panel ID="pnlPopup" runat="server" CssClass="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closePopup()">&times;</span>
                     <asp:Label class="adv-title-name" ID="lblPhoneNumber" runat="server"></asp:Label>
@@ -303,29 +303,9 @@
                         <asp:Button ID="btnCheckMailGood" runat="server" Text="Добавить" OnClientClick="btnCheckMail_Click(); return false;" CssClass="authorization-button" />
                     </div>
                 </div>
-            </asp:Panel>
+            </asp:Panel>--%>
         </div>
     </form>
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var dropdown = $('#<%= ddlBreed.ClientID %>');
-
-            // Добавляем обработчик событий на изменение выбора
-            dropdown.change(function () {
-                var selectedItem = $(this).find('option:selected');
-                if (selectedItem.text() === "Добавить свою породу") {
-                    // Сбрасываем выбор, чтобы пользователь мог кликнуть снова
-                    $(this).prop('selectedIndex', 0);
-                    openPopup();
-                }
-            });
-        });
-    </script>    <%-- Обработчик событий на последний элемент --%>
-
-
-
 
 
     <script type="text/javascript">
@@ -743,7 +723,7 @@
         </script>    <%-- Загрузка изображения животного и отображение --%>
 
 
-    <script>
+    <%--<script>
         document.addEventListener('DOMContentLoaded', function () {
             var modal = document.getElementById('<%= pnlPopup.ClientID %>');
 
@@ -801,6 +781,23 @@
             window.setOpenModalFlag = setOpenModalFlag;
         });
     </script>    <%-- Открытие модального окна с добавлением породы --%>
+
+
+    <%--    <script type="text/javascript">
+        $(document).ready(function () {
+            var dropdown = $('#<%= ddlBreed.ClientID %>');
+
+            // Добавляем обработчик событий на изменение выбора
+            dropdown.change(function () {
+                var selectedItem = $(this).find('option:selected');
+                if (selectedItem.text() === "Добавить свою породу") {
+                    // Сбрасываем выбор, чтобы пользователь мог кликнуть снова
+                    $(this).prop('selectedIndex', 0);
+                    openPopup();
+                }
+            });
+        });
+    </script>    <%-- Обработчик событий на последний элемент --%>
 
 
 
