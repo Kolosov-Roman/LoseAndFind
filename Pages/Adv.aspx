@@ -75,7 +75,7 @@
 
     <form id="adv" class="adv" runat="server" autocomplete="off">
         <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
-        <div class="adv-container-left">
+        <div id="advContainerLeft" class="adv-container-left">
             <div id="divCloseAndEditAd" runat="server" class="adv-container-right-showing">
                 <asp:Button ID="btnEditAdv" CssClass="adv-btnEditAd" Text="Редактировать объявление" runat="server" OnClick="EditAdv" />
                 <asp:Button ID="btnCloseAdv" CssClass="adv-btnCloseAd" Text="Снять с публикации" runat="server" OnClick="CloseAdv" />
@@ -85,8 +85,10 @@
                 <asp:Label ID="lblCloseAdv" class="adv-loseOrFind red-title" runat="server">Объявление снято с публикации</asp:Label>
             </div>
             <asp:Label ID="lblTitleAnimal" class="adv-title" runat="server"></asp:Label>
-            <div class="adv-div-img">
-                <asp:Image ID="imgAnimal" runat="server" CssClass="adv-image-animal" />
+            <div class="adv-div-div-img">
+                <div class="adv-div-img">
+                    <asp:Image ID="imgAnimal" runat="server" CssClass="adv-image-animal" />
+                </div>
             </div>
             <div class="adv-img-margin">
                 <asp:Label class="adv-address-info-label" ID="lblDataPublicationTitle" Text="Дата публикациии:" runat="server"></asp:Label>
@@ -99,46 +101,44 @@
             <div class="adv-separator-top"></div>
             <asp:Label ID="lblTitleCharact" class="adv-title-charact" Text="Характеристики" runat="server"></asp:Label>
             <div class="adv-separator-bottom"></div>
-            <div class="adv-div-charact">
-                <div class="adv-charact-div" style="margin-right: 100px;">
-                    <div class="adv-charact-label-main">
-                        <asp:Label ID="lblTypeTitle" class="adv-charact-label" Text="Тип:" runat="server"></asp:Label>
-                        <asp:Label ID="lblTypeValue" runat="server"></asp:Label>
-                    </div>
-                    <div class="adv-charact-label-main">
-                        <asp:Label ID="lblBreedTitle" class="adv-charact-label" Text="Порода:" runat="server"></asp:Label>
-                        <asp:Label ID="lblBreedValue" runat="server"></asp:Label>
-                    </div>
-                    <div class="adv-charact-label-main">
-                        <asp:Label ID="lblColorTitle" class="adv-charact-label" Text="Окрас:" runat="server"></asp:Label>
-                        <asp:Label ID="lblColorValue" runat="server"></asp:Label>
-                    </div>
-                    <div class="adv-charact-label-main">
-                        <asp:Label ID="lblMaleTitle" class="adv-charact-label" Text="Пол:" runat="server"></asp:Label>
-                        <asp:Label ID="lblMaleValue" runat="server"></asp:Label>
-                    </div>
+            <div class="adv-charact-cb-div">
+                <div>
+                    <asp:Label ID="lblTypeTitle" class="adv-charact-label" Text="Тип:" runat="server"></asp:Label>
+                    <asp:Label ID="lblTypeValue" runat="server"></asp:Label>
                 </div>
-                <div class="adv-div-cb">
-                    <div class="adv-charact-label-main">
-                        <asp:Label ID="lblIsChippingTitle" class="adv-charact-label" Text="Чипирован:" runat="server"></asp:Label>
-                        <asp:Label ID="lblIsChippingValue" runat="server"></asp:Label>
-                    </div>
-                    <div class="adv-charact-label-main">
-                        <asp:Label ID="lblIsCastratedTitle" class="adv-charact-label" Text="Кастрирован:" runat="server"></asp:Label>
-                        <asp:Label ID="lblIsCastratedValue" runat="server"></asp:Label>
-                    </div>
-                    <div class="adv-charact-label-last">
-                        <asp:Label ID="lblIsCollarTitle" class="adv-charact-label" Text="Ошейник:" runat="server"></asp:Label>
-                        <asp:Label ID="lblIsCollarValue" runat="server"></asp:Label>
-                    </div>
+                <div>
+                    <asp:Label ID="lblBreedTitle" class="adv-charact-label" Text="Порода:" runat="server"></asp:Label>
+                    <asp:Label ID="lblBreedValue" runat="server"></asp:Label>
+                </div>
+                <div>
+                    <asp:Label ID="lblColorTitle" class="adv-charact-label" Text="Окрас:" runat="server"></asp:Label>
+                    <asp:Label ID="lblColorValue" runat="server"></asp:Label>
+                </div>
+                <div>
+                    <asp:Label ID="lblMaleTitle" class="adv-charact-label" Text="Пол:" runat="server"></asp:Label>
+                    <asp:Label ID="lblMaleValue" runat="server"></asp:Label>
+                </div>
+                <div>
+                    <asp:Label ID="lblIsChippingTitle" class="adv-charact-label" Text="Чипирован:" runat="server"></asp:Label>
+                    <asp:Label ID="lblIsChippingValue" runat="server"></asp:Label>
+                </div>
+                <div>
+                    <asp:Label ID="lblIsCastratedTitle" class="adv-charact-label" Text="Кастрирован:" runat="server"></asp:Label>
+                    <asp:Label ID="lblIsCastratedValue" runat="server"></asp:Label>
+                </div>
+                <div>
+                    <asp:Label ID="lblIsCollarTitle" class="adv-charact-label" Text="Ошейник:" runat="server"></asp:Label>
+                    <asp:Label ID="lblIsCollarValue" runat="server"></asp:Label>
                 </div>
             </div>
             <div class="adv-separator-top"></div>
             <div class="adv-description-last">
                 <asp:Label ID="lblDescription" class="adv-description-last-text" runat="server"></asp:Label>
             </div>
-            <div class="adv-separator-top hidden"></div>
+            <div id="advSeparatorTop" class="adv-separator-top hidden"></div>
         </div>
+
+
         <div id="divInfoAccount" runat="server" class="adv-container-right">
             <div class="adv-div-center">
                 <div class="adv-element-center">
@@ -165,6 +165,31 @@
             </div>
         </div>
     </form>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function isMobile() {
+                return /Mobi|Android/i.test(navigator.userAgent);
+            }
+
+            function applyRoundedCorners() {
+                var hidden = document.getElementById('divInfoAccount');
+                var advContainer = document.getElementById('advContainerLeft');
+                if (isMobile() && hidden.style.display === 'none' && window.innerWidth >= 481) {
+                    advContainer.classList.add('rounded-corners');
+                } else {
+                    advContainer.classList.remove('rounded-corners');
+                }
+            }
+
+            // Initial check when the page loads
+            applyRoundedCorners();
+
+            // Check when the window is resized
+            window.addEventListener('resize', applyRoundedCorners);
+        });
+    </script>    <%-- Скругление углов левого контейнера в мобилке --%>
 
 
     <script type="text/javascript">

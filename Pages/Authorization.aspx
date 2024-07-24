@@ -19,7 +19,7 @@
 
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
 </head>
-<body style="height: calc(100vh - 50px);">
+<body style="height: calc(100vh - 50px); background-color: white;">
     <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">

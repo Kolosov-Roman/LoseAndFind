@@ -22,7 +22,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 </head>
-<body style="height: calc(100vh - 50px);">
+<body style="height: calc(100vh - 50px); background-color: white;">
     <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">

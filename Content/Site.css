@@ -1305,15 +1305,13 @@ a.ads-text-title {
 }
 
 .adv-container-right {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #fff;
+    display: grid;
     border-radius: 10px;
     min-width: 500px;
-    max-width: 500px;
     margin-left: 80px;
-    max-height: 308px;
+    height: min-content;
+    background-color: #fff;
+    padding: 20px;
 }
 
 .adv-image-animal {
@@ -1345,31 +1343,17 @@ a.ads-text-title {
     margin-top: 10px;
 }
 
-.adv-charact-label-main {
-    display: flex;
-}
-
-.adv-charact-label-last {
-    display: flex;
-}
-
 .adv-charact-label {
     color: #555555;
-    min-width: 130px;
+    margin-right: 8px;
 }
 
 .adv-address-info-label {
     color: #555555;
 }
 
-.adv-charact-div {
+.adv-charact-cb-div {
     display: grid;
-    gap: 10px;
-}
-
-.adv-div-cb {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
@@ -1467,10 +1451,6 @@ a.ads-text-title {
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-.adv-div-charact {
-    display: flex;
 }
 
 .adv-container-right-showing {
