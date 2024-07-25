@@ -311,7 +311,8 @@
 
             function openPopup() {
                 if (modal && !modal.classList.contains('show')) {
-                    modal.style.display = 'block';
+                    modal.style.display = 'flex';
+                    modal.style.justifyContent = 'center';
                     setTimeout(function () {
                         modal.classList.add('show');
                         modal.addEventListener('transitionend', onTransitionEnd);

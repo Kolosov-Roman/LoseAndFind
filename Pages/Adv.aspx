@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body id="body">
     <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
@@ -157,7 +157,7 @@
                     <asp:Button ID="btnShowPhone" CssClass="adv-btnShowPhone" Text="Показать телефон" runat="server" OnClientClick="openPopup(); return false;" />
                 </div>
                 <asp:Panel ID="pnlPopup" runat="server" CssClass="modal">
-                    <div class="modal-content">
+                    <div class="modal-content width-300">
                         <span class="close" onclick="closePopup()">&times;</span>
                         <asp:Label class="adv-title-name" ID="lblPhoneNumber" runat="server"></asp:Label>
                     </div>
@@ -165,6 +165,34 @@
             </div>
         </div>
     </form>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function doNotScrollBody() {
+                var body = document.getElementById('body');
+                var hidden = document.getElementById('pnlPopup');
+
+                if (hidden.style.display === 'none' || hidden.style.display === '') {
+                    body.style.overflow = '';
+                } else {
+                    body.style.overflow = 'hidden';
+                }
+            }
+
+            // Initial check when the page loads
+            doNotScrollBody();
+
+            // Create an observer instance to monitor changes in the display property
+            var observer = new MutationObserver(doNotScrollBody);
+
+            // Configuration of the observer
+            var config = { attributes: true, attributeFilter: ['style'] };
+
+            // Pass the target node and observer options
+            observer.observe(document.getElementById('pnlPopup'), config);
+        });
+    </script>    <%-- Запрет скролла при открытом модальном окне --%>
 
 
     <script>
@@ -206,7 +234,8 @@
                 }
                 else {
                     if (modal && !modal.classList.contains('show')) {
-                        modal.style.display = 'block';
+                        modal.style.display = 'flex';
+                        modal.style.justifyContent = 'center';
                         // Добавляем класс через setTimeout, чтобы анимация началась с задержкой
                         setTimeout(function () {
                             modal.classList.add('show');

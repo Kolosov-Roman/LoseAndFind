@@ -19,7 +19,7 @@
 <% }%>
 
 </head>
-<body style="height: calc(100vh - 50px);">
+<body id="bg" style="height: calc(100vh - 50px);">
     <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
@@ -157,6 +157,20 @@
             </asp:Panel>
         </div>
     </form>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var bg = document.getElementById('bg');
+            function isMobile() {
+                return /Mobi|Android/i.test(navigator.userAgent);
+            }
+
+            if (isMobile()) {
+                bg.style.backgroundColor = 'white';
+            }
+        });
+    </script>    <%-- Белый фон при заходе с мобилки --%>
 
 
     <script type="text/javascript">

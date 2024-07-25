@@ -357,6 +357,10 @@ header {
     width: 100%;
 }
 
+.width-300 {
+    max-width: 300px !important;
+}
+
 
 
 
