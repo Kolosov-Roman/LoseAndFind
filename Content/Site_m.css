@@ -17,8 +17,6 @@
     }
 
     .registration_form {
-        max-width: 420px;
-        min-width: 320px;
         width: 100%;
     }
 
@@ -56,6 +54,27 @@
 
     .adv-btnCloseAd {
         width: 100% !important;
+    }
+
+    .set-left-container {
+        display: none;
+    }
+
+    .set-right-container {
+        border-radius: 0px;
+    }
+
+    .set-all {
+        flex-direction: column-reverse;
+    }
+
+    .set-title-margin {
+        margin-bottom: 30px;
+    }
+
+    .set-sidebar-photo {
+        align-self: center;
+        margin-bottom: 35px;
     }
 }
 
@@ -122,6 +141,18 @@
     .adv-btnCloseAd {
         width: 100% !important;
     }
+
+    .set-left-container {
+        display: none;
+    }
+
+    .set-right-container {
+        border-radius: 0px;
+    }
+
+    .set-title-margin {
+        margin-bottom: 50px;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -185,6 +216,22 @@
 
     .adv-btnCloseAd {
         width: 100% !important;
+    }
+
+    .set {
+        padding: 20px;
+    }
+
+    .set-left-container {
+        display: none;
+    }
+
+    .set-right-container {
+        border-radius: 10px;
+    }
+
+    .set-title-margin {
+        margin-bottom: 50px;
     }
 }
 
@@ -260,6 +307,22 @@
     .adv-btnCloseAd {
         width: 100% !important;
     }
+
+    .set {
+        padding: 20px;
+    }
+
+    .set-left-container {
+        display: none;
+    }
+
+    .set-right-container {
+        border-radius: 10px;
+    }
+
+    .set-title-margin {
+        margin-bottom: 50px;
+    }
 }
 
 @media (min-width: 1281px) and (max-width: 1440px) {
@@ -333,6 +396,27 @@
 
     .adv-btnCloseAd {
         width: 100% !important;
+    }
+
+    .set {
+        height: fit-content;
+    }
+
+    .set-form {
+        padding: 20px;
+    }
+
+    .set-left-container {
+        border-radius: 10px;
+        display: flex;
+    }
+
+    .set-right-container {
+        border-radius: 10px;
+    }
+
+    .set-title-margin {
+        margin-bottom: 50px;
     }
 }
 
@@ -408,6 +492,27 @@
     .adv-btnCloseAd {
         width: 100% !important;
     }
+
+    .set {
+        height: fit-content;
+    }
+
+    .set-form {
+        padding: 20px;
+    }
+
+    .set-left-container {
+        border-radius: 10px;
+        display: flex;
+    }
+
+    .set-right-container {
+        border-radius: 10px;
+    }
+
+    .set-title-margin {
+        margin-bottom: 50px;
+    }
 }
 
 @media (min-width: 1920px) {
@@ -481,6 +586,27 @@
 
     .adv-btnCloseAd {
         width: 100% !important;
+    }
+
+    .set {
+        height: fit-content;
+    }
+
+    .set-form {
+        padding: 20px;
+    }
+
+    .set-left-container {
+        border-radius: 10px;
+        display: flex;
+    }
+
+    .set-right-container {
+        border-radius: 10px;
+    }
+
+    .set-title-margin {
+        margin-bottom: 50px;
     }
 }
 
@@ -660,7 +786,12 @@ header {
     max-width: 300px !important;
 }
 
-
+.divRegAuth {
+    max-width: 360px;
+    min-width: 260px;
+    width: 100%;
+    align-self: center;
+}
 
 
 
@@ -846,7 +977,7 @@ header {
 }
 
 .set-form-control {
-    width: 300px;
+    max-width: 300px;
 }
 
 .rounded-corners {
@@ -1208,6 +1339,7 @@ a.ads-text-title, a.ads-card-charact {
     background-color: #fff;
     width: 100%;
     max-width: 482px;
+    height: max-content;
 }
 
 .adv-container-right {
@@ -1531,13 +1663,12 @@ a.ads-text-title, a.ads-card-charact {
 
 
 
-.set-formm {
-    padding: 20px;
-    width: 1920px;
+.set-form {
+    width: 100%;
     display: flex;
 }
 
-.set-form {
+.set {
     width: 100%;
     display: flex;
     border-radius: 10px;
@@ -1551,23 +1682,21 @@ a.ads-text-title, a.ads-card-charact {
 
 
 .set-left-container {
-    width: 400px;
+    width: 100%;
     padding: 30px;
-    display: flex;
     background-color: #fff;
     flex-direction: column;
-    border-radius: 10px;
     align-items: center;
+    max-width: 300px;
 }
 
 .set-right-container {
-    width: 800px;
-    background: white;
+    width: 100%;
     padding: 30px;
     display: flex;
     background-color: #fff;
     flex-direction: column;
-    border-radius: 10px;
+    max-width: 768px;
 }
 
 .set-account {
@@ -1602,7 +1731,6 @@ a.ads-text-title, a.ads-card-charact {
 
 
 .set-sidebar {
-    padding: 0 20px 0 20px;
     display: none;
     width: 100%;
     justify-content: space-between;
@@ -1611,9 +1739,7 @@ a.ads-text-title, a.ads-card-charact {
 
 .set-sidebar-photo {
     display: flex;
-    height: 100%;
     width: 150px;
-    align-content: center;
     flex-direction: column;
 }
 
@@ -1629,7 +1755,9 @@ a.ads-text-title, a.ads-card-charact {
 .set-account-1 {
     display: flex;
     flex-direction: column;
-    width: 450px;
+    max-width: 450px;
+    width: 100%;
+    margin-right: 40px;
 }
 
 .set-account-img {
@@ -1641,32 +1769,27 @@ a.ads-text-title, a.ads-card-charact {
 
 .set-horizontal-label {
     display: flex;
-    width: 550px;
+    width: 100%;
     margin-bottom: 20px;
     justify-content: space-between;
 }
 
 .set-horizontal-namemail {
     display: flex;
-    width: 550px;
+    width: 100%;
     margin-bottom: 20px;
-}
-
-.set-horizontal-label-none {
-    display: flex;
-    width: 550px;
-    margin-bottom: 20px;
-    justify-content: space-between;
 }
 
 .set-title-margin {
-    width: 400px;
-    font-family: Onest-Medium;
+    width: 100%;
+    font-family: Onest-SemiBold;
     user-select: none;
     -webkit-user-select: none; /* Chrome, Safari, Opera */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
-    margin-bottom: 50px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .set-info {

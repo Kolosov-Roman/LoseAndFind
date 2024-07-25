@@ -19,7 +19,7 @@
 <% }%>
 
 </head>
-<body id="bg" style="height: calc(100vh - 50px);">
+<body id="body">
     <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
             <div class="container">
@@ -68,15 +68,27 @@
 
 
 
+    <script>
+        function adjustBodyHeight() {
+            // Высота body должна быть равна высоте содержимого или высоте окна, в зависимости от того, что больше
+            const contentHeight = document.getElementById('authForm').scrollHeight;
+            const windowHeight = window.innerHeight;
+            document.body.style.height = Math.max(contentHeight, windowHeight - 50) + 'px';
+        }
 
+        // Настраиваем высоту при загрузке страницы
+        document.addEventListener('DOMContentLoaded', adjustBodyHeight);
+        // Настраиваем высоту при изменении размера окна
+        window.addEventListener('resize', adjustBodyHeight);
+    </script>
 
 
 
     <form runat="server" id="authForm" class="cont">
-        <div class="registration_form" runat="server">
+        <div id="main" class="registration_form" runat="server">
             <h1 id="h1" class="registration_header">Авторизация</h1>
             <asp:Button Style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
-            <div id="divAuth" runat="server" class="visible">
+            <div id="divAuth" runat="server" class="visible divRegAuth">
                 <div class="form-group">
                     <div class="horizontal_label">
                         <label class="reg_label_left">Почта</label>
@@ -456,6 +468,34 @@
             });
         };
     </script>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                function doNotScrollBody() {
+                    var body = document.getElementById('body');
+                    var hidden = document.getElementById('divCheckRegSecond');
+
+                    if (hidden.style.display === 'none' || hidden.style.display === '') {
+                        body.style.overflow = '';
+                    } else {
+                        body.style.overflow = 'hidden';
+                    }
+                }
+
+                // Initial check when the page loads
+                doNotScrollBody();
+
+                // Create an observer instance to monitor changes in the display property
+                var observer = new MutationObserver(doNotScrollBody);
+
+                // Configuration of the observer
+                var config = { attributes: true, attributeFilter: ['style'] };
+
+                // Pass the target node and observer options
+                observer.observe(document.getElementById('divCheckRegSecond'), config);
+            });
+        </script>    <%-- Запрет скролла при открытом модальном окне --%>
 
 
 

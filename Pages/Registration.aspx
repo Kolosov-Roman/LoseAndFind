@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="/Content/Site.css" />
 <% }%>
 
-    <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -69,7 +68,19 @@
 
 
 
+        <script>
+            function adjustBodyHeight() {
+                // Высота body должна быть равна высоте содержимого или высоте окна, в зависимости от того, что больше
+                const contentHeight = document.getElementById('regForm').scrollHeight;
+                const windowHeight = window.innerHeight;
+                document.body.style.height = Math.max(contentHeight, windowHeight - 50) + 'px';
+            }
 
+            // Настраиваем высоту при загрузке страницы
+            document.addEventListener('DOMContentLoaded', adjustBodyHeight);
+            // Настраиваем высоту при изменении размера окна
+            window.addEventListener('resize', adjustBodyHeight);
+    </script>
 
 
 
@@ -78,7 +89,7 @@
         <form id="regForm" runat="server" class="registration_form" autocomplete="off">
             <asp:Button Style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
             <h1 id="titleReg" class="registration_header">Регистрация</h1>
-            <div id="divCheckRegFirst" class="reg-div-left visible" runat="server">
+            <div id="divCheckRegFirst" class="reg-div-left visible divRegAuth" runat="server">
                 <div class="form-group">
                     <div class="horizontal_label">
                         <label class="reg_label_left">Имя</label>

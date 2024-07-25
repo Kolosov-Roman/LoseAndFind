@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/Content/Site.css" />
 <% }%>
 
-    <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
+    
 </head>
 <body id="body">
     <header id="header-hide" class="fixed-top">

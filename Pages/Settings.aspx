@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="/Content/Site.css" />
 <% }%>
 
-    <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -73,9 +72,9 @@
 
 
 
-    <form id="settings" class="set-formm" runat="server" autocomplete="off">
+    <form id="set" class="set-form" runat="server" autocomplete="off">
         <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
-        <div class="set-form">
+        <div class="set">
             <div class="set-left-container">
                 <div class="set-account">
                     <asp:Image ID="imgClientAccount" runat="server" CssClass="set-image"></asp:Image>
@@ -108,11 +107,11 @@
 
 
             <div class="set-right-container">
-                <div class="set-sidebar" id="divAccount">    <%-- Информация об аккаунте --%>
-                    <h3 class="set-title-margin">Информация об аккаунте</h3>
+                <div class="set-sidebar" id="divAccount">    <%-- Настройки аккаунта --%>
+                    <h3 class="set-title-margin">Настройки аккаунта</h3>
                     <div class="set-all">
                         <div class="set-account-1">
-                            <div class="set-horizontal-namemail" id="divShowingSetAccount" runat="server">
+                            <div class="set-horizontal-namemail" runat="server">
                                 <asp:Label ClientIDMode="Static" ID="lblNameSidebar" runat="server"></asp:Label>
                                 <asp:TextBox ClientIDMode="Static" ID="tbNameSidebar" runat="server" class="set-form-control placeholder-red" placeholder="Имя пользователя" MaxLength="100" />
                                 <asp:ImageButton ClientIDMode="Static" ID="btnChangeName" OnClientClick="btnChangeName_Click(); return false;" ImageUrl="~/Resources/edit.png" runat="server" CssClass="set-save-data" />
@@ -126,16 +125,16 @@
                                 <asp:ImageButton ClientIDMode="Static" ID="btnSaveMail" OnClientClick="btnSaveMail_Click(); return false;" ImageUrl="~/Resources/save.svg" runat="server" CssClass="set-save-data" />
                                 <asp:ImageButton ClientIDMode="Static" ID="btnCancelMail" OnClientClick="btnCancelMail_Click(); return false;" ImageUrl="~/Resources/cancel.svg" runat="server" CssClass="set-save-data" />
                             </div>
-                            <div class="set-horizontal-label-none">
+                            <div class="set-horizontal-label">
                                 <asp:Label ID="lblNumberPhone" runat="server"></asp:Label>
                             </div>
-                            <div class="set-horizontal-label-none">
+                            <div class="set-horizontal-label">
                                 <asp:Label ID="lblTypeUserSidebar" runat="server"></asp:Label>
                             </div>
-                            <div class="set-horizontal-label-none">
+                            <div class="set-horizontal-label">
                                 <asp:Label ID="lblIdSidebar" runat="server"></asp:Label>
                             </div>
-                            <div class="set-horizontal-label-none">
+                            <div class="set-horizontal-label">
                                 <asp:Label ID="lblDateRegSidebar" runat="server"></asp:Label>
                             </div>
                         </div>
@@ -215,14 +214,14 @@
                                             </div>
                                             <asp:Label ID="lblTownAd" Text='<%# Eval("town") %>' CssClass="ads-text-town" runat="server"></asp:Label>
                                             <asp:Label ID="lblDataPublicationAd" Text='<%# FormatPublishDateToMinute((DateTime)Eval("dataPublication")) %>' CssClass="ads-text-time" runat="server"></asp:Label>
-                                            <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription" runat="server"></asp:Label>
+                                            <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription hidden-m" runat="server"></asp:Label>
                                         </div>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </div>
                     </div>
-                    <div id="divArchivedAds" class="hidden">
+                    <div id="divArchivedAds" class="hidden hidden-m">
                         <%-- Пассивные --%>
                         <div runat="server" class="main-container-message-attention" visible="false" id="divMyArchivedAdsAttention">
                             <asp:Label CssClass="main-text-attention-hight" runat="server">У вас нет архивных объявлений</asp:Label>
@@ -244,7 +243,7 @@
                                             </div>
                                             <asp:Label ID="lblTownAd" Text='<%# Eval("town") %>' CssClass="ads-text-town" runat="server"></asp:Label>
                                             <asp:Label ID="lblDataPublicationAd" Text='<%# FormatPublishDateToMinute((DateTime)Eval("dataPublication")) %>' CssClass="ads-text-time" runat="server"></asp:Label>
-                                            <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription" runat="server"></asp:Label>
+                                            <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' CssClass="ads-text-discription hidden-m" runat="server"></asp:Label>
                                         </div>
                                     </div>
                                 </ItemTemplate>
@@ -280,7 +279,7 @@
                                         </div>
                                         <asp:Label ID="lblTownAd" Text='<%# Eval("town") %>' CssClass="ads-text-town" runat="server"></asp:Label>
                                         <asp:Label ID="lblDataPublicationAd" Text='<%# FormatPublishDateToMinute((DateTime)Eval("dataPublication")) %>' CssClass="ads-text-time" runat="server"></asp:Label>
-                                        <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' Visible='<%# Eval("idStatus").ToString() != "2" %>' CssClass="ads-text-discription" runat="server"></asp:Label>
+                                        <asp:Label ID="lblDescriptionAd" Text='<%# Eval("description") %>' Visible='<%# Eval("idStatus").ToString() != "2" %>' CssClass="ads-text-discription hidden-m" runat="server"></asp:Label>
                                     </div>
                                 </div>
                             </ItemTemplate>
@@ -311,6 +310,9 @@
         </div>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     </form>
+
+
+
 
 
     <script>
@@ -387,6 +389,8 @@
             if (tabName === 'active') {
                 activeTab.classList.remove('hidden');
                 archiveTab.classList.add('hidden');
+                activeTab.classList.remove('hidden-m');
+                archiveTab.classList.add('hidden-m');
 
                 activeLink.classList.add('active');
                 activeLink.classList.remove('passive');
@@ -395,6 +399,8 @@
             } else {
                 activeTab.classList.add('hidden');
                 archiveTab.classList.remove('hidden');
+                activeTab.classList.add('hidden-m');
+                archiveTab.classList.remove('hidden-m');
 
                 activeLink.classList.add('passive');
                 activeLink.classList.remove('active');
@@ -964,6 +970,9 @@
             });
         }
     </script>    <%-- Заполнение сердечка --%>
+
+
+
 
 
 

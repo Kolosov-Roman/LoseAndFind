@@ -487,13 +487,13 @@ header {
 /*                                                              Стили окна настроек                                                        */
 
 
-.set-formm {
+.set-form {
     padding: 20px;
     width: 1920px;
     display: flex;
 }
 
-.set-form {
+.set {
     width: 100%;
     display: flex;
     border-radius: 10px;
@@ -563,7 +563,6 @@ header {
 
 
 .set-sidebar {
-    padding: 0 20px 0 20px;
     display: none;
     width: 100%;
     justify-content: space-between;
@@ -611,13 +610,6 @@ header {
     display: flex;
     width: 550px;
     margin-bottom: 20px;
-}
-
-.set-horizontal-label-none {
-    display: flex;
-    width: 550px;
-    margin-bottom: 20px;
-    justify-content: space-between;
 }
 
 .set-title-margin {
@@ -1516,6 +1508,7 @@ a.ads-text-title {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     transform: translateY(-50px);
+    height: max-content;
 }
 
 .modal.show .modal-content {

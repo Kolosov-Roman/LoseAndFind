@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/Content/Site.css" />
 <% }%>
 
-    <link rel="stylesheet" href="~/LoseAndFind.styles.css" asp-append-version="true" />
+    
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
