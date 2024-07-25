@@ -161,13 +161,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var bg = document.getElementById('bg');
+            var authForm = document.getElementById('authForm');
             function isMobile() {
                 return /Mobi|Android/i.test(navigator.userAgent);
             }
 
             if (isMobile()) {
-                bg.style.backgroundColor = 'white';
+                authForm.style.backgroundColor = 'white';
             }
         });
     </script>    <%-- Белый фон при заходе с мобилки --%>
