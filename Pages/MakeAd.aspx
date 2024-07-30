@@ -153,7 +153,7 @@
 
             makeAjaxRequest();
         }
-    </script>                                      <%-- Скрипт для Яндекс.Карт --%>
+    </script>    <%-- Скрипт для Яндекс.Карт --%>
 
 </head>
 <body>
@@ -209,52 +209,53 @@
 
 
 
-    <form id="MakeAdForm" runat="server" style="padding: 20px" autocomplete="off">
-        <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
-        <div class="makead-form-container">
+    <form id="MakeAdForm" runat="server" class="makead-form-container" autocomplete="off">
+        <asp:Button Style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
+        <div class="makead-div-container">
             <asp:HiddenField ID="hasCoordinatesChanged" runat="server" />
             <div class="makead-info-flex">
+                <label id="lblTitle" runat="server" class="makead-attention-red"></label>
                 <div class="makead-title">
                     <asp:TextBox class="makead-title-input form-control" ID="tbTitle" placeholder="Введите название" runat="server"></asp:TextBox>
-                    <label id="lblTitle" runat="server" class="makead-attention-red"></label>
                 </div>
                 <div class="adv-separator-bottom"></div>
                 <div class="makead-charact">
+
+                    <label id="lblLoseOrFind" runat="server" class="makead-attention-red"></label>
                     <div class="makead-label-and-cb">
                         <asp:DropDownList ID="ddlLoseOrFind" runat="server" class="main-cb">
                             <asp:ListItem Text="Вид объявления" Value="0" />
                         </asp:DropDownList>
-                        <label id="lblLoseOrFind" runat="server" class="makead-attention-red"></label>
                     </div>
 
+                    <label id="lblType" runat="server" class="makead-attention-red"></label>
                     <div class="makead-label-and-cb">
-                        <asp:DropDownList ID="ddlType" AutoPostBack="false" runat="server" class="main-cb">
+                        <asp:DropDownList ID="ddlType" ClientIDMode="Static" runat="server" class="main-cb">
                             <asp:ListItem Text="Тип" Value="0" />
                         </asp:DropDownList>
-                        <label id="lblType" runat="server" class="makead-attention-red"></label>
                     </div>
 
+                    <label id="lblBreed" runat="server" class="makead-attention-red"></label>
                     <div id="divBreed" class="makead-label-and-cb">
                         <asp:DropDownList ID="ddlBreed" runat="server" class="main-cb">
                             <asp:ListItem Text="Порода" Value="0" />
                         </asp:DropDownList>
-                        <label id="lblBreed" runat="server" class="makead-attention-red"></label>
                     </div>
 
+                    <label id="lblColor" runat="server" class="makead-attention-red"></label>
                     <div id="divColor" class="makead-label-and-cb">
                         <asp:DropDownList ID="ddlColor" runat="server" class="main-cb">
                             <asp:ListItem Text="Окрас" Value="0" />
                         </asp:DropDownList>
-                        <label id="lblColor" runat="server" class="makead-attention-red"></label>
                     </div>
 
+                    <label id="lblMale" runat="server" class="makead-attention-red"></label>
                     <div id="divMale" class="makead-label-and-cb-last">
                         <asp:DropDownList ID="ddlMale" runat="server" class="main-cb">
                             <asp:ListItem Text="Пол" Value="0" />
                         </asp:DropDownList>
-                        <label id="lblMale" runat="server" class="makead-attention-red"></label>
                     </div>
-                    <div class="checkboxes">
+                    <div class="makead-checkboxes">
                         <div class="main-chb">
                             <asp:CheckBox ID="cbIsChipping" Text="Чипированный" runat="server" />
                         </div>
@@ -267,43 +268,30 @@
                     </div>
                 </div>
                 <div class="adv-separator-bottom"></div>
-                <div style="width: 500px; height: 150px; justify-content: space-between; margin-bottom: 40px; display: flex;">
+
+                <label id="lblImage" runat="server" class="makead-attention-red"></label>
+                <div class="makead-photo-load">
                     <div class="file-upload-wrapper">
                         <asp:FileUpload ID="fileUpload" CssClass="file-upload-wrapper" onchange="checkFileFormat()" runat="server" AllowMultiple="true" />
                         <asp:Image class="file-upload-wrapper" AlternateText="Вставьте изображение" ID="imgAnimalChange" runat="server" />
                     </div>
-                    <label id="lblImage" runat="server" class="makead-attention-red"></label>
                 </div>
                 <div class="makead-description">
                     <asp:TextBox ID="txtDescription" runat="server" class="makead-description-input" TextMode="MultiLine" placeholder="Описание"></asp:TextBox>
                 </div>
                 <div class="adv-separator-bottom"></div>
+
+                <label id="lblAddress" runat="server" class="makead-attention-red"></label>
                 <div class="makead-label-and-tb">
                     <asp:TextBox runat="server" class="makead-title-input-form-control" type="text" ID="tbAddress"></asp:TextBox>
-                    <label id="lblAddress" runat="server" class="makead-attention-red"></label>
+
                 </div>
                 <div id="map" class="makead-map"></div>
                 <div class="makead-submit-button">
-                    <asp:Button runat="server" id="btnMakeAd" Text="Разместить" OnClientClick="uploadFile(); return false;" class="makead-btnMakeAd" />
+                    <asp:Button runat="server" ID="btnMakeAd" Text="Разместить" OnClientClick="uploadFile(); return false;" class="makead-btnMakeAd" />
                     <asp:Button ID="btnSaveChanges" runat="server" Text="Сохранить изменения" OnClientClick="editAd(); return false;" class="makead-btnMakeAd" />
                 </div>
             </div>
-            <%--<asp:Panel ID="pnlPopup" runat="server" CssClass="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closePopup()">&times;</span>
-                    <asp:Label class="adv-title-name" ID="lblPhoneNumber" runat="server"></asp:Label>
-                    <div class="form-group">
-                        <div class="horizontal_label">
-                            <label class="reg_label_left">Ваша порода</label>
-                            <label id="lblCorrectCode" runat="server" class="attention_red"></label>
-                        </div>
-                        <asp:TextBox ID="tbCode" runat="server" CssClass="form-control" placeholder="Введите породу" />
-                    </div>
-                    <div class="form-group">
-                        <asp:Button ID="btnCheckMailGood" runat="server" Text="Добавить" OnClientClick="btnCheckMail_Click(); return false;" CssClass="authorization-button" />
-                    </div>
-                </div>
-            </asp:Panel>--%>
         </div>
     </form>
 
@@ -382,6 +370,29 @@
             });
         });
     </script>    <%-- Вытаскивание элементов из комбобоксов --%>
+
+
+
+
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var ddlType = document.getElementById('ddlType');
+            setInterval(function () {
+                    previousIndex = ddlType.selectedIndex;
+                    if (ddlType.selectedIndex === 0) {
+                        lblBreed.style.display = 'none';
+                        lblMale.style.display = 'none';
+                        lblColor.style.display = 'none';
+                    }
+                    else {
+                        lblBreed.style.display = 'flex';
+                        lblMale.style.display = 'flex';
+                        lblColor.style.display = 'flex';
+                    }
+            });
+        });
+    </script>
 
 
     <script type="text/javascript">
@@ -476,6 +487,7 @@
             } else lblLoseOrFind.innerText = "";
 
             if (image || breed || type || color || male || loseOrFind || mapNull || mapIncorrect || title) {
+                // Отмотать в самый верх
                 return false;
             }
 
@@ -721,83 +733,6 @@
             }
         });
         </script>    <%-- Загрузка изображения животного и отображение --%>
-
-
-    <%--<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var modal = document.getElementById('<%= pnlPopup.ClientID %>');
-
-            function openPopup() {
-                if (modal && !modal.classList.contains('show')) {
-                    modal.style.display = 'block';
-                    setTimeout(function () {
-                        modal.classList.add('show');
-                        modal.addEventListener('transitionend', onTransitionEnd);
-                    }, 10);
-                }
-            }
-
-            function closePopup() {
-                if (modal && modal.classList.contains('show')) {
-                    modal.classList.remove('show');
-                    modal.addEventListener('transitionend', onTransitionEnd);
-                }
-            }
-
-            function onTransitionEnd() {
-                modal.removeEventListener('transitionend', onTransitionEnd);
-                if (!modal.classList.contains('show')) {
-                    modal.style.display = 'none';
-                }
-            }
-
-            if (modal) {
-                modal.addEventListener('click', function (event) {
-                    if (event.target === modal) {
-                        closePopup();
-                    }
-                });
-            }
-
-            function setOpenModalFlag() {
-                sessionStorage.setItem('openModal', 'true');
-            }
-
-            function checkModalStatus() {
-                if (sessionStorage.getItem('openModal') === 'true') {
-                    showModal();
-                    sessionStorage.removeItem('openModal');
-                }
-            }
-
-            function showModal() {
-                openPopup();
-            }
-
-            checkModalStatus();
-
-            window.openPopup = openPopup;
-            window.closePopup = closePopup;
-            window.setOpenModalFlag = setOpenModalFlag;
-        });
-    </script>    <%-- Открытие модального окна с добавлением породы --%>
-
-
-    <%--    <script type="text/javascript">
-        $(document).ready(function () {
-            var dropdown = $('#<%= ddlBreed.ClientID %>');
-
-            // Добавляем обработчик событий на изменение выбора
-            dropdown.change(function () {
-                var selectedItem = $(this).find('option:selected');
-                if (selectedItem.text() === "Добавить свою породу") {
-                    // Сбрасываем выбор, чтобы пользователь мог кликнуть снова
-                    $(this).prop('selectedIndex', 0);
-                    openPopup();
-                }
-            });
-        });
-    </script>    <%-- Обработчик событий на последний элемент --%>
 
 
 

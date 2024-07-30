@@ -107,8 +107,8 @@
 
 
             <div class="set-right-container">
-                <div class="set-sidebar" id="divAccount">    <%-- Настройки аккаунта --%>
-                    <h3 class="set-title-margin">Настройки аккаунта</h3>
+                <div class="set-sidebar" id="divAccount">    <%-- Настройки профиля --%>
+                    <h3 class="set-title-margin">Настройки профиля</h3>
                     <div class="set-all">
                         <div class="set-account-1">
                             <div class="set-horizontal-namemail" runat="server">
@@ -146,8 +146,8 @@
                             <asp:Button ID="btnSavePhotoClient" OnClick="imgClientChange_Click" Text="Сохранить" CssClass="set-save-photo" runat="server" />
                         </div>
                     </div>
-                    <div class="set-separator-center"></div>
-                    <div style="display: flex; flex-direction: column; height: fit-content;">
+                    <div id="setSeparatorCenter" class="set-separator-center"></div>
+                    <div class="set-dno">
                         <asp:Button ID="exitAccount" OnClick="exitAccount_Click" Text="Выйти из аккаунта" CssClass="set-exitAccount" runat="server" />
                         <asp:Button ID="deleteAccount" OnClick="deleteAccount_Click" Text="Удалить аккаунт" CssClass="set-deleteAccount" runat="server" />
                     </div>
@@ -157,15 +157,15 @@
                         <h3 class="set-title-margin">Изменение пароля</h3>
                         <div class="set-horizontal-label">
                             <asp:TextBox type="password" TextMode="Password" autocomplete="new-password" ID="oldPasswordSett" runat="server" class="set-form-control" placeholder="Старый пароль" />
-                            <asp:Label ID="lblOldPasswordSett" runat="server" class="set-attention_red"></asp:Label>
+                            <asp:Label ID="lblOldPasswordSett" runat="server" class="set-attention-red"></asp:Label>
                         </div>
                         <div class="set-horizontal-label">
                             <asp:TextBox type="password" ID="newPasswordSett" runat="server" class="set-form-control" placeholder="Новый пароль" />
-                            <asp:Label ID="lblNewPasswordSett" runat="server" class="set-attention_red"></asp:Label>
+                            <asp:Label ID="lblNewPasswordSett" runat="server" class="set-attention-red"></asp:Label>
                         </div>
                         <div class="set-horizontal-label">
                             <asp:TextBox type="password" ID="newConfirmPasswordSett" runat="server" class="set-form-control" placeholder="Подтвердите новый пароль" />
-                            <asp:Label ID="lblNewConfirmPasswordSett" runat="server" class="set-attention_red"></asp:Label>
+                            <asp:Label ID="lblNewConfirmPasswordSett" runat="server" class="set-attention-red"></asp:Label>
                         </div>
                         <div class="set-save-center">
                             <asp:Label ID="lblSaveOkSecuritySett" runat="server" class="attention_green"></asp:Label>
@@ -190,9 +190,10 @@
                             <div class="separator-1"></div>
                         </div>
                     </div>
+
                     <div id="divActiveAds">
                         <%-- Активные --%>
-                        <div runat="server" class="main-container-message-attention" visible="false" id="divMyAdsAttention">
+                        <div runat="server" class="main-container-message-attention" id="divMyAdsAttention">
                             <asp:Label CssClass="main-text-attention-hight" runat="server">У вас ещё нет объявлений</asp:Label>
                             <asp:Label CssClass="main-text-attention-low" runat="server">Но это легко исправить - разместите первое</asp:Label>
                             <asp:Button ID="btnMakeAd" OnClick="MakeAd_Click" runat="server" CssClass="myads-btn-make-ad" Text="Разместить объявление" />
@@ -223,7 +224,7 @@
                     </div>
                     <div id="divArchivedAds" class="hidden hidden-m">
                         <%-- Пассивные --%>
-                        <div runat="server" class="main-container-message-attention" visible="false" id="divMyArchivedAdsAttention">
+                        <div runat="server" class="main-container-message-attention" id="divMyArchivedAdsAttention">
                             <asp:Label CssClass="main-text-attention-hight" runat="server">У вас нет архивных объявлений</asp:Label>
                         </div>
                         <div runat="server" class="myads-card-container">
@@ -256,7 +257,7 @@
                 </div>
                 <div class="set-sidebar" id="divAdsInLikes">    <%-- Избранное --%>
                     <h3 class="set-title-margin">Избранное</h3>
-                    <div runat="server" class="main-container-message-attention" visible="false" id="divAdsInLikesAttention">
+                    <div runat="server" class="main-container-message-attention" id="divAdsInLikesAttention">
                         <asp:Label CssClass="main-text-attention-hight" runat="server">У вас ещё нет избранных</asp:Label>
                         <asp:Label CssClass="main-text-attention-low" runat="server">Но это легко исправить - добавьте первое</asp:Label>
                         <asp:Button runat="server" ID="btnAds" OnClick="Ads_Click" CssClass="myads-btn-make-ad" Text="Перейти к объявлениям" />
@@ -310,9 +311,6 @@
         </div>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     </form>
-
-
-
 
 
     <script>
@@ -792,71 +790,124 @@
 
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        function showSection(sectionId, element) {
-            var sidebarItems = document.getElementsByClassName('set-sidebar-item');
-            var sections = document.getElementsByClassName('set-sidebar');
+        document.addEventListener("DOMContentLoaded", function () {
 
-            // Скрыть все секции
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].style.display = 'none';
+            function insertAtPosition(parent, child, position) {
+                parent.insertBefore(child, parent.children[position - 1]);
             }
 
-            // Удалить класс 'set-active' у всех пунктов меню
-            for (var i = 0; i < sidebarItems.length; i++) {
-                sidebarItems[i].classList.remove('set-active');
+            function showSection(sectionId, element) {
+                var sidebarItems = document.getElementsByClassName('set-sidebar-item');
+                var sections = document.getElementsByClassName('set-sidebar');
+
+                var child = document.querySelector('.set-account-set');
+                var parent2 = document.getElementById('divAccount');
+                var parent3 = document.getElementById('divSecurity');
+                var separator = document.getElementById('setSeparatorCenter');
+                var divAdsInLikesAttention = document.getElementById('divAdsInLikesAttention');
+                var divAdsInLikesAttention1 = document.getElementById('divAdsInLikesAttention1');
+
+                function isMobile() {
+                    return /Mobi|Android/i.test(navigator.userAgent);
+                }
+
+                function applyRounded() {
+                    if (isMobile() && window.innerWidth < 1024 && sectionId === "divSecurity") {
+                        parent2.style.display = 'flex';
+                    }
+                    if (isMobile() && sectionId !== "divSecurity" || window.innerWidth >= 1024) {
+                        parent2.style.display = 'none';
+                    }
+                    if (sectionId === "divAccount") {
+                        parent2.style.display = 'flex';
+                    }
+                }
+
+                function applyRoundedCorners() {
+                    if (isMobile() && window.innerWidth < 1024) {
+                        insertAtPosition(parent2, child, 3);
+                        separator.style.backgroundColor = 'white';
+                    }
+                    else if (isMobile()) {
+                        parent3.insertBefore(child, parent3.firstChild);
+                        separator.style.backgroundColor = '#ccc';
+                    }
+                }
+
+                applyRoundedCorners();
+
+                window.addEventListener('resize', applyRoundedCorners);
+                window.addEventListener('resize', applyRounded);
+                window.addEventListener('load', applyRounded);
+
+                // Скрыть все секции
+                for (var i = 0; i < sections.length; i++) {
+                    sections[i].style.display = 'none';
+                }
+
+                // Удалить класс 'set-active' у всех пунктов меню
+                for (var i = 0; i < sidebarItems.length; i++) {
+                    sidebarItems[i].classList.remove('set-active');
+                }
+
+                // Показать выбранную секцию
+                var activeSection = document.getElementById(sectionId);
+                if (sectionId === "divAccount") {
+                    activeSection.style.display = 'flex';
+                } else if (activeSection) {
+                    activeSection.style.display = 'block';
+                }
+
+                if (divAdsInLikesAttention.style.display === 'flex') {
+                    activeSection.style.display = 'flex';
+                }
+
+
+
+                // Добавить класс 'set-active' к выбранному пункту меню
+                if (element) {
+                    element.classList.add('set-active');
+                }
+
+                // Обновить URL без перезагрузки страницы
+                var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?section=' + sectionId;
+                window.history.replaceState({ path: newUrl }, '', newUrl);
             }
 
-            // Показать выбранную секцию
-            var activeSection = document.getElementById(sectionId);
-            if (activeSection) {
-                activeSection.style.display = 'block';
-            }
+            // Получаем параметры запроса из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const section = urlParams.get('section');
 
-            // Добавить класс 'set-active' к выбранному пункту меню
-            if (element) {
-                element.classList.add('set-active');
-            }
-
-            // Обновить URL без перезагрузки страницы
-            var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?section=' + sectionId;
-            window.history.replaceState({ path: newUrl }, '', newUrl);
-        }
-
-        // Получаем параметры запроса из URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const section = urlParams.get('section');
-
-        // Добавляем обработчики событий для элементов с классом 'set-sidebar-item'
-        var sidebarItems = document.querySelectorAll('.set-sidebar-item');
-        sidebarItems.forEach(function (item) {
-            item.addEventListener('click', function () {
-                var sectionId = this.getAttribute('data-section-id');
-                showSection(sectionId, this);
+            // Добавляем обработчики событий для элементов с классом 'set-sidebar-item'
+            var sidebarItems = document.querySelectorAll('.set-sidebar-item');
+            sidebarItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    var sectionId = this.getAttribute('data-section-id');
+                    showSection(sectionId, this);
+                });
             });
-        });
 
-        // Вызываем функцию для отображения секции из параметра запроса или первой секции по умолчанию
-        if (section) {
-            const selectedElement = document.querySelector(`[data-section-id="${section}"]`);
-            if (selectedElement) {
-                showSection(section, selectedElement);
+            // Вызываем функцию для отображения секции из параметра запроса или первой секции по умолчанию
+            if (section) {
+                const selectedElement = document.querySelector(`[data-section-id="${section}"]`);
+                if (selectedElement) {
+                    showSection(section, selectedElement);
+                } else {
+                    console.warn("Selected element not found for section:", section); // Отладочное сообщение
+                    showSection('divAccount', document.querySelector('.set-sidebar-item'));
+                }
             } else {
-                console.warn("Selected element not found for section:", section); // Отладочное сообщение
                 showSection('divAccount', document.querySelector('.set-sidebar-item'));
             }
-        } else {
-            showSection('divAccount', document.querySelector('.set-sidebar-item'));
-        }
 
-        // Чтение сообщения из localStorage
-        const message = localStorage.getItem('closeAdvMessage');
-        if (message) {
-            alert(message); // Или используйте другой способ отображения сообщения
-            localStorage.removeItem('closeAdvMessage'); // Удаляем сообщение из localStorage после отображения
-        }
+            // Чтение сообщения из localStorage
+            const message = localStorage.getItem('closeAdvMessage');
+            if (message) {
+                alert(message); // Или используйте другой способ отображения сообщения
+                localStorage.removeItem('closeAdvMessage'); // Удаляем сообщение из localStorage после отображения
+            }
     });
-    </script>    <%-- Загрузка вкладок в Settings --%>
+    </script>    <%-- Перемещение блока безопасности и загрузка вкладок в Settings --%>
 
 
     <script type="text/javascript">

@@ -455,8 +455,8 @@
                     var result = response.d;
                     if (result == "") {
                         document.getElementById('<%= btnEnterHide.ClientID %>').click();
-                    } else if (result == "Данный пользователь не найден") {
-                        lblLoginAuth.innerText = "Данный пользователь не найден";
+                    } else if (result == "Данный пользователь не зарегистрирован") {
+                        lblLoginAuth.innerText = "Данный пользователь не зарегистрирован";
                     } else {
                         lblPasswordAuth.innerText = "Пароль не верный";
                     }
@@ -467,10 +467,10 @@
                 }
             });
         };
-    </script>
+    </script>    <%-- Проверка данных для входа и вход --%>
 
 
-        <script>
+    <script>
             document.addEventListener('DOMContentLoaded', function () {
                 function doNotScrollBody() {
                     var body = document.getElementById('body');

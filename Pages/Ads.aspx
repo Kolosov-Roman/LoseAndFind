@@ -160,7 +160,7 @@
 
 
         <div runat="server" class="ads-card-container">
-            <div runat="server" class="main-container" id="hiddenEmpty">
+            <div runat="server" class="ads-main-container" id="hiddenEmpty">
                 <asp:Label ID="lblAttentionMain" CssClass="ads-text-attention-main" runat="server">Объявления не найдены(</asp:Label>
                 <asp:Label ID="lblAttention" CssClass="ads-text-attention" runat="server">Попробуйте изменить фильтры или запрос.</asp:Label>
             </div>
