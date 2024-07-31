@@ -314,6 +314,55 @@
 
 
     <script>
+        function handleEnterKeyOldPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('newPasswordSett').focus();
+            }
+        }
+        function handleEnterKeyNewPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('newConfirmPasswordSett').focus();
+            }
+        }
+        function handleEnterKeyConfirmPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('btnChangePassword').click();
+            }
+        }
+
+        function handleEnterKeyChangeName(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('btnSaveName').click();
+            }
+        }
+        function handleEnterKeyChangeMail(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('btnSaveMail').click();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const tbNameSidebar = document.getElementById('tbNameSidebar');
+            const tbMailSidebar = document.getElementById('tbMailSidebar');
+            const oldPasswordSett = document.getElementById('oldPasswordSett');
+            const newPasswordSett = document.getElementById('newPasswordSett');
+            const newConfirmPasswordSett = document.getElementById('newConfirmPasswordSett');
+
+            tbNameSidebar.addEventListener('keydown', handleEnterKeyChangeName);
+            tbMailSidebar.addEventListener('keydown', handleEnterKeyChangeMail);
+            oldPasswordSett.addEventListener('keydown', handleEnterKeyOldPassword);
+            newPasswordSett.addEventListener('keydown', handleEnterKeyNewPassword);
+            newConfirmPasswordSett.addEventListener('keydown', handleEnterKeyConfirmPassword);
+        });
+    </script>    <%-- События клика по enter --%>
+
+
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             $('#btnCancelName, #btnCancelMail, #btnSaveName, #btnSaveMail, #tbNameSidebar, #tbMailSidebar').hide();
 
@@ -435,6 +484,10 @@
                 success: function (response) {
                     var currentUserName = response.d;
 
+                    setTimeout(function () {
+                        tbNameSidebar.focus();
+                    });
+
                     tbNameSidebar.style.borderColor = "black";
 
                     lblMailSidebar.style.display = 'inline';
@@ -466,6 +519,10 @@
                 dataType: "json",
                 success: function (response) {
                     var currentUserMail = response.d;
+
+                    setTimeout(function () {
+                        tbMailSidebar.focus();
+                    });
 
                     lblNameSidebar.style.display = 'inline';
                     btnChangeName.style.display = 'inline';

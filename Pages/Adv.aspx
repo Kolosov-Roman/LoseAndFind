@@ -6,6 +6,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>Lose and Find - сервис для нахождения потерянных животных</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
@@ -228,8 +229,20 @@
                 var isUserAuthenticated = <%= currentUser == null ? "false" : "true" %>;
 
                 if (!isUserAuthenticated) {
-                '<%= LoseAndFind.Pages.Helper.valueOfPage = "~/Pages/Adv?advertisementId=" + LoseAndFind.Pages.Helper.advertisementId %>';
-                    window.location.href = '<%= ResolveUrl("~/Pages/Authorization") %>';
+                    $.ajax({
+                        type: "POST",
+                        url: "Adv.aspx/btnChangeValueOfPage",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            window.location.href = '<%= ResolveUrl("~/Pages/Authorization") %>';
+                        },
+                        error: function (xhr, status, error) {
+                            console.error(xhr.responseText);
+                            alert("Произошла ошибка при получении имени пользователя.");
+                        }
+                    });
+
                     return false;
                 }
                 else {
