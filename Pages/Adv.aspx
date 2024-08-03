@@ -81,12 +81,12 @@
         <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
         <div id="advContainerLeft" class="adv-container-left">
             <div id="divBackAndDelete" runat="server" class="adv-container-right-showing">
-                <asp:Button ID="btnBackAdv" CssClass="adv-btnBackAd" Text="Опубликовать заново" runat="server" OnClick="BackAdv" />
-                <asp:Button ID="btnDeleteAdv" CssClass="adv-btnDeleteAd" Text="Удалить навсегда" runat="server" OnClick="DeleteAdv" />
+                <asp:Button CssClass="adv-btnBackAd" Text="Опубликовать заново" runat="server" OnClick="BackAdv" />
+                <asp:Button CssClass="adv-btnDeleteAd" Text="Удалить навсегда" runat="server" OnClick="DeleteAdv" />
             </div>
             <div id="divCloseAndEditAd" runat="server" class="adv-container-right-showing">
-                <asp:Button ID="btnEditAdv" CssClass="adv-btnEditAd" Text="Редактировать объявление" runat="server" OnClick="EditAdv" />
-                <asp:Button ID="btnCloseAdv" CssClass="adv-btnCloseAd" Text="Снять с публикации" runat="server" OnClick="CloseAdv" />
+                <asp:Button CssClass="adv-btnEditAd" Text="Редактировать объявление" runat="server" OnClick="EditAdv" />
+                <asp:Button CssClass="adv-btnCloseAd" Text="Снять с публикации" runat="server" OnClick="CloseAdv" />
             </div>
             <div class="adv-label-lf">
                 <asp:Label ID="lblLoseOrFind" class="adv-loseOrFind" runat="server"></asp:Label>
