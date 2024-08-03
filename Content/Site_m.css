@@ -1292,7 +1292,6 @@ header {
     cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
-    word-break: break-all;
     overflow-wrap: break-word;
 }
 
@@ -1538,7 +1537,8 @@ a.ads-text-title, a.ads-card-charact {
 }
 
 .adv-label-lf {
-    height: 30px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .adv-title-charact {

@@ -81,7 +81,7 @@
                 <asp:Button ID="btnEditAdv" CssClass="adv-btnEditAd" Text="Редактировать объявление" runat="server" OnClick="EditAdv" />
                 <asp:Button ID="btnCloseAdv" CssClass="adv-btnCloseAd" Text="Снять с публикации" runat="server" OnClick="CloseAdv" />
             </div>
-            <div class="adv-label-lf" style="display: flex; justify-content: space-between">
+            <div class="adv-label-lf">
                 <asp:Label ID="lblLoseOrFind" class="adv-loseOrFind" runat="server"></asp:Label>
                 <asp:Label ID="lblCloseAdv" class="adv-loseOrFind red-title" runat="server">Объявление снято с публикации</asp:Label>
             </div>
