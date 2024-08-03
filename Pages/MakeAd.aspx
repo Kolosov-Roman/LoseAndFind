@@ -4,24 +4,24 @@
 
 <html lang="ru">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
-    <title>Lose and Find - сервис для нахождения потерянных животных</title>
-    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    
-        <% if ((string)Page.Items["DeviceType"] == "mobile")
-   { %>
-    <link rel="stylesheet" href="/Content/Site_m.css" />
-<% } else
-   { %>
-    <link rel="stylesheet" href="/Content/Site.css" />
-<% }%>
-
-    
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=8eaafcc7-f3c1-4c9c-8d8d-fd268b267bbc&suggest_apikey=2b862a1c-38be-4bb4-99c2-db5eb6fddd37" type="text/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
+    <title>Lose and Find - сервис для нахождения потерянных животных</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+
+    <% if ((string)Page.Items["DeviceType"] == "mobile")
+        { %>
+    <link rel="stylesheet" href="/Content/Site_m.css" />
+    <% }
+        else
+        { %>
+    <link rel="stylesheet" href="/Content/Site.css" />
+    <% }%>
+
 
     <script type="text/javascript">
         var myPlacemark = null;
@@ -154,6 +154,7 @@
             makeAjaxRequest();
         }
     </script>    <%-- Скрипт для Яндекс.Карт --%>
+
 
 </head>
 <body>
@@ -372,9 +373,6 @@
     </script>    <%-- Вытаскивание элементов из комбобоксов --%>
 
 
-
-
-
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             var ddlType = document.getElementById('ddlType');
@@ -392,7 +390,7 @@
                     }
             });
         });
-    </script>
+    </script>    <%-- Скрытие и показ красных лейблов --%>
 
 
     <script type="text/javascript">
@@ -733,6 +731,55 @@
             }
         });
         </script>    <%-- Загрузка изображения животного и отображение --%>
+
+
+    <script>
+        function handleEnterKeyTitle(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('ddlLoseOrFind').focus();
+            }
+        }
+        function handleEnterKeycbIsChipping(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('cbIsChipping').click();
+            }
+        }
+        function handleEnterKeycbIsCollar(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('cbIsCollar').click();
+            }
+        }
+        function handleEnterKeycbIsCastrated(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('cbIsCastrated').click();
+            }
+        }
+        function handleEnterKeyAddress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('tbAddress').blur();
+                document.getElementById('btnMakeAd').click();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const tbTitle = document.getElementById('tbTitle');
+            const cbIsChipping = document.getElementById('cbIsChipping');
+            const cbIsCollar = document.getElementById('cbIsCollar');
+            const cbIsCastrated = document.getElementById('cbIsCastrated');
+            const tbAddress = document.getElementById('tbAddress');
+
+            tbTitle.addEventListener('keydown', handleEnterKeyTitle);
+            cbIsChipping.addEventListener('keydown', handleEnterKeycbIsChipping);
+            cbIsCollar.addEventListener('keydown', handleEnterKeycbIsCollar);
+            cbIsCastrated.addEventListener('keydown', handleEnterKeycbIsCastrated);
+            tbAddress.addEventListener('keydown', handleEnterKeyAddress);
+        });
+    </script>    <%-- События клика по enter --%>
 
 
 

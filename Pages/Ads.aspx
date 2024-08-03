@@ -4,25 +4,24 @@
 
 <html lang="ru">
 <head runat="server">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
     <title>Lose and Find - сервис для нахождения потерянных животных</title>
     <link rel="stylesheet" href="/Content/bootstrap.min.css" />
-    
+
     <% if ((string)Page.Items["DeviceType"] == "mobile")
-       { %>
-        <link rel="stylesheet" href="/Content/Site_m.css" />
-    <% } else
-       { %>
-        <link rel="stylesheet" href="/Content/Site.css" />
+        { %>
+    <link rel="stylesheet" href="/Content/Site_m.css" />
+    <% }
+        else
+        { %>
+    <link rel="stylesheet" href="/Content/Site.css" />
     <% }%>
 
-    <link rel="stylesheet" href="/LoseAndFind.styles.css" asp-append-version="true" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 </head>
-
 <body>
     <header id="header-hide" class="fixed-top">
         <nav class="navbar navbar-expand-sm">
@@ -176,7 +175,7 @@
             // Событие, которое будет вызвано при нажатии кнопки "Назад"
             alert("Вы нажали кнопку 'Назад'!");
         });
-    </script>    <%-- Тестирование кнопки назад --%>
+    </script>    <%-- Тестирование кнопки назад (плохо) --%>
 
 
     <script>
@@ -364,8 +363,6 @@
             var selectedCastrated = cbIsCastrated.checked;
             var selectedSearch = tbSearch.value;
 
-            console.log("Начало функции SAF");
-
             $.ajax({
                 type: "POST",
                 url: "Ads.aspx/ShowAllFilters",
@@ -385,7 +382,6 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    console.log("Начало функции SAF");
                     $('#hiddenEmpty').hide();
                     var adsContainer = $('#ads-card-container');
                     adsContainer.html(response.d);

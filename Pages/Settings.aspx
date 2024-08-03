@@ -4,20 +4,21 @@
 
 <html lang="ru">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
     <title>Личный кабинет - Lose and Find</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
 
-        <% if ((string)Page.Items["DeviceType"] == "mobile")
-   { %>
+    <% if ((string)Page.Items["DeviceType"] == "mobile")
+        { %>
     <link rel="stylesheet" href="/Content/Site_m.css" />
-<% } else
-   { %>
+    <% }
+        else
+        { %>
     <link rel="stylesheet" href="/Content/Site.css" />
-<% }%>
+    <% }%>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header id="header-hide" class="fixed-top">
@@ -329,10 +330,10 @@
         function handleEnterKeyConfirmPassword(event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
+                document.getElementById('newConfirmPasswordSett').blur();
                 document.getElementById('btnChangePassword').click();
             }
         }
-
         function handleEnterKeyChangeName(event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -345,6 +346,13 @@
                 document.getElementById('btnSaveMail').click();
             }
         }
+        function handleEnterKeyCode(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('tbCode').blur();
+                document.getElementById('btnCheckMail').click();
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', (event) => {
             const tbNameSidebar = document.getElementById('tbNameSidebar');
@@ -352,12 +360,14 @@
             const oldPasswordSett = document.getElementById('oldPasswordSett');
             const newPasswordSett = document.getElementById('newPasswordSett');
             const newConfirmPasswordSett = document.getElementById('newConfirmPasswordSett');
+            const tbCode = document.getElementById('tbCode');
 
             tbNameSidebar.addEventListener('keydown', handleEnterKeyChangeName);
             tbMailSidebar.addEventListener('keydown', handleEnterKeyChangeMail);
             oldPasswordSett.addEventListener('keydown', handleEnterKeyOldPassword);
             newPasswordSett.addEventListener('keydown', handleEnterKeyNewPassword);
             newConfirmPasswordSett.addEventListener('keydown', handleEnterKeyConfirmPassword);
+            tbCode.addEventListener('keydown', handleEnterKeyCode);
         });
     </script>    <%-- События клика по enter --%>
 
@@ -1078,8 +1088,6 @@
             });
         }
     </script>    <%-- Заполнение сердечка --%>
-
-
 
 
 

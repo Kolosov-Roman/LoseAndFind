@@ -5,18 +5,19 @@
 <html lang="ru">
 <head runat="server">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
     <title>Вход - Lose and Find</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    
-        <% if ((string)Page.Items["DeviceType"] == "mobile")
-   { %>
+
+    <% if ((string)Page.Items["DeviceType"] == "mobile")
+        { %>
     <link rel="stylesheet" href="/Content/Site_m.css" />
-<% } else
-   { %>
+    <% }
+        else
+        { %>
     <link rel="stylesheet" href="/Content/Site.css" />
-<% }%>
+    <% }%>
 
 </head>
 <body id="body">
@@ -68,19 +69,7 @@
 
 
 
-    <script>
-        function adjustBodyHeight() {
-            // Высота body должна быть равна высоте содержимого или высоте окна, в зависимости от того, что больше
-            const contentHeight = document.getElementById('authForm').scrollHeight;
-            const windowHeight = window.innerHeight;
-            document.body.style.height = Math.max(contentHeight, windowHeight - 50) + 'px';
-        }
 
-        // Настраиваем высоту при загрузке страницы
-        document.addEventListener('DOMContentLoaded', adjustBodyHeight);
-        // Настраиваем высоту при изменении размера окна
-        window.addEventListener('resize', adjustBodyHeight);
-    </script>
 
 
 
@@ -335,8 +324,8 @@
                     if (response.d) {
 
                         divRecover.classList.remove('visible');
-                        divRecover.classList.add('hidden-m');
-                        divEnter.classList.remove('hidden-m');
+                        divRecover.classList.add('hidden-m', 'hidden');
+                        divEnter.classList.remove('hidden-m', 'hidden');
                         divEnter.classList.add('visible');
                         h1.innerText = "Изменение пароля";
 
@@ -496,6 +485,81 @@
                 observer.observe(document.getElementById('divCheckRegSecond'), config);
             });
         </script>    <%-- Запрет скролла при открытом модальном окне --%>
+
+
+    <script>
+        function adjustBodyHeight() {
+            // Высота body должна быть равна высоте содержимого или высоте окна, в зависимости от того, что больше
+            const contentHeight = document.getElementById('authForm').scrollHeight;
+            const windowHeight = window.innerHeight;
+            document.body.style.height = Math.max(contentHeight, windowHeight - 50) + 'px';
+        }
+
+        // Настраиваем высоту при загрузке страницы
+        document.addEventListener('DOMContentLoaded', adjustBodyHeight);
+        // Настраиваем высоту при изменении размера окна
+        window.addEventListener('resize', adjustBodyHeight);
+    </script>    <%-- Регулировка высоты --%>
+
+
+    <script>
+        function handleEnterKeyLogin(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('passwordAuth').focus();
+            }
+        }
+        function handleEnterKeyPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('passwordAuth').blur();
+                document.getElementById('btnEnter').click();
+            }
+        }
+        function handleEnterRecovery(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('tbMail').blur();
+                document.getElementById('getCode').click();
+            }
+        }
+        function handleEnterCode(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('tbCode').blur();
+                document.getElementById('btnCheckMailGood').click();
+            }
+        }
+        function handleEnterKeyNewPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('passwordConfirmReg').focus();
+            }
+        }
+        function handleEnterKeyConfirmPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('passwordConfirmReg').blur();
+                document.getElementById('btnSavePassword').click();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const loginAuth = document.getElementById('loginAuth');
+            const passwordAuth = document.getElementById('passwordAuth');
+            const tbMail = document.getElementById('tbMail');
+            const tbCode = document.getElementById('tbCode');
+            const passwordReg = document.getElementById('passwordReg');
+            const passwordConfirmReg = document.getElementById('passwordConfirmReg');
+
+            loginAuth.addEventListener('keydown', handleEnterKeyLogin);
+            passwordAuth.addEventListener('keydown', handleEnterKeyPassword);
+            tbMail.addEventListener('keydown', handleEnterRecovery);
+            tbCode.addEventListener('keydown', handleEnterCode);
+            passwordReg.addEventListener('keydown', handleEnterKeyNewPassword);
+            passwordConfirmReg.addEventListener('keydown', handleEnterKeyConfirmPassword);
+        });
+    </script>    <%-- События клика по enter --%>
 
 
 

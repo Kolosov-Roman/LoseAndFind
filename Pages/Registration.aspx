@@ -4,22 +4,23 @@
 
 <html lang="ru">
 <head runat="server">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1" />
     <title>Lose and Find - сервис для нахождения потерянных животных</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
-    
-        <% if ((string)Page.Items["DeviceType"] == "mobile")
-   { %>
-    <link rel="stylesheet" href="/Content/Site_m.css" />
-<% } else
-   { %>
-    <link rel="stylesheet" href="/Content/Site.css" />
-<% }%>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <% if ((string)Page.Items["DeviceType"] == "mobile")
+        { %>
+    <link rel="stylesheet" href="/Content/Site_m.css" />
+    <% }
+        else
+        { %>
+    <link rel="stylesheet" href="/Content/Site.css" />
+    <% }%>
+
 </head>
 <body style="height: calc(100vh - 50px);">
     <header id="header-hide" class="fixed-top">
@@ -68,19 +69,8 @@
 
 
 
-        <script>
-            function adjustBodyHeight() {
-                // Высота body должна быть равна высоте содержимого или высоте окна, в зависимости от того, что больше
-                const contentHeight = document.getElementById('regForm').scrollHeight;
-                const windowHeight = window.innerHeight;
-                document.body.style.height = Math.max(contentHeight, windowHeight - 50) + 'px';
-            }
 
-            // Настраиваем высоту при загрузке страницы
-            document.addEventListener('DOMContentLoaded', adjustBodyHeight);
-            // Настраиваем высоту при изменении размера окна
-            window.addEventListener('resize', adjustBodyHeight);
-    </script>
+
 
 
 
@@ -308,12 +298,12 @@
     </script>    <%-- Проверки на валидность второго окна регистрации --%>
 
 
-        <script>
-            function validateEmail(email) {
-                var re = /^[a-zA-Z0-9._%+-]+\u0040[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
-                return re.test(email);
-            }
-        </script>
+    <script>
+        function validateEmail(email) {
+            var re = /^[a-zA-Z0-9._%+-]+\u0040[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+            return re.test(email);
+        }
+    </script>    <%-- Проверка почты на корректность ввода --%>
 
 
     <script>
@@ -412,7 +402,81 @@
                 dropdownCssClass: 'my-dropdown'
             });
         });
-</script>    <%-- Стили для комбобокса --%>
+    </script>    <%-- Стили для комбобокса --%>
+
+
+    <script>
+        function adjustBodyHeight() {
+            // Высота body должна быть равна высоте содержимого или высоте окна, в зависимости от того, что больше
+            const contentHeight = document.getElementById('regForm').scrollHeight;
+            const windowHeight = window.innerHeight;
+            document.body.style.height = Math.max(contentHeight, windowHeight - 50) + 'px';
+        }
+
+        // Настраиваем высоту при загрузке страницы
+        document.addEventListener('DOMContentLoaded', adjustBodyHeight);
+        // Настраиваем высоту при изменении размера окна
+        window.addEventListener('resize', adjustBodyHeight);
+    </script>    <%-- Регулировка высоты --%>
+
+
+    <script>
+        function handleEnterKeyName(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('tbNumberPhone').focus();
+            }
+        }
+        function handleEnterKeyPhone(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('tbNumberPhone').blur();
+                document.getElementById('btnReg').click();
+            }
+        }
+        function handleEnterKeyEmail(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('passwordReg').focus();
+            }
+        }
+        function handleEnterKeyPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('passwordConfirmReg').focus();
+            }
+        }
+        function handleEnterKeyConfirmPassword(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('passwordConfirmReg').blur();
+                document.getElementById('btnR').click();
+            }
+        }
+        function handleEnterKeyReg(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('tbCode').blur();
+                document.getElementById('btnCheckMailGood').click();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const tbNameReg = document.getElementById('tbNameReg');
+            const tbNumberPhone = document.getElementById('tbNumberPhone');
+            const loginReg = document.getElementById('loginReg');
+            const passwordReg = document.getElementById('passwordReg');
+            const passwordConfirmReg = document.getElementById('passwordConfirmReg');
+            const tbCode = document.getElementById('tbCode');
+
+            tbNameReg.addEventListener('keydown', handleEnterKeyName);
+            tbNumberPhone.addEventListener('keydown', handleEnterKeyPhone);
+            loginReg.addEventListener('keydown', handleEnterKeyEmail);
+            passwordReg.addEventListener('keydown', handleEnterKeyPassword);
+            passwordConfirmReg.addEventListener('keydown', handleEnterKeyConfirmPassword);
+            tbCode.addEventListener('keydown', handleEnterKeyReg);
+        });
+    </script>    <%-- События клика по enter --%>
 
 
 
