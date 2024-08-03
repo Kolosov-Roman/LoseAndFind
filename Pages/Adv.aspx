@@ -80,8 +80,8 @@
     <form id="adv" class="adv" runat="server" autocomplete="off">
         <asp:Button style="display: none" ID="hiddenButton" runat="server" OnClick="LinkButtonAd_Click" />
         <div id="advContainerLeft" class="adv-container-left">
+            <asp:Button ID="btnBackAdv" CssClass="adv-btnEditAd" Text="Опубликовать заново" runat="server" OnClick="BackAdv" />
             <div id="divCloseAndEditAd" runat="server" class="adv-container-right-showing">
-                <asp:Button ID="btnBackAdv" CssClass="adv-btnEditAd" Text="Опубликовать заново" runat="server" OnClick="BackAdv" />
                 <asp:Button ID="btnEditAdv" CssClass="adv-btnEditAd" Text="Редактировать объявление" runat="server" OnClick="EditAdv" />
                 <asp:Button ID="btnCloseAdv" CssClass="adv-btnCloseAd" Text="Снять с публикации" runat="server" OnClick="CloseAdv" />
             </div>
