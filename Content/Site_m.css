@@ -2355,7 +2355,7 @@ a.ads-text-title, a.ads-card-charact {
     color: gray;
 }
 
-.adv-btnDeleteAd {
+.adv-btnDeleteAd:hover {
     background-color: #ac3737;
 }
 
