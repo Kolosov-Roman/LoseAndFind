@@ -1562,6 +1562,8 @@ a.ads-text-title, a.ads-card-charact {
     transition: background-color 0.25s;
 }
 
+.adv-btnDeleteAd,
+.adv-btnBackAd,
 .adv-btnCloseAd,
 .adv-btnEditAd,
 .myads-btn-make-ad {
@@ -1577,6 +1579,15 @@ a.ads-text-title, a.ads-card-charact {
 
 .adv-btnEditAd {
     background-color: #28a745;
+}
+
+.adv-btnBackAd {
+    width: 100%;
+}
+
+.adv-btnDeleteAd {
+    width: 100%;
+    background-color: #d24242;
 }
 
 .adv-element-center {
@@ -2342,6 +2353,10 @@ a.ads-text-title, a.ads-card-charact {
 
 .set-sidebar-item:hover {
     color: gray;
+}
+
+.adv-btnDeleteAd {
+    background-color: #ac3737;
 }
 
 .ads-search-button:hover,
