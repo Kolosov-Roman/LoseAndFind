@@ -1538,7 +1538,8 @@ a.ads-text-title, a.ads-card-charact {
 
 .adv-label-lf {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .adv-title-charact {
