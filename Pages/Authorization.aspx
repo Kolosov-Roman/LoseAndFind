@@ -22,45 +22,48 @@
 </head>
 <body id="body">
     <header id="header-hide" class="fixed-top">
-        <nav class="navbar navbar-expand-sm">
-            <div class="container">
-                <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
-                    <img style="margin-top: 2px; height: 47px; width: 26px; margin-right: 15px;" src="/Resources/lapaThin.svg" />
-                    <img style="margin-bottom: 7px;" src="/Resources/logoDefault.svg" />
-                </a>
-                <div class="navbar-collapse justify-content-center">
-                    <ul class="navbar-nav">
-                        <li class="mx-2">
-                            <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="Settings.aspx?section=divMyAds" style="margin-right: 8px;" class="nav-link text-white header">Мои объявления</a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="Settings.aspx?section=divAdsInLikes">
-                                <img class="header-img header" src="/Resources/heartFull-active.svg" /></a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="Settings.aspx?section=divBells">
-                                <img class="header-img header" src="/Resources/bell.svg" /></a>
-                        </li>
-                        <li class="mx-2">
-                            <a href="Settings.aspx?section=divMessages">
-                                <img class="header-img header" src="/Resources/message-active.svg" /></a>
-                        </li>
-                    </ul>
-                </div>
-                <ul runat="server" id="ulAuthorization" class="navbar-nav">
+    <nav class="navbar navbar-expand-sm">
+        <div class="container">
+            <a class="text-white header" style="height: 40px; text-decoration: none;" href="Ads.aspx">
+                <img style="margin-top: 2px; height: 47px; width: 26px; margin-right: 15px;" src="/Resources/lapaThin.svg" />
+                <img style="margin-bottom: 7px;" src="/Resources/logoDefault.svg" />
+            </a>
+            <div class="navbar-collapse justify-content-center">
+                <ul class="navbar-nav">
                     <li class="mx-2">
-                        <a href="Authorization.aspx" class="nav-link text-white header">Войти</a>
+                        <a class="nav-link text-white header" href="Ads.aspx">Доска объявлений</a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="Settings.aspx?section=divMyAds" style="margin-right: 8px;" class="nav-link text-white header">Мои объявления</a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="Settings.aspx?section=divAdsInLikes">
+                            <img class="header-img header" src="/Resources/heartFull-active.svg" /></a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="Settings.aspx?section=divBells">
+                            <img class="header-img header" src="/Resources/bell.svg" /></a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="Settings.aspx?section=divMessages">
+                            <img class="header-img header" src="/Resources/message-active.svg" /></a>
                     </li>
                 </ul>
-                <a id="imageAClient" runat="server" href="Settings.aspx">
-                    <asp:Image ID="imgClient" runat="server" CssClass="header-image header-image-link"></asp:Image>
-                </a>
             </div>
-        </nav>
-    </header>
+            <ul runat="server" id="ulAuthorization" class="navbar-nav">
+                <li class="mx-2">
+                    <a href="Authorization.aspx" class="nav-link text-white header">Войти</a>
+                </li>
+            </ul>
+            <a id="imageAClient" runat="server" href="Settings.aspx">
+                <asp:Image ID="imgClient" runat="server" CssClass="header-image header-image-link"></asp:Image>
+            </a>
+        </div>
+    </nav>
+</header>
 
 
     <%--                                                         Верхняя часть                                                                --%>

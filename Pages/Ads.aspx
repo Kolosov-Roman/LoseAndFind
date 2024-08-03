@@ -33,6 +33,9 @@
                 <div class="navbar-collapse justify-content-center">
                     <ul class="navbar-nav">
                         <li class="mx-2">
+                            <a class="nav-link text-white header" href="Ads.aspx">Доска объявлений</a>
+                        </li>
+                        <li class="mx-2">
                             <a href="MakeAd.aspx" class="nav-link text-white header header-text-shadow" onclick="document.getElementById('hiddenButton').click(); return false;">Разместить объявление</a>
                         </li>
                         <li class="mx-2">

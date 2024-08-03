@@ -1517,6 +1517,7 @@ a.ads-text-title, a.ads-card-charact {
 
 .adv-loseOrFind {
     display: flex;
+    width: fit-content;
 }
 
 .adv-title {
@@ -1538,8 +1539,8 @@ a.ads-text-title, a.ads-card-charact {
 
 .adv-label-lf {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: column-reverse;
+    gap: 20px;
 }
 
 .adv-title-charact {
