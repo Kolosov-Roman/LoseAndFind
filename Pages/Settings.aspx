@@ -110,6 +110,9 @@
                     <div data-section-id="divHelp" class="set-sidebar-item">
                         <asp:Label runat="server">Обратная связь</asp:Label>
                     </div>
+                    <div data-section-id="divBlog" class="set-sidebar-item">
+                        <asp:Label runat="server">Блог</asp:Label>
+                    </div>
                 </div>
             </div>
 
@@ -157,6 +160,9 @@
                     <div id="setSeparatorCenter" class="set-separator-center"></div>
                     <div data-section-id="divHelp" class="set-sidebar-item hidden">
                         <asp:Label runat="server">Обратная связь</asp:Label>
+                    </div>
+                    <div data-section-id="divBlog" class="set-sidebar-item hidden">
+                        <asp:Label runat="server">Блог</asp:Label>
                     </div>
                     <div class="set-separator-center hidden"></div>
                     <div class="set-dno">
@@ -317,6 +323,9 @@
                         </div>
                         <asp:Label CssClass="set-message-container-center" ID="lblResultEnter" runat="server">Спасибо за обратную связь, вы прекрасны!</asp:Label>
                     </div>
+                </div>
+                <div class="set-sidebar" id="divBlog">    <%-- Блог --%>
+                    <h3 class="set-title-margin">Блог</h3>
                 </div>
 
 
