@@ -99,7 +99,11 @@
     }
 
     .set-main-text-attention-low {
-        font-size: 16px;
+        font-size: 16px !important;
+    }
+
+    .set-main-text-attention-hight {
+        font-size: 22px !important;
     }
 }
 
@@ -198,10 +202,6 @@
     .makead-div-container {
         padding: 30px;
         border-radius: 10px;
-    }
-
-    .set-main-text-attention-low {
-        font-size: 16px;
     }
 }
 
@@ -2122,6 +2122,13 @@ a.ads-text-title, a.ads-card-charact {
     font-family: Onest-Medium;
     font-size: 18px;
     margin-bottom: 20px;
+}
+
+.set-main-text-attention-hight {
+    font-family: Onest-Bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .set-labels-main {

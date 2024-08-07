@@ -828,6 +828,13 @@ header {
     margin-bottom: 20px;
 }
 
+.set-main-text-attention-hight {
+    font-family: Onest-Bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .set-labels-main {
     display: flex;
     flex-direction: column;

@@ -306,7 +306,7 @@
                     <h3 class="set-title-margin">Обратная связь</h3>
                     <div runat="server" class="set-divHelp">
                         <div class="set-labels-main">
-                            <asp:Label CssClass="main-text-attention-hight" runat="server">Вопросы, претензии, пожелания</asp:Label>
+                            <asp:Label CssClass="set-main-text-attention-hight" runat="server">Вопросы, претензии, пожелания</asp:Label>
                             <asp:Label CssClass="set-main-text-attention-low" runat="server">Здесь Вы можете рассказать о том, что можно добавить или улучшить, а также задать интересующие вас вопросы. Мы пришлём письмо с ответом на вашу почту в ближайшее время.</asp:Label>
                         </div>
                         <div id="setDivElementsHelp" class="set-divElementsHelp">
