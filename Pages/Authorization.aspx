@@ -284,7 +284,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "Authorization.aspx/CheckRegSecond",
+                url: "https://losenfind.ru/Pages/Authorization.aspx/CheckRegSecond",
                 data: JSON.stringify({ tbMail: tbMail.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -315,7 +315,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "Authorization.aspx/btnCheckMail_Click",
+                url: "https://losenfind.ru/Pages/Authorization.aspx/btnCheckMail_Click",
                 data: JSON.stringify({ tbMail: tbMail.value, tbCode: tbCode.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -385,7 +385,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "Authorization.aspx/CheckNewPassword",
+                url: "https://losenfind.ru/Pages/Authorization.aspx/CheckNewPassword",
                 data: JSON.stringify({ tbMail: tbMail.value, passwordReg: passwordReg.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -439,7 +439,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "Authorization.aspx/CheckAuth",
+                url: "https://losenfind.ru/Pages/Authorization.aspx/CheckAuth",
                 data: JSON.stringify({ loginAuth: loginAuth.value, passwordAuth: passwordAuth.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

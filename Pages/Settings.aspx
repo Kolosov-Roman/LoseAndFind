@@ -523,7 +523,7 @@
         function btnChangeName_Click() {
             $.ajax({
                 type: "POST",
-                url: "Settings.aspx/btnChangeName_Click",
+                url: "https://losenfind.ru/Pages/Settings.aspx/btnChangeName_Click",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -559,7 +559,7 @@
         function btnChangeMail_Click() {
             $.ajax({
                 type: "POST",
-                url: "Settings.aspx/btnChangeMail_Click",
+                url: "https://losenfind.ru/Pages/Settings.aspx/btnChangeMail_Click",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -609,7 +609,7 @@
         function btnSaveName_Click() {
             $.ajax({
                 type: "POST",
-                url: "Settings.aspx/btnSaveName_Click",
+                url: "https://losenfind.ru/Pages/Settings.aspx/btnSaveName_Click",
                 data: JSON.stringify({ tbNameSidebar: tbNameSidebar.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -641,7 +641,7 @@
         function btnSaveMail_Click() {
             $.ajax({
                 type: "POST",
-                url: "Settings.aspx/btnSaveMail_Click",
+                url: "https://losenfind.ru/Pages/Settings.aspx/btnSaveMail_Click",
                 data: JSON.stringify({ tbMailSidebar: tbMailSidebar.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -673,7 +673,7 @@
         function btnCheckMail_Click() {
             $.ajax({
                 type: "POST",
-                url: "Settings.aspx/btnCheckMail_Click",
+                url: "https://losenfind.ru/Pages/Settings.aspx/btnCheckMail_Click",
                 data: JSON.stringify({ tbMailSidebar: tbMailSidebar.value, tbCode: tbCode.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -1068,7 +1068,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Settings.aspx/ChangePassword",
+                    url: "https://losenfind.ru/Pages/Settings.aspx/ChangePassword",
                     data: JSON.stringify({ oldPassword: oldPassword.value, newPassword: newPassword.value }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -1099,7 +1099,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "Settings.aspx/btnAddInLikes_Click",
+                url: "https://losenfind.ru/Pages/Settings.aspx/btnAddInLikes_Click",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ adId: adId }),
                 dataType: "json",
@@ -1158,7 +1158,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "Settings.aspx/btnHelp_Click",
+                url: "https://losenfind.ru/Pages/Settings.aspx/btnHelp_Click",
                 data: JSON.stringify({ tbHelp: tbHelp.value, txtDescription: txtDescription.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
