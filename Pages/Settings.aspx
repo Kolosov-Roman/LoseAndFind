@@ -155,7 +155,7 @@
                         </div>
                     </div>
                     <div id="setSeparatorCenter" class="set-separator-center"></div>
-                    <div data-section-id="divHelp" class="set-sidebar-item">
+                    <div id="hiddenDivHelp" data-section-id="divHelp" class="set-sidebar-item">
                         <asp:Label runat="server">Поддержка</asp:Label>
                     </div>
                     <div id="setSeparatorCenterMobile" class="set-separator-center"></div>
@@ -932,7 +932,6 @@
                     }
                     else if (isMobile()) {
                         parent3.insertBefore(child, parent3.firstChild);
-                        separator.style.backgroundColor = '#ccc';
                     }
                 }
 

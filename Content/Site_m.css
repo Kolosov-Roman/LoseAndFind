@@ -731,7 +731,7 @@
     }
 }
 
-#header-hide, #footer-hide, #ads-text-discription-hide {
+#header-hide, #footer-hide, #ads-text-discription-hide, #setSeparatorCenterMobile, #hiddenDivHelp {
     display: none;
 }
 
