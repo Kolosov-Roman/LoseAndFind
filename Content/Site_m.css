@@ -97,6 +97,10 @@
         padding: 20px;
         border-radius: 0px;
     }
+
+    .set-main-text-attention-low {
+        font-size: 16px;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
@@ -194,6 +198,10 @@
     .makead-div-container {
         padding: 30px;
         border-radius: 10px;
+    }
+
+    .set-main-text-attention-low {
+        font-size: 16px;
     }
 }
 

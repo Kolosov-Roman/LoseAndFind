@@ -108,7 +108,7 @@
                     </div>
                     <div class="set-separator"></div>
                     <div data-section-id="divHelp" class="set-sidebar-item">
-                        <asp:Label runat="server">Поддержка</asp:Label>
+                        <asp:Label runat="server">Обратная связь</asp:Label>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                     </div>
                     <div id="setSeparatorCenter" class="set-separator-center"></div>
                     <div data-section-id="divHelp" class="set-sidebar-item hidden">
-                        <asp:Label runat="server">Поддержка</asp:Label>
+                        <asp:Label runat="server">Обратная связь</asp:Label>
                     </div>
                     <div class="set-separator-center hidden"></div>
                     <div class="set-dno">
@@ -302,8 +302,8 @@
                 <div class="set-sidebar" id="divBells">    <%-- Уведомления --%>
                     <h3 class="set-title-margin">Уведомления</h3>
                 </div>
-                <div class="set-sidebar" id="divHelp">    <%-- Поддержка --%>
-                    <h3 class="set-title-margin">Поддержка</h3>
+                <div class="set-sidebar" id="divHelp">    <%-- Обратная связь --%>
+                    <h3 class="set-title-margin">Обратная связь</h3>
                     <div runat="server" class="set-divHelp">
                         <div class="set-labels-main">
                             <asp:Label CssClass="main-text-attention-hight" runat="server">Вопросы, претензии, пожелания</asp:Label>
