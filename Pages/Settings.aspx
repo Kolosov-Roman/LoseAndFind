@@ -551,7 +551,7 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert("Произошла ошибка при получении имени пользователя.");
+                    alert("Произошла ошибка при получении вашего имени.");
                 }
             });
         }
@@ -585,7 +585,7 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert("Произошла ошибка при получении имени пользователя.");
+                    alert("Произошла ошибка при получении вашей почты.");
                 }
             });
         }
@@ -633,7 +633,7 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert("Произошла ошибка при получении имени пользователя.");
+                    alert("Произошла ошибка при записи вашего нового имени.");
                 }
             });
         }
@@ -665,7 +665,7 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText, error);
-                    alert("Произошла ошибка при получении имени пользователя.");
+                    alert("Произошла ошибка при отправке кода подтверждения на вашу почту.");
                 }
            });
         }
@@ -690,7 +690,7 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText, error);
-                    alert("Произошла ошибка при получении имени пользователя.");
+                    alert("Произошла ошибка при записи вашей новой почты.");
                 }
             });
         }
@@ -1116,7 +1116,7 @@
                 error: function (xhr, status, error) {
                     // Обработка ошибки
                     console.error(xhr.responseText);
-                    alert("Произошла ошибка при выполнении запроса.");
+                    alert("Произошла ошибка при добавлении объявления в избранное.");
                 }
             });
         }
@@ -1197,7 +1197,7 @@
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
-                    alert("Произошла ошибка при получении имени пользователя.");
+                    alert("Произошла ошибка при отправке сообщения.");
                 }
             });
         }

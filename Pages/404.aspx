@@ -39,7 +39,7 @@
     <div class="error-container">
         <h1>404</h1>
         <p>Такой страницы не существует.</p>
-        <p>Вернитесь на <a href="http://losenfind.ru/Pages/Ads">главную страницу</a>.</p>
+        <p>Вернитесь на <a href="https://losenfind.ru/Pages/Ads">главную страницу</a>.</p>
     </div>
 </body>
 </html>
