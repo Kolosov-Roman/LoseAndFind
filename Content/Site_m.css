@@ -988,6 +988,7 @@ header {
 
 .placeholder-red::placeholder {
     color: red;
+    font-family: Onest-Regular;
 }
 
 .my-dropdown {
@@ -2063,6 +2064,87 @@ a.ads-text-title, a.ads-card-charact {
     margin-bottom: 20px;
     margin-top: 20px;
 }
+
+.set-divHelp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.set-btnHelp {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #198de4;
+    color: #fff;
+    border-radius: 7px;
+    transition: background-color 0.25s;
+    margin-top: 10px;
+}
+
+.set-description-input {
+    width: 100%;
+    height: 150px;
+    border: 1px solid rgb(100, 100, 100);
+    padding: 10px;
+    border-radius: 7px;
+    resize: none;
+    outline: none;
+}
+
+.set-divElementsHelp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+    .set-divElementsHelp.show {
+        opacity: 0;
+    }
+
+.set-main-text-attention-low {
+    max-width: 600px;
+    text-align: center;
+    font-family: Onest-Medium;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.set-labels-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.set-help-email {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid rgb(90, 90, 90);
+    border-radius: 7px;
+    outline: none;
+    height: 41px;
+}
+
+.set-message-container-center {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: none;
+    align-self: center;
+    text-align: center;
+}
+
+    .set-message-container-center.show {
+        opacity: 1;
+    }
 
 
 

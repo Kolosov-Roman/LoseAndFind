@@ -106,6 +106,10 @@
                     <div data-section-id="divBells" class="set-sidebar-item">
                         <asp:Label runat="server">Уведомления</asp:Label>
                     </div>
+                    <div class="set-separator"></div>
+                    <div data-section-id="divHelp" class="set-sidebar-item">
+                        <asp:Label runat="server">Поддержка</asp:Label>
+                    </div>
                 </div>
             </div>
 
@@ -151,6 +155,10 @@
                         </div>
                     </div>
                     <div id="setSeparatorCenter" class="set-separator-center"></div>
+                    <div data-section-id="divHelp" class="set-sidebar-item">
+                        <asp:Label runat="server">Поддержка</asp:Label>
+                    </div>
+                    <div id="setSeparatorCenterMobile" class="set-separator-center"></div>
                     <div class="set-dno">
                         <asp:Button ID="exitAccount" OnClick="exitAccount_Click" Text="Выйти из аккаунта" CssClass="set-exitAccount" runat="server" />
                         <asp:Button ID="deleteAccount" OnClick="deleteAccount_Click" Text="Удалить аккаунт" CssClass="set-deleteAccount" runat="server" />
@@ -294,6 +302,22 @@
                 <div class="set-sidebar" id="divBells">    <%-- Уведомления --%>
                     <h3 class="set-title-margin">Уведомления</h3>
                 </div>
+                <div class="set-sidebar" id="divHelp">    <%-- Поддержка --%>
+                    <h3 class="set-title-margin">Поддержка</h3>
+                    <div runat="server" class="set-divHelp">
+                        <div class="set-labels-main">
+                            <asp:Label CssClass="main-text-attention-hight" runat="server">Вопросы, претензии, пожелания</asp:Label>
+                            <asp:Label CssClass="set-main-text-attention-low" runat="server">Здесь Вы можете рассказать о том, что можно добавить или улучшить, а также задать интересующие вас вопросы. Мы пришлём письмо с ответом на вашу почту в ближайшее время.</asp:Label>
+                        </div>
+                        <div id="setDivElementsHelp" class="set-divElementsHelp">
+                            <asp:Label ID="lblHelpRed" runat="server" class="set-attention-red width-300"></asp:Label>
+                            <asp:TextBox ID="tbHelp" runat="server" class="set-help-email" placeholder="Ваша почта" />
+                            <asp:TextBox ID="txtDescription" runat="server" class="set-description-input" TextMode="MultiLine" placeholder="Ваш вопрос, претензия или пожелание"></asp:TextBox>
+                            <asp:Button runat="server" ID="btnHelp" OnClientClick="btnHelp_Click(); return false;" CssClass="set-btnHelp" Text="Отправить" />
+                        </div>
+                        <asp:Label CssClass="set-message-container-center" ID="lblResultEnter" runat="server">Спасибо за обратную связь, вы прекрасны!</asp:Label>
+                    </div>
+                </div>
 
 
                 <asp:Panel ID="divCheckRegSecond" runat="server" CssClass="modal">
@@ -356,6 +380,12 @@
                 document.getElementById('btnCheckMail').click();
             }
         }
+        function handleEnterKeyNextTxtDescription(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('txtDescription').focus();
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', (event) => {
             const tbNameSidebar = document.getElementById('tbNameSidebar');
@@ -364,6 +394,7 @@
             const newPasswordSett = document.getElementById('newPasswordSett');
             const newConfirmPasswordSett = document.getElementById('newConfirmPasswordSett');
             const tbCode = document.getElementById('tbCode');
+            const tbHelp = document.getElementById('tbHelp');
 
             tbNameSidebar.addEventListener('keydown', handleEnterKeyChangeName);
             tbMailSidebar.addEventListener('keydown', handleEnterKeyChangeMail);
@@ -371,6 +402,7 @@
             newPasswordSett.addEventListener('keydown', handleEnterKeyNewPassword);
             newConfirmPasswordSett.addEventListener('keydown', handleEnterKeyConfirmPassword);
             tbCode.addEventListener('keydown', handleEnterKeyCode);
+            tbHelp.addEventListener('keydown', handleEnterKeyNextTxtDescription);
         });
     </script>    <%-- События клика по enter --%>
 
@@ -875,7 +907,6 @@
                 var parent3 = document.getElementById('divSecurity');
                 var separator = document.getElementById('setSeparatorCenter');
                 var divAdsInLikesAttention = document.getElementById('divAdsInLikesAttention');
-                var divAdsInLikesAttention1 = document.getElementById('divAdsInLikesAttention1');
 
                 function isMobile() {
                     return /Mobi|Android/i.test(navigator.userAgent);
@@ -897,6 +928,7 @@
                     if (isMobile() && window.innerWidth < 1024) {
                         insertAtPosition(parent2, child, 3);
                         separator.style.backgroundColor = 'white';
+                        if (sectionId === "divHelp") parent2.style.display = 'none';
                     }
                     else if (isMobile()) {
                         parent3.insertBefore(child, parent3.firstChild);
@@ -1091,6 +1123,95 @@
             });
         }
     </script>    <%-- Заполнение сердечка --%>
+
+
+    <script>
+        var tbHelp = document.getElementById('tbHelp');
+        var txtDescription = document.getElementById('txtDescription');
+        var setDivElementsHelp = document.getElementById('setDivElementsHelp');
+        var lblResultEnter = document.getElementById('lblResultEnter');
+        var lblHelpRed = document.getElementById('lblHelpRed');
+
+        var tbHelp_ = false;
+        var txtDescription_ = false;
+
+        function btnHelp_Click() {
+
+            if (tbHelp.value === "") {
+                tbHelp.classList.add('placeholder-red');
+                tbHelp_ = true;
+            }
+            else if (!validateEmail(tbHelp.value)) {
+                lblHelpRed.innerText = "Введите корректную почту";
+                tbHelp_ = true;
+            }
+            else {
+                tbHelp_ = false;
+                lblHelpRed.innerText = "";
+            }
+
+            if (txtDescription.value === "") {
+                txtDescription.classList.add('placeholder-red');
+                txtDescription_ = true;
+            }
+            else txtDescription_ = false;
+
+            if (tbHelp_ || txtDescription_) return false;
+
+            $.ajax({
+                type: "POST",
+                url: "Settings.aspx/btnHelp_Click",
+                data: JSON.stringify({ tbHelp: tbHelp.value, txtDescription: txtDescription.value }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response.d) {
+                        setDivElementsHelp.style.display = 'flex';
+                        setDivElementsHelp.classList.add('show');
+
+                        setTimeout(function () {
+                            setDivElementsHelp.style.display = 'none';
+                            lblResultEnter.style.display = 'block';
+
+                            setTimeout(function () {
+                                lblResultEnter.classList.add('show');
+
+                                setTimeout(function () {
+                                    lblResultEnter.classList.remove('show');
+
+                                    setTimeout(function () {
+                                        lblResultEnter.style.display = 'none';
+                                        setDivElementsHelp.style.display = 'flex';
+
+                                        tbHelp.value = "";
+                                        txtDescription.value = "";
+                                        tbHelp.classList.remove('placeholder-red');
+                                        txtDescription.classList.remove('placeholder-red');
+
+                                        setTimeout(function () {
+                                            setDivElementsHelp.classList.remove('show');
+                                        });
+                                    }, 500);
+                                }, 4000);
+                            }, 10);
+                        }, 500);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("Произошла ошибка при получении имени пользователя.");
+                }
+            });
+        }
+    </script>    <%-- Отправка сообщения поддержке --%>
+
+
+    <script>
+        function validateEmail(email) {
+            var re = /^[a-zA-Z0-9._%+-]+\u0040[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+            return re.test(email);
+        }
+    </script>    <%-- Проверка почты на корректность ввода --%>
 
 
 

@@ -186,6 +186,7 @@ header {
 
 .placeholder-red::placeholder {
     color: red;
+    font-family: Onest-Regular;
 }
 
 .my-dropdown {
@@ -206,7 +207,6 @@ header {
     font-family: Onest-Medium;
 }
 
-    /* Стили для элементов списка */
 .my-dropdown .select2-results__option {
     padding: 10px !important;
     transition: background-color 0.2s ease !important;
@@ -222,7 +222,6 @@ header {
     font-family: Onest-Medium;
 }
 
-/* Стили для элементов при наведении */
 .my-dropdown .select2-results__option:hover {
     background-color: #ddd !important;
 }
@@ -434,13 +433,13 @@ header {
 .authorization-button,
 .set-save-photo,
 .set-save-button {
-    width: 100%; /* Ширина кнопок */
-    padding: 10px; /* Внутренний отступ кнопок */
-    border: none; /* Убираем границу */
-    background-color: #198de4; /* Цвет кнопок */
-    color: #fff; /* Цвет текста кнопок */
-    border-radius: 7px; /* Закругляем углы кнопок */
-    cursor: pointer; /* Изменяем указатель при наведении */
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #198de4;
+    color: #fff;
+    border-radius: 7px;
+    cursor: pointer;
     transition: background-color 0.25s;
 }
 
@@ -453,12 +452,15 @@ header {
     align-self: center;
     margin-top: 20px;
 }
+
+    .set-btnHelp:hover,
     .adv-btnCloseAd:hover,
+    .adv-btnBackAd:hover,
     .fetch-code-button:hover,
     .set-save-photo:hover,
     .authorization-button:hover,
     .myads-btn-make-ad:hover {
-        background-color: #0069db; /* Цвет кнопок при наведении */
+        background-color: #0069db;
     }
 
 .register-button,
@@ -472,13 +474,12 @@ header {
     border-radius: 7px;
     cursor: pointer;
 }
-
     .ads-search-button:hover,
     .adv-btnEditAd:hover,
     .adv-btnShowPhone:hover,
     .register-button:hover,
     .set-save-button:hover {
-        background-color: #188a1a; /* Цвет кнопок при наведении */
+        background-color: #188a1a;
     }
 
 
@@ -565,8 +566,8 @@ header {
 .set-sidebar {
     display: none;
     width: 100%;
-    justify-content: space-between;
     flex-direction: column;
+    height: 100%;
 }
 
 .set-sidebar-photo {
@@ -584,6 +585,7 @@ header {
 .set-all {
     display: flex;
     margin-bottom: 65px;
+    flex-grow: 1;
 }
 
 .set-account-1 {
@@ -773,6 +775,88 @@ header {
     flex-direction: column;
     height: fit-content;
 }
+
+.set-divHelp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 50px;
+}
+
+.set-btnHelp {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #198de4;
+    color: #fff;
+    border-radius: 7px;
+    transition: background-color 0.25s;
+    margin-top: 10px;
+}
+
+.set-description-input {
+    width: 100%;
+    height: 150px;
+    border: 1px solid rgb(100, 100, 100);
+    padding: 10px;
+    border-radius: 7px;
+    resize: none;
+    outline: none;
+}
+
+.set-divElementsHelp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 500px;
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+    .set-divElementsHelp.show {
+        opacity: 0;
+    }
+
+.set-main-text-attention-low {
+    max-width: 600px;
+    text-align: center;
+    font-family: Onest-Medium;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.set-labels-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.set-help-email {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid rgb(90, 90, 90);
+    border-radius: 7px;
+    outline: none;
+    height: 41px;
+}
+
+.set-message-container-center {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: none;
+    align-self: center;
+    text-align: center;
+}
+
+    .set-message-container-center.show {
+        opacity: 1;
+    }
 
 
 
@@ -1098,14 +1182,6 @@ a.ads-text-title {
     display: flex;
 }
 
-.makead-description-input {
-    width: 250px;
-    padding: 10px;
-    border: 0px;
-    border-radius: 7px;
-    resize: none;
-}
-
 .makead-checkboxes {
     display: flex;
     flex-direction: column;
@@ -1130,6 +1206,9 @@ a.ads-text-title {
     width: 500px;
     height: 150px;
     border: 1px solid #aaa;
+    padding: 10px;
+    border-radius: 7px;
+    resize: none;
 }
 
 .makead-map {
@@ -1273,8 +1352,9 @@ a.ads-text-title {
 .message-container-center {
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    display: none; /* Изначально скрыт */
+    display: none;
     align-self: center;
+    text-align: center;
 }
 
     .message-container-center.show {

@@ -105,16 +105,11 @@
                 </div>
                 <div id="adsFiltersContainer" class="hidden-m ads-filters">
                     <div class="ads-filters-c">
-                        <label class="ads-filters-text">Сортировка</label>
+                        <label class="ads-filters-text">Сортировка по дате</label>
                         <asp:DropDownList ID="sortDate" runat="server" CssClass="main-cb">
                             <asp:ListItem Text="По умолчанию"></asp:ListItem>
                             <asp:ListItem Text="По возрастанию"></asp:ListItem>
                             <asp:ListItem Text="По убыванию"></asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                    <div class="ads-filters-c">
-                        <label class="ads-filters-text">Вид объявления</label>
-                        <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb">
                         </asp:DropDownList>
                     </div>
                     <div class="ads-filters-c">
@@ -123,8 +118,8 @@
                         </asp:DropDownList>
                     </div>
                     <div class="ads-filters-c">
-                        <label class="ads-filters-text">Окрас животного</label>
-                        <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb">
+                        <label class="ads-filters-text">Вид объявления</label>
+                        <asp:DropDownList ID="filterLoseOrFind" runat="server" CssClass="main-cb">
                         </asp:DropDownList>
                     </div>
                     <div id="ddlBreed-div" class="ads-filters-c">
@@ -133,6 +128,11 @@
                             <asp:DropDownList ID="filterBreed" runat="server" CssClass="main-cb">
                             </asp:DropDownList>
                         </div>
+                    </div>
+                    <div class="ads-filters-c">
+                        <label class="ads-filters-text">Окрас животного</label>
+                        <asp:DropDownList ID="filterColor" runat="server" CssClass="main-cb">
+                        </asp:DropDownList>
                     </div>
                     <div id="ddlMale-div" class="ads-filters-c">
                         <label class="ads-filters-text">Пол</label>

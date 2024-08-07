@@ -22,140 +22,6 @@
     <link rel="stylesheet" href="/Content/Site.css" />
     <% }%>
 
-
-    <script type="text/javascript">
-        var myPlacemark = null;
-        var initialCoords = [55.755864, 37.617698]; // Начальные координаты метки
-
-        ymaps.ready(init);
-
-        function init() {
-            var myMap = new ymaps.Map("map", {
-                center: initialCoords,
-                zoom: 9,
-                controls: ['geolocationControl', 'zoomControl']
-            });
-
-            var suggestView = new ymaps.SuggestView('tbAddress');
-
-            suggestView.events.add('select', function (e) {
-                var selectedItem = e.get('item');
-                var selectedAddress = selectedItem.value;
-
-                ymaps.geocode(selectedAddress, { kind: 'house' })
-                    .then(function (res) {
-                        if (res.geoObjects.getLength()) {
-                            var firstGeoObject = res.geoObjects.get(0);
-                            var selectedCoordinates = firstGeoObject.geometry.getCoordinates();
-
-                            setPlacemarkCoordinates(selectedCoordinates);
-
-                            var zoom = 17;
-                            myMap.setZoom(zoom);
-                            myMap.setCenter(selectedCoordinates);
-                        } else {
-                            console.log('Не удалось найти координаты для адреса: ' + selectedAddress);
-                        }
-                    });
-
-                suggestView.state.set('expanded', false);
-            });
-
-            myPlacemark = new ymaps.Placemark(initialCoords, {}, {
-                iconLayout: 'default#image',
-                iconImageHref: '/Resources/imageGeo.png',
-                iconImageSize: [35, 38],
-                iconImageOffset: [-17.5, -38],
-                draggable: true
-            });
-
-            myPlacemark.events.add('dragend', function () {
-                checkCoordinatesChanged();
-            });
-
-            myMap.geoObjects.add(myPlacemark);
-
-            myMap.events.add('boundschange', function (e) {
-                var newCenter = e.get('newCenter');
-                animateCoords(myPlacemark.geometry.getCoordinates(), newCenter, myPlacemark, 100);
-
-                var addressUpdateTimer = setTimeout(function () {
-                    var coordinates = myPlacemark.geometry.getCoordinates();
-                    ymaps.geocode(coordinates, { kind: 'house' })
-                        .then(function (res) {
-                            if (res.geoObjects.getLength()) {
-                                var firstGeoObject = res.geoObjects.get(0);
-                                var tbAddress = firstGeoObject.getAddressLine();
-                                document.getElementById('tbAddress').value = tbAddress;
-                            } else {
-                                console.log('Не удалось найти адрес для координат: ' + coordinates);
-                            }
-                        });
-                }, 100);
-            });
-        }
-
-        function animateCoords(startCoords, endCoords, placemark, duration) {
-            var startTime = Date.now();
-            function step() {
-                var progress = Math.min((Date.now() - startTime) / duration, 1);
-                var currentCoords = [
-                    startCoords[0] + (endCoords[0] - startCoords[0]) * progress,
-                    startCoords[1] + (endCoords[1] - startCoords[1]) * progress
-                ];
-                placemark.geometry.setCoordinates(currentCoords);
-                if (progress < 1) {
-                    requestAnimationFrame(step);
-                }
-            }
-
-            step();
-        }
-
-        function roundToHundredths(coord) {
-            return parseFloat(coord.toFixed(2));
-        }
-
-        function setPlacemarkCoordinates(coords) {
-            if (myPlacemark) {
-                myPlacemark.geometry.setCoordinates(coords);
-            } else {
-                myPlacemark = new ymaps.Placemark(coords, {}, {
-                    iconLayout: 'default#image',
-                    iconImageHref: '/Resources/imageGeo.png',
-                    iconImageSize: [35, 38],
-                    iconImageOffset: [0, -30],
-                    draggable: true
-                });
-                myPlacemark.events.add('dragend', function () {
-                    checkCoordinatesChanged();
-                });
-                myMap.geoObjects.add(myPlacemark);
-            }
-            checkCoordinatesChanged();
-        }
-
-        function checkCoordinatesChanged() {
-            if (!myPlacemark) return;
-
-            var newCoords = myPlacemark.geometry.getCoordinates();
-            var roundedInitialCoords = initialCoords.map(roundToHundredths);
-            var roundedNewCoords = newCoords.map(roundToHundredths);
-
-            console.log("Initial Coords: ", roundedInitialCoords);
-            console.log("New Coords: ", roundedNewCoords);
-
-            if (roundedNewCoords[0] !== roundedInitialCoords[0] || roundedNewCoords[1] !== roundedInitialCoords[1]) {
-                document.getElementById('<%= hasCoordinatesChanged.ClientID %>').value = "true";
-            } else {
-                document.getElementById('<%= hasCoordinatesChanged.ClientID %>').value = "false";
-            }
-
-            makeAjaxRequest();
-        }
-    </script>    <%-- Скрипт для Яндекс.Карт --%>
-
-
 </head>
 <body>
     <header id="header-hide" class="fixed-top">
@@ -380,17 +246,16 @@
         document.addEventListener('DOMContentLoaded', function () {
             var ddlType = document.getElementById('ddlType');
             setInterval(function () {
-                    previousIndex = ddlType.selectedIndex;
-                    if (ddlType.selectedIndex === 0) {
-                        lblBreed.style.display = 'none';
-                        lblMale.style.display = 'none';
-                        lblColor.style.display = 'none';
-                    }
-                    else {
-                        lblBreed.style.display = 'flex';
-                        lblMale.style.display = 'flex';
-                        lblColor.style.display = 'flex';
-                    }
+                if (ddlType.selectedIndex === 0) {
+                    lblBreed.style.display = 'none';
+                    lblMale.style.display = 'none';
+                    lblColor.style.display = 'none';
+                }
+                else {
+                    lblBreed.style.display = 'flex';
+                    lblMale.style.display = 'flex';
+                    lblColor.style.display = 'flex';
+                }
             });
         });
     </script>    <%-- Скрытие и показ красных лейблов --%>
@@ -398,16 +263,6 @@
 
     <script type="text/javascript">
         function uploadFile() {
-
-            var image = false;
-            var type = false;
-            var breed = false;
-            var color = false;
-            var male = false;
-            var loseOrFind = false;
-            var mapIncorrect = false;
-            var mapNull = false;
-            var title = false;
 
             var tbTitle = document.getElementById('tbTitle');
             var tbAddress = document.getElementById('tbAddress');
@@ -434,6 +289,8 @@
             var cbIsChipping = document.getElementById('cbIsChipping');
             var cbIsCastrated = document.getElementById('cbIsCastrated');
 
+            var invalidFields = [];
+
             lblTitle.innerText = "";
             lblAddress.innerText = "";
             lblType.innerText = "";
@@ -441,54 +298,57 @@
             lblMale.innerText = "";
             lblColor.innerText = "";
             lblLoseOrFind.innerText = "";
+            lblImage.innerText = "";
 
             if (tbTitle.value == "") {
                 lblTitle.innerText = "Введите название";
-                title = true;
-            } else lblTitle.innerText = "";
+                invalidFields.push(tbTitle);
+            }
 
             if (tbAddress.value == "") {
                 lblAddress.innerText = "Введите адрес";
-                mapNull = true;
+                invalidFields.push(tbAddress);
             } else {
                 if (hasCoordinatesChanged.value == "false" && tbAddress.value == "") {
                     lblAddress.innerText = "Выберите адрес из списка";
-                    mapIncorrect = true;
-                } else lblAddress.innerText = "";
+                    invalidFields.push(tbAddress);
+                }
             }
 
             if (imgAnimalChange.src == "" && fileUpload.files.length == 0) {
                 lblImage.innerText = "Загрузите хотя бы одно изображение";
-                image = true;
-            } else lblImage.innerText = "";
+                invalidFields.push(imgAnimalChange);
+            }
 
             if (ddlType == 0) {
                 lblType.innerText = "Выберите тип";
-                type = true;
-            } else lblType.innerText = "";
+                invalidFields.push(document.getElementById('ddlType'));
+            }
 
             if (ddlBreed == 0) {
                 lblBreed.innerText = "Выберите породу";
                 breed = true;
-            } else lblBreed.innerText = "";
+                invalidFields.push(document.getElementById('ddlBreed'));
+            }
 
             if (ddlColor == 0) {
                 lblColor.innerText = "Выберите окрас";
-                color = true;
-            } else lblColor.innerText = "";
+                invalidFields.push(document.getElementById('ddlColor'));
+            }
 
             if (ddlMale == 0) {
                 lblMale.innerText = "Выберите пол";
-                male = true;
-            } else lblMale.innerText = "";
+                invalidFields.push(document.getElementById('ddlMale'));
+            }
 
             if (ddlLoseOrFind == 0) {
                 lblLoseOrFind.innerText = "Выберите вид объявления";
-                loseOrFind = true;
-            } else lblLoseOrFind.innerText = "";
+                invalidFields.push(document.getElementById('ddlLoseOrFind'));
+            }
 
-            if (image || breed || type || color || male || loseOrFind || mapNull || mapIncorrect || title) {
-                // Отмотать в самый верх
+            if (invalidFields.length > 0) {
+                invalidFields[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                invalidFields[0].focus();
                 return false;
             }
 
@@ -766,6 +626,7 @@
                 event.preventDefault();
                 document.getElementById('tbAddress').blur();
                 document.getElementById('btnMakeAd').click();
+                document.getElementById('btnSaveChanges').click();
             }
         }
 
@@ -783,6 +644,139 @@
             tbAddress.addEventListener('keydown', handleEnterKeyAddress);
         });
     </script>    <%-- События клика по enter --%>
+
+
+    <script type="text/javascript">
+            var myPlacemark = null;
+            var initialCoords = [55.755864, 37.617698]; // Начальные координаты метки
+
+            ymaps.ready(init);
+
+            function init() {
+                var myMap = new ymaps.Map("map", {
+                    center: initialCoords,
+                    zoom: 9,
+                    controls: ['geolocationControl', 'zoomControl']
+                });
+
+                var suggestView = new ymaps.SuggestView('tbAddress');
+
+                suggestView.events.add('select', function (e) {
+                    var selectedItem = e.get('item');
+                    var selectedAddress = selectedItem.value;
+
+                    ymaps.geocode(selectedAddress, { kind: 'house' })
+                        .then(function (res) {
+                            if (res.geoObjects.getLength()) {
+                                var firstGeoObject = res.geoObjects.get(0);
+                                var selectedCoordinates = firstGeoObject.geometry.getCoordinates();
+
+                                setPlacemarkCoordinates(selectedCoordinates);
+
+                                var zoom = 17;
+                                myMap.setZoom(zoom);
+                                myMap.setCenter(selectedCoordinates);
+                            } else {
+                                console.log('Не удалось найти координаты для адреса: ' + selectedAddress);
+                            }
+                        });
+
+                    suggestView.state.set('expanded', false);
+                });
+
+                myPlacemark = new ymaps.Placemark(initialCoords, {}, {
+                    iconLayout: 'default#image',
+                    iconImageHref: '/Resources/imageGeo.png',
+                    iconImageSize: [35, 38],
+                    iconImageOffset: [-17.5, -38],
+                    draggable: true
+                });
+
+                myPlacemark.events.add('dragend', function () {
+                    checkCoordinatesChanged();
+                });
+
+                myMap.geoObjects.add(myPlacemark);
+
+                myMap.events.add('boundschange', function (e) {
+                    var newCenter = e.get('newCenter');
+                    animateCoords(myPlacemark.geometry.getCoordinates(), newCenter, myPlacemark, 100);
+
+                    var addressUpdateTimer = setTimeout(function () {
+                        var coordinates = myPlacemark.geometry.getCoordinates();
+                        ymaps.geocode(coordinates, { kind: 'house' })
+                            .then(function (res) {
+                                if (res.geoObjects.getLength()) {
+                                    var firstGeoObject = res.geoObjects.get(0);
+                                    var tbAddress = firstGeoObject.getAddressLine();
+                                    document.getElementById('tbAddress').value = tbAddress;
+                                } else {
+                                    console.log('Не удалось найти адрес для координат: ' + coordinates);
+                                }
+                            });
+                    }, 100);
+                });
+            }
+
+            function animateCoords(startCoords, endCoords, placemark, duration) {
+                var startTime = Date.now();
+                function step() {
+                    var progress = Math.min((Date.now() - startTime) / duration, 1);
+                    var currentCoords = [
+                        startCoords[0] + (endCoords[0] - startCoords[0]) * progress,
+                        startCoords[1] + (endCoords[1] - startCoords[1]) * progress
+                    ];
+                    placemark.geometry.setCoordinates(currentCoords);
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    }
+                }
+
+                step();
+            }
+
+            function roundToHundredths(coord) {
+                return parseFloat(coord.toFixed(2));
+            }
+
+            function setPlacemarkCoordinates(coords) {
+                if (myPlacemark) {
+                    myPlacemark.geometry.setCoordinates(coords);
+                } else {
+                    myPlacemark = new ymaps.Placemark(coords, {}, {
+                        iconLayout: 'default#image',
+                        iconImageHref: '/Resources/imageGeo.png',
+                        iconImageSize: [35, 38],
+                        iconImageOffset: [0, -30],
+                        draggable: true
+                    });
+                    myPlacemark.events.add('dragend', function () {
+                        checkCoordinatesChanged();
+                    });
+                    myMap.geoObjects.add(myPlacemark);
+                }
+                checkCoordinatesChanged();
+            }
+
+            function checkCoordinatesChanged() {
+                if (!myPlacemark) return;
+
+                var newCoords = myPlacemark.geometry.getCoordinates();
+                var roundedInitialCoords = initialCoords.map(roundToHundredths);
+                var roundedNewCoords = newCoords.map(roundToHundredths);
+
+                console.log("Initial Coords: ", roundedInitialCoords);
+                console.log("New Coords: ", roundedNewCoords);
+
+                if (roundedNewCoords[0] !== roundedInitialCoords[0] || roundedNewCoords[1] !== roundedInitialCoords[1]) {
+                    document.getElementById('<%= hasCoordinatesChanged.ClientID %>').value = "true";
+            } else {
+                document.getElementById('<%= hasCoordinatesChanged.ClientID %>').value = "false";
+                }
+
+                makeAjaxRequest();
+            }
+        </script>    <%-- Скрипт для Яндекс.Карт --%>
 
 
 

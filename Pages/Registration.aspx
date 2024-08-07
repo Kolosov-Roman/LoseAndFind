@@ -5,6 +5,7 @@
 <html lang="ru">
 <head runat="server">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.6/dist/inputmask.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -168,6 +169,9 @@
 
 
     <script type="text/javascript">
+        const phoneInput = document.getElementById('tbNumberPhone');
+        Inputmask('+7 (999) 999-99-99').mask(phoneInput);
+
         document.getElementById('btnReg').onclick = function (event) {
             event.preventDefault(); // предотвращение обновления страницы
 
@@ -195,17 +199,13 @@
                 lblNameReg.innerText = "";
             }
 
+            const phoneValue = phoneInput.inputmask.unmaskedvalue();
+
             if (!phoneNumber) {
                 lblNumberPhone.innerText = "Введите номер телефона";
                 numberPhone = true;
-            } else if (phoneNumber.length > 12 ||
-                phoneNumber.length < 11 ||
-                /[^0-9+]/.test(phoneNumber) ||
-                (!phoneNumber.startsWith("+7") && !phoneNumber.startsWith("8")) ||
-                (phoneNumber.indexOf('+') !== 0 && (phoneNumber.match(/\+/g) || []).length > 1) ||
-                (!phoneNumber.startsWith("+7") && phoneNumber.indexOf('+') !== -1)) {
-                lblNumberPhone.innerText = "Введите корректный номер телефона";
-                numberPhone = true;
+            } else if (phoneValue.length !== 10) {
+                lblNumberPhone.innerText = "Введите корректный номер";
             } else {
                 lblNumberPhone.innerText = "";
             }
