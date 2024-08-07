@@ -20,7 +20,7 @@
     <% }%>
 
 </head>
-<body>
+<body id="body">
     <header id="header-hide" class="fixed-top">
     <nav class="navbar navbar-expand-sm">
         <div class="container">
@@ -914,8 +914,8 @@
                 var child = document.querySelector('.set-account-set');
                 var parent2 = document.getElementById('divAccount');
                 var parent3 = document.getElementById('divSecurity');
-                var separator = document.getElementById('setSeparatorCenter');
                 var divAdsInLikesAttention = document.getElementById('divAdsInLikesAttention');
+                var body = document.getElementById('body');
 
                 function isMobile() {
                     return /Mobi|Android/i.test(navigator.userAgent);
@@ -931,6 +931,7 @@
                     if (sectionId === "divAccount") {
                         parent2.style.display = 'flex';
                     }
+                    if (isMobile() && window.innerWidth < 768) body.style.backgroundColor = 'white';
                 }
 
                 function applyRoundedCorners() {
