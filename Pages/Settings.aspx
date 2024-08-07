@@ -932,6 +932,7 @@
                         parent2.style.display = 'flex';
                     }
                     if (isMobile() && window.innerWidth < 768) body.style.backgroundColor = 'white';
+                    else body.style.backgroundColor = 'rgb(233, 166, 166)';
                 }
 
                 function applyRoundedCorners() {
