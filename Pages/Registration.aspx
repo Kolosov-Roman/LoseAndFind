@@ -273,7 +273,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "https://losenfind.ru/Pages/Registration.aspx/CheckRegSecond",
+                url: "Registration.aspx/CheckRegSecond",
                 data: JSON.stringify({ loginReg: loginReg.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -374,7 +374,7 @@
         function btnCheckMail_Click() {
             $.ajax({
                 type: "POST",
-                url: "https://losenfind.ru/Pages/Registration.aspx/btnCheckMail_Click",
+                url: "Registration.aspx/btnCheckMail_Click",
                 data: JSON.stringify({ loginReg: loginReg.value, tbCode: tbCode.value }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

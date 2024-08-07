@@ -368,7 +368,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "https://losenfind.ru/Pages/Ads.aspx/ShowAllFilters",
+                url: "Ads.aspx/ShowAllFilters",
                 data: JSON.stringify({
                     selectedType: selectedType,
                     selectedMale: selectedMale,
@@ -422,7 +422,7 @@
             console.log(adId);
             $.ajax({
                 type: "POST",
-                url: "https://losenfind.ru/Pages/Ads.aspx/btnAddInLikes_Click",
+                url: "Ads.aspx/btnAddInLikes_Click",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ adId: adId }),
                 dataType: "json",

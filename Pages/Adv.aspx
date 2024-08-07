@@ -238,7 +238,7 @@
                 if (!isUserAuthenticated) {
                     $.ajax({
                         type: "POST",
-                        url: "https://losenfind.ru/Pages/Adv.aspx/btnChangeValueOfPage",
+                        url: "Adv.aspx/btnChangeValueOfPage",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {
