@@ -155,10 +155,10 @@
                         </div>
                     </div>
                     <div id="setSeparatorCenter" class="set-separator-center"></div>
-                    <div id="hiddenDivHelp" data-section-id="divHelp" class="set-sidebar-item">
+                    <div data-section-id="divHelp" class="set-sidebar-item hidden">
                         <asp:Label runat="server">Поддержка</asp:Label>
                     </div>
-                    <div id="setSeparatorCenterMobile" class="set-separator-center"></div>
+                    <div class="set-separator-center hidden"></div>
                     <div class="set-dno">
                         <asp:Button ID="exitAccount" OnClick="exitAccount_Click" Text="Выйти из аккаунта" CssClass="set-exitAccount" runat="server" />
                         <asp:Button ID="deleteAccount" OnClick="deleteAccount_Click" Text="Удалить аккаунт" CssClass="set-deleteAccount" runat="server" />
