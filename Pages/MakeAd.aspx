@@ -597,6 +597,9 @@
 
 
     <script>
+        var btnMakeAd = document.getElementById('btnMakeAd');
+        var btnSaveChanges = document.getElementById('btnSaveChanges');
+
         function handleEnterKeyTitle(event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -625,8 +628,9 @@
             if (event.key === 'Enter') {
                 event.preventDefault();
                 document.getElementById('tbAddress').blur();
-                document.getElementById('btnMakeAd').click();
-                document.getElementById('btnSaveChanges').click();
+                if (btnMakeAd)
+                    document.getElementById('btnMakeAd').click();
+                else document.getElementById('btnSaveChanges').click();
             }
         }
 
