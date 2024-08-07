@@ -927,7 +927,6 @@
                 function applyRoundedCorners() {
                     if (isMobile() && window.innerWidth < 1024) {
                         insertAtPosition(parent2, child, 3);
-                        separator.style.backgroundColor = 'white';
                         if (sectionId === "divHelp") parent2.style.display = 'none';
                     }
                     else if (isMobile()) {
